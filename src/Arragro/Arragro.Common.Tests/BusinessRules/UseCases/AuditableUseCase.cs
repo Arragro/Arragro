@@ -23,14 +23,33 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
             public int EntityFooId { get; set; }
         }
 
+        private class EntityBar : Auditable<Guid>
+        {
+            public int EntityBarId { get; set; }
+        }
+
         [Fact]
-        public void AuditableUseCaseTest()
+        public void AuditableUseCaseTestFoo()
         {
             var entityFoo = new EntityFoo
             {
                 EntityFooId = 1,
                 CreatedBy = 1,
                 ModifiedBy = 1,
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
+            };
+        }
+
+        [Fact]
+        public void AuditableUseCaseTestBar()
+        {
+            var userId = Guid.NewGuid();
+            var entityBar = new EntityBar
+            {
+                EntityBarId = 1,
+                CreatedBy = userId,
+                ModifiedBy = userId,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now
             };
