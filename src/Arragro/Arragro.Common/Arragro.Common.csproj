@@ -42,6 +42,7 @@
     <Compile Include="BusinessRules\Auditable.cs" />
     <Compile Include="BusinessRules\RulesException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
