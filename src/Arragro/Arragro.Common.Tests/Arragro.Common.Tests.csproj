@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessRules\UseCases\AuditableUseCase.cs" />
+    <Compile Include="BusinessRules\UseCases\RulesExceptionUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
