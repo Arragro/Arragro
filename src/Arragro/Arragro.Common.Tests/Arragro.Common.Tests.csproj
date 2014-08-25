@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessRules\UseCases\AuditableUseCase.cs" />
+    <Compile Include="BusinessRules\UseCases\BusinessRulesUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\RulesExceptionUseCase.cs" />
     <Compile Include="ModelsAndHelpers\MockHelper.cs" />
     <Compile Include="ModelsAndHelpers\ModelFoo.cs" />

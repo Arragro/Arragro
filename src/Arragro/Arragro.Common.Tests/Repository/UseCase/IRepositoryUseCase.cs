@@ -7,19 +7,17 @@ namespace Arragro.Common.Tests.Repository.UseCase
 {
     public class IRepositoryUseCase
     {
-        public readonly List<ModelFoo> _modelFoos;
+        public readonly List<ModelFoo> ModelFoos;
 
         public IRepositoryUseCase()
         {
-            _modelFoos = new List<ModelFoo>();
-            _modelFoos.Add(new ModelFoo { Id = 1, Name = "Test 1" });
-            _modelFoos.Add(new ModelFoo { Id = 2, Name = "Test 2" });
+            ModelFoos = ModelFoos.InitialiseAndLoadModelFoos();
         }
         
         [Fact]
         public void RepositoryUseCaseMoq()
         {
-            var modelFooRepository = MockHelper.GetMockRepository(_modelFoos);
+            var modelFooRepository = MockHelper.GetMockRepository(ModelFoos);
             Assert.Equal(modelFooRepository.Find(1).Name, "Test 1");
             Assert.Equal(modelFooRepository.Find(2).Name, "Test 2");
             modelFooRepository.InsertOrUpdate(new ModelFoo { Name = "Test 3" }, true);
