@@ -1,9 +1,5 @@
 ﻿using Arragro.Common.BusinessRules;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Arragro.Common.Tests.BusinessRules.UseCases
@@ -18,12 +14,12 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
             public DateTime ModifiedDate { get; set; }
         }
 
-        private class EntityFoo : AuditableTestInt
+        private class ModelFoo : AuditableTestInt
         {
             public int EntityFooId { get; set; }
         }
 
-        private class EntityBar : Auditable<Guid>
+        private class ModelBar : Auditable<Guid>
         {
             public int EntityBarId { get; set; }
         }
@@ -31,7 +27,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
         [Fact]
         public void AuditableUseCaseTestFoo()
         {
-            var entityFoo = new EntityFoo
+            var entityFoo = new ModelFoo
             {
                 EntityFooId = 1,
                 CreatedBy = 1,
@@ -45,7 +41,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
         public void AuditableUseCaseTestBar()
         {
             var userId = Guid.NewGuid();
-            var entityBar = new EntityBar
+            var entityBar = new ModelBar
             {
                 EntityBarId = 1,
                 CreatedBy = userId,
