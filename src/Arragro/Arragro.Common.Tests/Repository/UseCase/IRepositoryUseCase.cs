@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Xunit;
 
-namespace Arragro.Common.Tests.Repository
+namespace Arragro.Common.Tests.Repository.UseCase
 {
     public class IRepositoryUseCase
     {

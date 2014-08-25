@@ -48,7 +48,7 @@
     <Compile Include="BusinessRules\UseCases\AuditableUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\RulesExceptionUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IRepositoryUseCase.cs" />
+    <Compile Include="Repository\UseCase\IRepositoryUseCase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BusinessRules\UnitTests\" />
