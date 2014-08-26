@@ -7,7 +7,7 @@ namespace Arragro.Common.BusinessRules
         where TModel : class, IAuditable<TUserIdType>
         where TRepository : IRepository<TModel, TKeyType>
     {
-        public AuditableBusinessRulesBase(TRepository repositoryBase) : base(repositoryBase) { }
+        public AuditableBusinessRulesBase(TRepository repository) : base(repository) { }
 
         protected void AddOrUpdateAudit(TModel entity, TUserIdType userId, bool add)
         {

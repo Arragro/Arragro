@@ -7,13 +7,13 @@ namespace Arragro.Common.BusinessRules
         where TModel : class
         where TRepository : IRepository<TModel, TKeyType>
     {
-        protected readonly TRepository RepositoryBase;
+        protected readonly TRepository Repository;
 
-        public BusinessRulesBase(TRepository repositoryBase)
+        public BusinessRulesBase(TRepository repository)
         {
-            if (repositoryBase == null)
+            if (repository == null)
                 throw new ArgumentNullException("repositoryBase");
-            RepositoryBase = repositoryBase;
+            Repository = repository;
             RulesException = new RulesException<TModel>();
         }
 
