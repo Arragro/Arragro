@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessRules\UnitTests\BusinessRulesBaseUnitTest.cs" />
+    <Compile Include="BusinessRules\UnitTests\AuditableBusinessRulesUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\AuditableUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\BusinessRulesUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\RulesExceptionUseCase.cs" />

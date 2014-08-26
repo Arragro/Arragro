@@ -1,4 +1,5 @@
 ﻿using Arragro.Common.Repository;
+using System;
 
 namespace Arragro.Common.BusinessRules
 {
@@ -10,6 +11,8 @@ namespace Arragro.Common.BusinessRules
 
         public BusinessRulesBase(TRepository repositoryBase)
         {
+            if (repositoryBase == null)
+                throw new ArgumentNullException("repositoryBase");
             RepositoryBase = repositoryBase;
             RulesException = new RulesException<TModel>();
         }

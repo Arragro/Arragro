@@ -1,10 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using Arragro.Common.BusinessRules;
+using System;
+using System.Collections.Generic;
+
 namespace Arragro.Common.Tests.ModelsAndHelpers
 {
     public class ModelFoo
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+
+    public class ModelFooInt : Auditable<int>
+    {
+        public int Id { get; set; }
+    }
+
+    public class ModelFooGuid : Auditable<Guid>
+    {
+        public int Id { get; set; }
     }
 
     public static class ModelFooExtentions
