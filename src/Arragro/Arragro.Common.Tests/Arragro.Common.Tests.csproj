@@ -34,6 +34,7 @@
       <HintPath>..\packages\Moq.4.2.1408.0717\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,7 @@
     <Compile Include="ModelsAndHelpers\ModelFoo.cs" />
     <Compile Include="ModelsAndHelpers\ModelFooService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\UnitTests\InMemoryRepositoryUnitTests.cs" />
     <Compile Include="Repository\UseCase\IRepositoryUseCase.cs" />
     <Compile Include="ServiceBase\UseCase\ServiceUseCase.cs" />
   </ItemGroup>

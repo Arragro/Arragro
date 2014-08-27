@@ -1,6 +1,7 @@
 ﻿using Arragro.Common.BusinessRules;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Arragro.Common.Tests.ModelsAndHelpers
 {
@@ -9,7 +10,7 @@ namespace Arragro.Common.Tests.ModelsAndHelpers
         public int Id { get; set; }
         public string Name { get; set; }
     }
-
+    
     public class ModelFooInt : Auditable<int>
     {
         public int Id { get; set; }
