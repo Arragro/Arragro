@@ -17,7 +17,7 @@ namespace Arragro.Common.Repository
             var type = typeof(TModel);
             var name = type.Name;
             var properties = type.GetProperties();
-            var key = properties.SingleOrDefault(x => x.IsDefined(typeof(KeyAttribute)));
+            var key = properties.SingleOrDefault(x => x.IsDefined(typeof(KeyAttribute), true));
                 
             if (key == null) 
                 key = properties.SingleOrDefault(x => x.Name == name + "Id");
