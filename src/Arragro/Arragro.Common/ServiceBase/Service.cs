@@ -7,8 +7,6 @@ namespace Arragro.Common.Service
         where TModel : class
         where TRepository : IRepository<TModel, TKeyType>
     {
-        protected new IRepository<TModel, TKeyType> Repository { get { return base.Repository; } }
-        
         public Service(TRepository repository) : base(repository) { }
 
         public TModel Find(TKeyType id)
