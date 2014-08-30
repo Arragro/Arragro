@@ -1,5 +1,7 @@
 ﻿using Arragro.Common.Repository;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Arragro.Common.BusinessRules
 {
@@ -15,6 +17,14 @@ namespace Arragro.Common.BusinessRules
                 throw new ArgumentNullException("repositoryBase");
             Repository = repository;
             RulesException = new RulesException<TModel>();
+        }
+        
+        public IList<ValidationResult> ValidateModel(TModel model)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(model, null, null);
+            Validator.TryValidateObject(model, validationContext, validationResults, true);
+            return validationResults;
         }
 
         public readonly RulesException<TModel> RulesException;
