@@ -29,7 +29,7 @@ namespace Arragro.Common.Repository
                 throw new Exception("Cannot find Key, use Id, {Type}Id, or Key attribute");
 
             if (key.PropertyType != typeof(TKeyType))
-                throw new Exception("Key is not the same defined on the class TKeyType");
+                throw new Exception(string.Format("Key is not the same defined on the class {0}", typeof(TKeyType).Name));
 
             return key;
         }
