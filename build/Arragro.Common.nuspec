@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arragro.Common</id>
+    <version>1.0.0.0</version>
+    <title>Arragro Common Library</title>
+    <authors>Mike Jewell</authors>
+    <owners>Mike Jewell</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Built on the foundation of Domain Driven Development (DDD) with Entity Framework consideration.
+      
+      Contains core functionality for other projects including the following:
+    </description>
+    <summary>      
+        BusinessRules
+        Logging
+		    Repository  
+		    Services
+    </summary>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Arragro Arragro.Common Common BusinessRules Repository Service Logging</tags>
+  </metadata>
+</package>
