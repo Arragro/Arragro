@@ -22,7 +22,7 @@ namespace Arragro.Common.Tests.ModelsAndHelpers
          * 
          * This would occur on a InsertOrUpdate at the service layer.
          */
-        public void ValidateModel(ModelFoo modelFoo)
+        public void EnsureValidModel(ModelFoo modelFoo)
         {
             if (Repository.All()
                     .Where(x => x.Id != modelFoo.Id

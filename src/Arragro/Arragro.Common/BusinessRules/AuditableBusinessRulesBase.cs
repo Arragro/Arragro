@@ -7,7 +7,7 @@ namespace Arragro.Common.BusinessRules
         where TModel : class, IAuditable<TUserIdType>
         where TRepository : IRepository<TModel, TKeyType>
     {
-        protected TRepository Repository { get { return base.Repository; } }
+        protected new TRepository Repository { get { return base.Repository; } }
 
         public AuditableBusinessRulesBase(TRepository repository) : base(repository) { }
 

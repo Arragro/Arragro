@@ -28,7 +28,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = "Test 2" });
+                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = "Test 2" });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {
@@ -44,7 +44,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = null });
+                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = null });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {
@@ -60,7 +60,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = "1" });
+                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = "1" });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {
@@ -76,7 +76,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = "1234567" });
+                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = "1234567" });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {

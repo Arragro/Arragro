@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 
 namespace Arragro.Common.BusinessRules
 {
@@ -38,6 +39,12 @@ namespace Arragro.Common.BusinessRules
             {
                 Errors.Add(error);
             }
+        }
+
+        protected new virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("Errors", Errors);
         }
     }
 
