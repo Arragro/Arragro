@@ -6,6 +6,8 @@
     <title>Arragro Common Library</title>
     <authors>Mike Jewell</authors>
     <owners>Mike Jewell</owners>
+    <licenseUrl>https://github.com/mike-jewell/Arragro/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mike-jewell/Arragro</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
       Built on the foundation of Domain Driven Development (DDD) with Entity Framework consideration.
