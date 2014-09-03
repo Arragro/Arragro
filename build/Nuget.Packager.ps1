@@ -60,6 +60,7 @@ Try
 }
 Catch [System.Exception]
 {
-    Write-Error $_.Exception.Messge;
+    Write-Error $_.Exception;
+    Write-Output $_.Exception;
     exit 1;
 }
