@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -42,20 +43,22 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
         [Fact]
         public void TestAuditableFunctionalityAgainstIntModel()
         {
-            var startDateTime = DateTime.Now;
+            var startDateTime = DateTime.Now.AddMilliseconds(-5);
 
             var mockRepository = new Mock<IRepository<ModelFooInt, int>>();
             var modelFooIntService = new ModelFooIntService(mockRepository.Object);
 
             var model = modelFooIntService.TestAddOrUpdateAudit(new ModelFooInt { Id = 1 }, 1, true);
             Assert.Equal(1, model.CreatedBy);
-            Assert.True(model.CreatedDate.Ticks > startDateTime.Ticks);
+            Assert.True(model.CreatedDate > startDateTime);
             Assert.Equal(1, model.ModifiedBy);
             Assert.True(model.ModifiedDate == model.CreatedDate);
 
+            Thread.Sleep(5);
+
             model = modelFooIntService.TestAddOrUpdateAudit(model, 2, false);
             Assert.Equal(1, model.CreatedBy);
-            Assert.True(model.CreatedDate.Ticks > startDateTime.Ticks);
+            Assert.True(model.CreatedDate > startDateTime);
             Assert.Equal(2, model.ModifiedBy);
             Assert.True(model.ModifiedDate > model.CreatedDate);
         }
@@ -63,7 +66,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
         [Fact]
         public void TestAuditableFunctionalityAgainstGuidModel()
         {
-            var startDateTime = DateTime.Now;
+            var startDateTime = DateTime.Now.AddSeconds(-1);
 
             var mockRepository = new Mock<IRepository<ModelFooGuid, int>>();
             var modelFooGuidService = new ModelFooGuidService(mockRepository.Object);
@@ -73,15 +76,17 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
 
             var model = modelFooGuidService.TestAddOrUpdateAudit(new ModelFooGuid { Id = 1 }, user1, true);
             Assert.Equal(user1, model.CreatedBy);
-            Assert.True(model.CreatedDate.Ticks > startDateTime.Ticks);
+            Assert.True(model.CreatedDate > startDateTime);
             Assert.Equal(user1, model.ModifiedBy);
             Assert.True(model.ModifiedDate == model.CreatedDate);
 
+            Thread.Sleep(5);
+
             model = modelFooGuidService.TestAddOrUpdateAudit(model, user2, false);
             Assert.Equal(user1, model.CreatedBy);
-            Assert.True(model.CreatedDate.Ticks > startDateTime.Ticks);
+            Assert.True(model.CreatedDate > startDateTime);
             Assert.Equal(user2, model.ModifiedBy);
-            Assert.True(model.ModifiedDate.Ticks > model.CreatedDate.Ticks);
+            Assert.True(model.ModifiedDate > model.CreatedDate);
         }
     }
 }
