@@ -11,16 +11,25 @@ $nugetPath = "$($buildDirectory)\nuget"
 if (Test-Path $nugetPath) { Remove-Item $nugetPath -Force -Recurse }
 New-Item $nugetPath -ItemType Directory -Force
 
+function Invoker($exp) {
+    $er = (Invoke-Expression $exp) 2>&1
+	    if ($lastexitcode) {throw $er}
+}
+
 function SetNugetApiKey($nugetApiKey) {
-	Invoke-Expression "& `"$($buildDirectory)\src\.nuget\Nuget.exe`" setApiKey $($nugetApiKey)"
+	$exp = "& `"$($buildDirectory)\src\.nuget\Nuget.exe`" setApiKey $($nugetApiKey)"
+    Invoker $exp
 }
 
 function PackageNuget($buildDirectory, $packPath, $nuspec, $version) {
-    Invoke-Expression "& `"$($buildDirectory)\src\.nuget\Nuget.exe`" pack '$packPath\$nuspec' -OutputDirectory '$packPath' -Version '$($version)' -Symbols"
+    $exp =  "& `"$($buildDirectory)\src\.nuget\Nuget.exe`" pack '$packPath\$nuspec' -OutputDirectory '$packPath' -Version '$($version)' -Symbols"
+    Invoker $exp
 }
 
 function PushNuget($buildDirectory, $packPath, $project, $version) {
-    Invoke-Expression "& `"$($buildDirectory)\src\.nuget\Nuget.exe`" push '$packPath\$project.$($version).nupkg'"
+
+    $exp = "& `"$($buildDirectory)\src\.nuget\Nuget.exe`" push '$packPath\$project.$($version).nupkg'"
+    Invoker $exp
     #Invoke-Expression "& `"$($buildDirectory)\src\.nuget\Nuget.exe`" push '$packPath\$project.$($version).symbols.nupkg'"
 }
 
@@ -44,5 +53,13 @@ function BuildNugetCommon($buildDirectory, $version, $project) {
     PushNuget $buildDirectory $nugetProjPath "$($project)" $version
 }
 
-SetNugetApiKey $nugetApiKey
-BuildNugetCommon $buildDirectory $version "Arragro.Common"
+Try
+{
+    SetNugetApiKey $nugetApiKey
+    BuildNugetCommon $buildDirectory $version "Arragro.Common"
+}
+Catch [System.Exception]
+{
+    Write-Error $_.Exception.Messge;
+    exit 1;
+}
