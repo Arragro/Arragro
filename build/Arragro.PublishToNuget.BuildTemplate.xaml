@@ -49,6 +49,7 @@
     <x:Property Name="Metadata" Type="mtbw:ProcessParameterMetadataCollection" />
     <x:Property Name="SupportedReasons" Type="mtbc1:BuildReason" />
     <x:Property Name="BuildProcessVersion" Type="x:String" />
+    <x:Property Name="AssemblyVersion" Type="InArgument(x:String)" />
   </x:Members>
   <this:Process.ProjectsToBuild>
     <InArgument x:TypeArguments="s:String[]" />
@@ -113,9 +114,6 @@
   <sap2010:WorkflowViewState.IdRef>TfsBuild.Process_1</sap2010:WorkflowViewState.IdRef>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces serialized as XML namespaces</mva:VisualBasic.Settings>
   <Sequence DisplayName="Overall build process" sap2010:WorkflowViewState.IdRef="Sequence_3">
-    <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="AssemblyVersion" />
-    </Sequence.Variables>
     <mtbac:SetBuildNumber DropLocation="{x:Null}" BuildNumberFormat="[BuildNumberFormat]" DisplayName="Update build number" sap2010:WorkflowViewState.IdRef="SetBuildNumber_1" />
     <mtbwa:AgentScope DataToIgnore="" DisplayName="Run on agent" sap2010:WorkflowViewState.IdRef="AgentScope_1" MaxExecutionTime="[AgentSettings.GetValue(Of TimeSpan)(&quot;MaxExecutionTime&quot;, New System.TimeSpan(0,0,0))]" MaxWaitTime="[AgentSettings.GetValue(Of TimeSpan)(&quot;MaxWaitTime&quot;, New System.TimeSpan(4,0,0))]" ReservationSpec="[AgentSettings.CreateAgentReservationSpec()]" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
       <mtbac:InitializeEnvironment BinariesFolder="bin" DisplayName="Initialize environment" sap2010:WorkflowViewState.IdRef="InitializeEnvironment_1" SourceFolder="src" TestResultsFolder="tst" />
@@ -178,7 +176,7 @@
         </TryCatch.Finally>
       </TryCatch>
     </mtbwa:AgentScope>
-    <sads:DebugSymbol.Symbol>d05EOlxEZXZlbG9wbWVudFxBcnJhZ3JvXEFycmFncm9cYnVpbGRcQXJyYWdyby5QdWJsaXNoVG9OdWdldC5CdWlsZFRlbXBsYXRlLnhhbWxZAY8MAd4QAQsBwgcB5AoBCgHjCwHqCwEJAfsUAYIVAQgBYgGeBwEHAcIUAd0UAQYB+xABgxQBBQGrFQGyFQEEAZ0UAaQUAQMBhQsBxAsBAnMDtgEOAgEBdwV3sgECAXJ4BbQBGAIBAndFd1oCAXN48AF4zAICAQd4ggF44wECAQV43QJ4iwMCAQN5B3nFAQIBbnoHerwBAgFoewd74QECAWR8B7MBEgIBCXmlAXmqAQIBcXkzeTgCAXB5vQF5wgECAW96Jno5AgFsekF6VQIBanqHAXqNAQIBaXvBAXveAQIBZnt1e3sCAWV+C54BFgIBE64BC7EBFgIBD6YBD6kBGgIBCoEBPIEBYgIBFIMBDYMB3wICAV6EAQ2EAXgCAVuFAQ2FAe8BAgFThgENhgHfBQIBQIcBDYcB4AICATqIAQ2IAeECAgE0iQENiQGnAgIBLYoBDYoB4gICASeLAQ2LAa4BAgEjjAENnQEjAgEVrwENrwFxAgERsAENsAFLAgEQpwERpwG1AQIBDKgBEagBgwECAQuDAcIBgwHIAQIBY4MBJ4MBiAECAWGDAdIBgwGuAgIBX4QBY4QBdQIBXIUB2QGFAewBAgFZhQGaAYUBrQECAVeFAb4BhQHQAQIBVYUBQoUBUAIBVIYBuwOGAc4DAgFRhgGCA4YBiAMCAVCGAdQFhgHcBQIBT4YB7QSGAckFAgFNhgH7A4YB3wQCAUuGAU2GAegBAgFJhgH/AYYBmAICAUeGAZgDhgGqAwIBRYYBuwKGAcECAgFEhgEphgE3AgFChgHkA4YB6gMCAUGHAcIBhwHIAQIBP4cBJ4cBiQECAT2HAdIBhwGvAgIBO4gBxQGIAcsBAgE5iAEniAGHAQIBN4gB1QGIAbACAgE1iQGSAokBpAICATKJAX6JAdABAgEwiQE7iQFUAgEuigHFAYoBywECASyKASeKAYgBAgEqigHVAYoBsQICASiLAZgBiwGrAQIBJYsBS4sBUQIBJIwBwwKMAbEDAgEijAEsjAHOAQIBHowB9QGMAYECAgEdmgETmgHeAQIBGZIBE5IBdgIBFq8BaK8BbgIBEqcBZqcBeAIBDZoBapoBdwIBG5IBZpIBcwIBFw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d05EOlxEZXZlbG9wbWVudFxBcnJhZ3JvXEFycmFncm9cYnVpbGRcQXJyYWdyby5QdWJsaXNoVG9OdWdldC5CdWlsZFRlbXBsYXRlLnhhbWxZAY8MAd4QAQsBwgcB5AoBCgHjCwHqCwEJAfsUAYIVAQgBYgGeBwEHAcIUAd0UAQYB+xABgxQBBQGrFQGyFQEEAZ0UAaQUAQMBhQsBxAsBAnQDtAEOAgEBdQV1sgECAXJ2BbIBGAIBAnVFdVoCAXN28AF2zAICAQd2ggF24wECAQV23QJ2iwMCAQN3B3fFAQIBbngHeLwBAgFoeQd54QECAWR6B7EBEgIBCXelAXeqAQIBcXczdzgCAXB3vQF3wgECAW94Jng5AgFseEF4VQIBaniHAXiNAQIBaXnBAXneAQIBZnl1eXsCAWV8C5wBFgIBE6wBC68BFgIBD6QBD6cBGgIBCn88f2ICARSBAQ2BAd8CAgFeggENggF4AgFbgwENgwHvAQIBU4QBDYQB3wUCAUCFAQ2FAeACAgE6hgENhgHhAgIBNIcBDYcBpwICAS2IAQ2IAeICAgEniQENiQGuAQIBI4oBDZsBIwIBFa0BDa0BcQIBEa4BDa4BSwIBEKUBEaUBtQECAQymARGmAYMBAgELgQHCAYEByAECAWOBASeBAYgBAgFhgQHSAYEBrgICAV+CAWOCAXUCAVyDAdkBgwHsAQIBWYMBmgGDAa0BAgFXgwG+AYMB0AECAVWDAUKDAVACAVSEAbsDhAHOAwIBUYQBggOEAYgDAgFQhAHUBYQB3AUCAU+EAe0EhAHJBQIBTYQB+wOEAd8EAgFLhAFNhAHoAQIBSYQB/wGEAZgCAgFHhAGYA4QBqgMCAUWEAbsChAHBAgIBRIQBKYQBNwIBQoQB5AOEAeoDAgFBhQHCAYUByAECAT+FASeFAYkBAgE9hQHSAYUBrwICATuGAcUBhgHLAQIBOYYBJ4YBhwECATeGAdUBhgGwAgIBNYcBkgKHAaQCAgEyhwF+hwHQAQIBMIcBO4cBVAIBLogBxQGIAcsBAgEsiAEniAGIAQIBKogB1QGIAbECAgEoiQGYAYkBqwECASWJAUuJAVECASSKAcMCigGxAwIBIooBLIoBzgECAR6KAfUBigGBAgIBHZgBE5gB3gECARmQAROQAXYCARatAWitAW4CARKlAWalAXgCAQ2YAWqYAXcCARuQAWaQAXMCARc=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
