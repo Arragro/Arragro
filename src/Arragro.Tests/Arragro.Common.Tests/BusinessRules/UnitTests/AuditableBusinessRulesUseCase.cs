@@ -42,7 +42,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
         [Fact]
         public void TestAuditableFunctionalityAgainstIntModel()
         {
-            var startDateTime = DateTime.Now;
+            var startDateTime = DateTime.Now.AddSeconds(-1);
 
             var mockRepository = new Mock<IRepository<ModelFooInt, int>>();
             var modelFooIntService = new ModelFooIntService(mockRepository.Object);
@@ -63,7 +63,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
         [Fact]
         public void TestAuditableFunctionalityAgainstGuidModel()
         {
-            var startDateTime = DateTime.Now;
+            var startDateTime = DateTime.Now.AddSeconds(-1);
 
             var mockRepository = new Mock<IRepository<ModelFooGuid, int>>();
             var modelFooGuidService = new ModelFooGuidService(mockRepository.Object);
