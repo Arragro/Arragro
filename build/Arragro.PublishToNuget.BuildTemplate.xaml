@@ -114,7 +114,7 @@
   <mva:VisualBasic.Settings>Assembly references and imported namespaces serialized as XML namespaces</mva:VisualBasic.Settings>
   <Sequence DisplayName="Overall build process" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Default="1.0.0.0" Name="AssemblyVersion" />
+      <Variable x:TypeArguments="x:String" Name="AssemblyVersion" />
     </Sequence.Variables>
     <mtbac:SetBuildNumber DropLocation="{x:Null}" BuildNumberFormat="[BuildNumberFormat]" DisplayName="Update build number" sap2010:WorkflowViewState.IdRef="SetBuildNumber_1" />
     <mtbwa:AgentScope DataToIgnore="" DisplayName="Run on agent" sap2010:WorkflowViewState.IdRef="AgentScope_1" MaxExecutionTime="[AgentSettings.GetValue(Of TimeSpan)(&quot;MaxExecutionTime&quot;, New System.TimeSpan(0,0,0))]" MaxWaitTime="[AgentSettings.GetValue(Of TimeSpan)(&quot;MaxWaitTime&quot;, New System.TimeSpan(4,0,0))]" ReservationSpec="[AgentSettings.CreateAgentReservationSpec()]" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces">
@@ -130,6 +130,7 @@
             </Sequence.Variables>
             <mtba:RunScript Arguments="[AdvancedBuildSettings.GetValue(Of String)(&quot;PreActionScriptArguments&quot;, String.Empty)]" DisplayName="Run optional script before MSBuild" Enabled="True" FilePath="[AdvancedBuildSettings.GetValue(Of String)(&quot;PreActionScriptPath&quot;, String.Empty)]" sap2010:WorkflowViewState.IdRef="RunScript_1" />
             <mtbwa:GetBuildDirectory sap2010:WorkflowViewState.IdRef="GetBuildDirectory_1" Result="[BuildDirectory]" />
+            <atba:UpdateAssemblyVersionActivity AssemblyFileMask="Assembly*.cs" sap2010:WorkflowViewState.IdRef="UpdateAssemblyVersionActivity_1" Result="[AssemblyVersion]" SourceDirectory="[BuildDirectory]" Version="[AssemblyVersion]" />
             <mtba:RunMSBuild CleanBuild="[CleanBuild]" CommandLineArguments="[String.Format(&quot;/p:SkipInvalidConfigurations=true {0}&quot;, AdvancedBuildSettings.GetValue(Of String)(&quot;MSBuildArguments&quot;, String.Empty))]" ConfigurationsToBuild="[ConfigurationsToBuild]" DisplayName="Run MSBuild" Enabled="True" sap2010:WorkflowViewState.IdRef="RunMSBuild_1" MSBuildMultiProc="True" OutputLocation="[OutputLocation]" ProjectsToBuild="[ProjectsToBuild]" RestoreNuGetPackages="True" RunCodeAnalysis="[AdvancedBuildSettings.GetValue(Of String)(&quot;RunCodeAnalysis&quot;, &quot;AsConfigured&quot;)]" ToolPlatform="[AdvancedBuildSettings.GetValue(Of String)(&quot;MSBuildPlatform&quot;, &quot;Auto&quot;)]" Verbosity="Normal" />
             <mtba:RunScript Arguments="[AdvancedBuildSettings.GetValue(Of String)(&quot;PostActionScriptArguments&quot;, String.Empty)]" DisplayName="Run optional script after MSBuild" Enabled="True" FilePath="[AdvancedBuildSettings.GetValue(Of String)(&quot;PostActionScriptPath&quot;, String.Empty)]" sap2010:WorkflowViewState.IdRef="RunScript_2" />
             <mtba:RunScript Arguments="[AdvancedTestSettings.GetValue(Of String)(&quot;PreActionScriptArguments&quot;, String.Empty)]" DisplayName="Run optional script before Test Runner" Enabled="True" FilePath="[AdvancedTestSettings.GetValue(Of String)(&quot;PreActionScriptPath&quot;, String.Empty)]" sap2010:WorkflowViewState.IdRef="RunScript_3" />
@@ -142,7 +143,7 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="errOutput" />
                   </ActivityAction.Argument>
-                  <mtbwa:WriteBuildError Message="[errOutput]" sap2010:WorkflowViewState.IdRef="WriteBuildError_1" />
+                  <mtbwa:WriteBuildError sap2010:WorkflowViewState.IdRef="WriteBuildError_1" Message="[errOutput]" />
                 </ActivityAction>
               </mtbwa:InvokeProcess.ErrorDataReceived>
               <mtbwa:InvokeProcess.OutputDataReceived>
@@ -150,7 +151,7 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="stdOutput" />
                   </ActivityAction.Argument>
-                  <mtbwa:WriteBuildMessage Message="[stdOutput]" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" sap2010:WorkflowViewState.IdRef="WriteBuildMessage_1" />
+                  <mtbwa:WriteBuildMessage sap2010:WorkflowViewState.IdRef="WriteBuildMessage_1" Message="[stdOutput]" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" />
                 </ActivityAction>
               </mtbwa:InvokeProcess.OutputDataReceived>
             </mtbwa:InvokeProcess>
@@ -177,7 +178,7 @@
         </TryCatch.Finally>
       </TryCatch>
     </mtbwa:AgentScope>
-    <sads:DebugSymbol.Symbol>d05EOlxEZXZlbG9wbWVudFxBcnJhZ3JvXEFycmFncm9cYnVpbGRcQXJyYWdyby5QdWJsaXNoVG9OdWdldC5CdWlsZFRlbXBsYXRlLnhhbWxVAY8MAd4QAQsBwgcB5AoBCgHjCwHqCwEJAfsUAYIVAQgBYgGeBwEHAcIUAd0UAQYB+xABgxQBBQGrFQGyFQEEAZ0UAaQUAQMBhQsBxAsBAnMDtQEOAgEBdTR1PQIBAncFd7IBAgFreAWzARgCAQN3RXdaAgFsePABeMwCAgEIeIIBeOMBAgEGeN0CeIsDAgEEeQd5xQECAWd6B3q8AQIBYXsHe+EBAgFdfAeyARICAQp5pQF5qgECAWp5M3k4AgFpeb0BecIBAgFoeiZ6OQIBZXpBelUCAWN6hwF6jQECAWJ7wQF73gECAV97dXt7AgFefgudARYCARStAQuwARYCARClAQ+oARoCAQuBATyBAWICARWDAQ2DAd8CAgFXhAENhAF4AgFUhQENhQHfBQIBQYYBDYYB4AICATuHAQ2HAeECAgE1iAENiAGnAgIBLokBDYkB4gICASiKAQ2KAa4BAgEkiwENnAEjAgEWrgENrgFxAgESrwENrwFLAgERpgERpgG1AQIBDacBEacBgwECAQyDAcIBgwHIAQIBXIMBJ4MBiAECAVqDAdIBgwGuAgIBWIQBY4QBdQIBVYUBuwOFAc4DAgFShQGCA4UBiAMCAVGFAdQFhQHcBQIBUIUB7QSFAckFAgFOhQH7A4UB3wQCAUyFAU2FAegBAgFKhQH/AYUBmAICAUiFAZgDhQGqAwIBRoUBuwKFAcECAgFFhQEphQE3AgFDhQHkA4UB6gMCAUKGAcIBhgHIAQIBQIYBJ4YBiQECAT6GAdIBhgGvAgIBPIcBxQGHAcsBAgE6hwEnhwGHAQIBOIcB1QGHAbACAgE2iAGSAogBpAICATOIAX6IAdABAgExiAE7iAFUAgEviQHFAYkBywECAS2JASeJAYgBAgEriQHVAYkBsQICASmKAZgBigGrAQIBJooBS4oBUQIBJYsBwwKLAbEDAgEjiwEsiwHOAQIBH4sB9QGLAYECAgEemQETmQHeAQIBGpEBE5EBdgIBF64BaK4BbgIBE6YBZqYBeAIBDpkBNJkBQQIBHJEBMpEBPwIBGA==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>d05EOlxEZXZlbG9wbWVudFxBcnJhZ3JvXEFycmFncm9cYnVpbGRcQXJyYWdyby5QdWJsaXNoVG9OdWdldC5CdWlsZFRlbXBsYXRlLnhhbWxZAY8MAd4QAQsBwgcB5AoBCgHjCwHqCwEJAfsUAYIVAQgBYgGeBwEHAcIUAd0UAQYB+xABgxQBBQGrFQGyFQEEAZ0UAaQUAQMBhQsBxAsBAnMDtgEOAgEBdwV3sgECAXJ4BbQBGAIBAndFd1oCAXN48AF4zAICAQd4ggF44wECAQV43QJ4iwMCAQN5B3nFAQIBbnoHerwBAgFoewd74QECAWR8B7MBEgIBCXmlAXmqAQIBcXkzeTgCAXB5vQF5wgECAW96Jno5AgFsekF6VQIBanqHAXqNAQIBaXvBAXveAQIBZnt1e3sCAWV+C54BFgIBE64BC7EBFgIBD6YBD6kBGgIBCoEBPIEBYgIBFIMBDYMB3wICAV6EAQ2EAXgCAVuFAQ2FAe8BAgFThgENhgHfBQIBQIcBDYcB4AICATqIAQ2IAeECAgE0iQENiQGnAgIBLYoBDYoB4gICASeLAQ2LAa4BAgEjjAENnQEjAgEVrwENrwFxAgERsAENsAFLAgEQpwERpwG1AQIBDKgBEagBgwECAQuDAcIBgwHIAQIBY4MBJ4MBiAECAWGDAdIBgwGuAgIBX4QBY4QBdQIBXIUB2QGFAewBAgFZhQGaAYUBrQECAVeFAb4BhQHQAQIBVYUBQoUBUAIBVIYBuwOGAc4DAgFRhgGCA4YBiAMCAVCGAdQFhgHcBQIBT4YB7QSGAckFAgFNhgH7A4YB3wQCAUuGAU2GAegBAgFJhgH/AYYBmAICAUeGAZgDhgGqAwIBRYYBuwKGAcECAgFEhgEphgE3AgFChgHkA4YB6gMCAUGHAcIBhwHIAQIBP4cBJ4cBiQECAT2HAdIBhwGvAgIBO4gBxQGIAcsBAgE5iAEniAGHAQIBN4gB1QGIAbACAgE1iQGSAokBpAICATKJAX6JAdABAgEwiQE7iQFUAgEuigHFAYoBywECASyKASeKAYgBAgEqigHVAYoBsQICASiLAZgBiwGrAQIBJYsBS4sBUQIBJIwBwwKMAbEDAgEijAEsjAHOAQIBHowB9QGMAYECAgEdmgETmgHeAQIBGZIBE5IBdgIBFq8BaK8BbgIBEqcBZqcBeAIBDZoBapoBdwIBG5IBZpIBcwIBFw==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -187,6 +188,7 @@
       <sap2010:ViewStateData Id="AssociateChanges_1" sap:VirtualizedContainerService.HintSize="418,22" />
       <sap2010:ViewStateData Id="RunScript_1" sap:VirtualizedContainerService.HintSize="234,22" />
       <sap2010:ViewStateData Id="GetBuildDirectory_1" sap:VirtualizedContainerService.HintSize="234,22" />
+      <sap2010:ViewStateData Id="UpdateAssemblyVersionActivity_1" sap:VirtualizedContainerService.HintSize="234,22" />
       <sap2010:ViewStateData Id="RunMSBuild_1" sap:VirtualizedContainerService.HintSize="234,22" />
       <sap2010:ViewStateData Id="RunScript_2" sap:VirtualizedContainerService.HintSize="234,22" />
       <sap2010:ViewStateData Id="RunScript_3" sap:VirtualizedContainerService.HintSize="234,22" />
@@ -196,7 +198,7 @@
       <sap2010:ViewStateData Id="WriteBuildError_1" sap:VirtualizedContainerService.HintSize="200,22" />
       <sap2010:ViewStateData Id="WriteBuildMessage_1" sap:VirtualizedContainerService.HintSize="200,22" />
       <sap2010:ViewStateData Id="InvokeProcess_1" sap:VirtualizedContainerService.HintSize="234,270" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="256,890">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="256,952">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -219,16 +221,16 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="418,1117" />
-      <sap2010:ViewStateData Id="AgentScope_1" sap:VirtualizedContainerService.HintSize="440,1427" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="462,1613">
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="418,1179" />
+      <sap2010:ViewStateData Id="AgentScope_1" sap:VirtualizedContainerService.HintSize="440,1489" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="462,1675">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TfsBuild.Process_1" sap:VirtualizedContainerService.HintSize="502,1693" />
+      <sap2010:ViewStateData Id="TfsBuild.Process_1" sap:VirtualizedContainerService.HintSize="502,1755" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
