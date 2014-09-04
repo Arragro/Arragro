@@ -1,7 +1,7 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
 
-namespace Arragro.Common.Service
+namespace Arragro.Common.ServiceBase
 {
     public abstract class Service<TRepository, TModel, TKeyType> : BusinessRulesBase<TRepository, TModel, TKeyType>
         where TModel : class

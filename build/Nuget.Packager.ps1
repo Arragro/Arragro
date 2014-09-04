@@ -42,7 +42,7 @@ function BuildNugetCommon($buildDirectory, $version, $project) {
 
     if (Test-Path $nugetProjPath) { Remove-Item $nugetProjPath -Force -Recurse }
     New-Item $libNet45 -ItemType Directory -Force
-
+		
     Copy-Item "$($projPath)\bin\Release\$($project).dll" $libNet45
     Copy-Item "$($projPath)\bin\Release\$($project).pdb" $libNet45
     Copy-Item "$($buildDirectory)\build\$($project).nuspec" $nugetProjPath
