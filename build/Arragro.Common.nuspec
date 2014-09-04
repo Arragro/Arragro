@@ -24,4 +24,8 @@
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.Common Common BusinessRules Repository Service Logging</tags>
   </metadata>
+  <files>
+    <file src="lib\**\*.*" target="lib" />
+    <file src="..\..\src\Arragro.Common\**\*.cs" target="src" />
+  </files>
 </package>

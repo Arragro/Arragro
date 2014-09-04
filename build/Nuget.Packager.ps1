@@ -38,9 +38,7 @@ function BuildNugetCommon($buildDirectory, $version, $project) {
     $projPath = "$($buildDirectory)\src\$($project)"
     $nugetPath = "$($buildDirectory)\nuget"
     $nugetProjPath = "$($nugetPath)\$($project)"
-    $dllsPath = "$($buildDirectory)\src\dlls\"
     $libNet45 = "$($nugetProjPath)\lib\net45"
-    $dllsPath = "$($buildDirectory)\src\dlls"
 
     if (Test-Path $nugetProjPath) { Remove-Item $nugetProjPath -Force -Recurse }
     New-Item $libNet45 -ItemType Directory -Force
