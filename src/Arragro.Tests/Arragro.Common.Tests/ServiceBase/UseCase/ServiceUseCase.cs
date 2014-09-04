@@ -1,6 +1,6 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
-using Arragro.Common.Service;
+using Arragro.Common.ServiceBase;
 using Arragro.Common.Tests.ModelsAndHelpers;
 using System;
 using System.Collections.Generic;
