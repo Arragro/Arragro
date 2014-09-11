@@ -7,7 +7,7 @@ namespace Arragro.Common.Tests.Logging.UseCase
     public class LoggingUseCase
     {
         [Fact]
-        public void TestDebugFactory()
+        public void LoggingUseCaseWithDebugLogManager()
         {
             Debug.AutoFlush = true;
             LogManager.LogFactory = new DebugLogManager();

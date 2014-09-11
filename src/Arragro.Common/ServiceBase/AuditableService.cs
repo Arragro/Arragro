@@ -9,6 +9,11 @@ namespace Arragro.Common.ServiceBase
     {
         public AuditableService(TRepository repository) : base(repository) { }
 
+        public TModel Find(TKeyType id)
+        {
+            return Repository.Find(id);
+        }
+
         public abstract void EnsureValidModel(TModel model, params object[] relatedModels);
         public abstract TModel InsertOrUpdate(TModel model, TUserIdType userId);
     }
