@@ -48,6 +48,14 @@
     <Compile Include="BusinessRules\AuditableBusinessRulesBase.cs" />
     <Compile Include="BusinessRules\BusinessRulesBase.cs" />
     <Compile Include="BusinessRules\RulesException.cs" />
+    <Compile Include="CacheProvider\Cache.cs" />
+    <Compile Include="CacheProvider\CacheProviderManager.cs" />
+    <Compile Include="CacheProvider\MemoryCacheProvider.cs" />
+    <Compile Include="CacheProvider\Models\CacheItem.cs" />
+    <Compile Include="CacheProvider\Models\CacheItemList.cs" />
+    <Compile Include="CacheProvider\Models\ICacheItem.cs" />
+    <Compile Include="CacheProvider\ICacheProvider.cs" />
+    <Compile Include="CacheProvider\Models\MasterKeys.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\DebugLogManager.cs" />
     <Compile Include="Logging\ILog.cs" />
