@@ -83,7 +83,7 @@
       <Project>{df7f6387-5d1a-4e62-b136-0c85e4175e1b}</Project>
       <Name>Arragro.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Arragro.TestBase\Arragro.TestBase.csproj">
+    <ProjectReference Include="..\Arragro.TestBase\Arragro.TestBase.csproj">
       <Project>{e2b0e486-599a-4996-92ca-6a8f258cbe79}</Project>
       <Name>Arragro.TestBase</Name>
     </ProjectReference>

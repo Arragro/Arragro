@@ -28,9 +28,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Common.Tests", "Arr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.EF6", "Arragro.EF6\Arragro.EF6.csproj", "{2F1ACB16-1B19-41E2-90C0-1D2B36405288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.EF6.IntegrationTests", "Arragro.EF6.IntegrationTests\Arragro.EF6.IntegrationTests.csproj", "{24A55230-FAF2-49C9-923C-49DF4A6B8590}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.EF6.IntegrationTests", "Arragro.Tests\Arragro.EF6.IntegrationTests\Arragro.EF6.IntegrationTests.csproj", "{24A55230-FAF2-49C9-923C-49DF4A6B8590}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.TestBase", "Arragro.TestBase\Arragro.TestBase.csproj", "{E2B0E486-599A-4996-92CA-6A8F258CBE79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.TestBase", "Arragro.Tests\Arragro.TestBase\Arragro.TestBase.csproj", "{E2B0E486-599A-4996-92CA-6A8F258CBE79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

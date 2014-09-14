@@ -51,7 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arragro.Common\Arragro.Common.csproj">
+    <ProjectReference Include="..\..\Arragro.Common\Arragro.Common.csproj">
       <Project>{df7f6387-5d1a-4e62-b136-0c85e4175e1b}</Project>
       <Name>Arragro.Common</Name>
     </ProjectReference>
