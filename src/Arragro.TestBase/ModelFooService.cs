@@ -1,13 +1,12 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
-using Arragro.Common.Tests.ModelsAndHelpers;
+using Arragro.Common.ServiceBase;
 using System;
 using System.Linq;
 
-namespace Arragro.Common.Tests.ModelsAndHelpers
+namespace Arragro.TestBase
 {
-
-    public class ModelFooService : BusinessRulesBase<IRepository<ModelFoo, int>, ModelFoo, int>
+    public class ModelFooService : Service<IRepository<ModelFoo, int>, ModelFoo, int>
     {
         public const string DuplicateName = "There is already a Model Foo with that name in the repository";
         public const string RequiredName = "The Name field is required";
@@ -22,7 +21,7 @@ namespace Arragro.Common.Tests.ModelsAndHelpers
          * 
          * This would occur on a InsertOrUpdate at the service layer.
          */
-        public void EnsureValidModel(ModelFoo modelFoo)
+        public override void EnsureValidModel(ModelFoo modelFoo, params object[] relatedObjects)
         {
             if (Repository.All()
                     .Where(x => x.Id != modelFoo.Id
@@ -36,6 +35,13 @@ namespace Arragro.Common.Tests.ModelsAndHelpers
                 RulesException.ErrorFor(c => c.Name, RangeLengthName);
 
             if (RulesException.Errors.Any()) throw RulesException;
+        }
+
+        public override ModelFoo InsertOrUpdate(ModelFoo model)
+        {
+            EnsureValidModel(model);
+            model = Repository.InsertOrUpdate(model, model.Id == default(int));
+            return model;
         }
     }
 }

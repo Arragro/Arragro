@@ -1,6 +1,6 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
-using Arragro.Common.Tests.ModelsAndHelpers;
+using Arragro.TestBase;
 using Moq;
 using System;
 using System.Collections.Generic;

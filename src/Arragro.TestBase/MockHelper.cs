@@ -3,7 +3,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Arragro.Common.Tests.ModelsAndHelpers
+namespace Arragro.TestBase
 {
     public class MockHelper
     {

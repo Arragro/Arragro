@@ -1,5 +1,5 @@
 ﻿using Arragro.Common.Tests.BusinessRules.UseCases;
-using Arragro.Common.Tests.ModelsAndHelpers;
+using Arragro.TestBase;
 using System;
 using Xunit;
 

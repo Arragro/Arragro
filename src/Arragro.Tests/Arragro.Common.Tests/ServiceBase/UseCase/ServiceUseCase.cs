@@ -1,7 +1,7 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
 using Arragro.Common.ServiceBase;
-using Arragro.Common.Tests.ModelsAndHelpers;
+using Arragro.TestBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +11,6 @@ namespace Arragro.Common.Tests.Services.UseCase
 {
     public class ServiceUseCase
     {
-        public class ModelFooService : Service<IRepository<ModelFoo, int>, ModelFoo, int>
-        {
-            public const string RequiredName = "The Name field is required.";
-
-            public ModelFooService(IRepository<ModelFoo, int> repository) : base(repository) { }
-
-            public override void EnsureValidModel(ModelFoo model, params object[] relatedModels)
-            {
-                if (String.IsNullOrEmpty(model.Name))
-                    RulesException.ErrorFor(x => x.Name, RequiredName);
-
-                if (RulesException.Errors.Any()) throw RulesException;
-            }
-
-            public override ModelFoo InsertOrUpdate(ModelFoo model)
-            {
-                EnsureValidModel(model);
-                model = Repository.InsertOrUpdate(model, model.Id == default(int));
-                return model;
-            }
-        }
-
         public readonly List<ModelFoo> ModelFoos;
 
         public ServiceUseCase()

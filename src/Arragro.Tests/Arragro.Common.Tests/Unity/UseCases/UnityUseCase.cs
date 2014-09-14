@@ -1,7 +1,7 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
 using Arragro.Common.ServiceBase;
-using Arragro.Common.Tests.ModelsAndHelpers;
+using Arragro.TestBase;
 using Microsoft.Practices.Unity;
 using System.Linq;
 using Xunit;

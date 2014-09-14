@@ -1,5 +1,5 @@
 ﻿using Arragro.Common.Repository;
-using Arragro.Common.Tests.ModelsAndHelpers;
+using Arragro.TestBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
