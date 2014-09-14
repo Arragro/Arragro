@@ -22,4 +22,9 @@ This library is the foundation of our projects and the core for other libraries 
 2. Business Rules
 3. Service Base classes
 4. Logging Engine (based on log4net, but adaptable)
+5. Memory Caching
+
+##Arragro.EF6
+This is a implementation of the IRepository interface defined in Arragro.Common
+for Entity Framework 6.
 
