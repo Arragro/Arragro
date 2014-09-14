@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D
 	ProjectSection(SolutionItems) = preProject
 		..\build\Arragro.Build.GitTemplate.12.xaml = ..\build\Arragro.Build.GitTemplate.12.xaml
 		..\build\Arragro.Common.nuspec = ..\build\Arragro.Common.nuspec
+		..\build\Arragro.EF6.nuspec = ..\build\Arragro.EF6.nuspec
+		..\build\Arragro.PackageNuget.BuildTemplate.xaml = ..\build\Arragro.PackageNuget.BuildTemplate.xaml
 		..\build\Arragro.PublishToNuget.BuildTemplate.xaml = ..\build\Arragro.PublishToNuget.BuildTemplate.xaml
 		..\build\Nuget.Packager.ps1 = ..\build\Nuget.Packager.ps1
 	EndProjectSection

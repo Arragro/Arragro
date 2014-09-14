@@ -4,7 +4,9 @@ param (
 	[parameter(mandatory=$true, valuefrompipeline=$true)]
 	[string]$version,
 	[parameter(mandatory=$true, valuefrompipeline=$true)]
-	[string]$nugetApiKey
+	[string]$nugetApiKey,
+	[parameter(mandatory=$true, valuefrompipeline=$true)]
+	[bool]$publish
 )
 
 $nugetPath = "$($buildDirectory)\nuget"
@@ -48,13 +50,16 @@ function BuildNugetCommon($buildDirectory, $version, $project) {
     Copy-Item "$($buildDirectory)\build\$($project).nuspec" $nugetProjPath
 
     PackageNuget $buildDirectory $nugetProjPath "$($project).nuspec" $version
-    PushNuget $buildDirectory $nugetProjPath "$($project)" $version
+	if ($publish -eq $true)	{
+		PushNuget $buildDirectory $nugetProjPath "$($project)" $version
+	}
 }
 
 Try
 {
     SetNugetApiKey $nugetApiKey
     BuildNugetCommon $buildDirectory $version "Arragro.Common"
+    BuildNugetCommon $buildDirectory $version "Arragro.EF6"
 }
 Catch [System.Exception]
 {
