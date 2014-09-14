@@ -16,13 +16,13 @@
     <releaseNotes>Initial Release.</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.EF6 Repository EntityFramework</tags>
+    <dependencies>
+      <dependency id="Arragro.Common" />
+      <dependency id="EntityFramework" version="6.1.1" />
+    </dependencies>
   </metadata>
   <files>
     <file src="lib\**\*.*" target="lib" />
     <file src="..\..\src\Arragro.EF6\**\*.cs" target="src" />
   </files>
-  <dependencies>
-    <dependency id="Arragro.Common" />
-    <dependency id="EntityFramework" version="6.1.1" />
-  </dependencies>
 </package>
