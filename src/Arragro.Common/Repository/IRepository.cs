@@ -6,7 +6,7 @@ namespace Arragro.Common.Repository
     {
         void TurnOnOffLazyLoading(bool on = true);
         TModel Find(TKeyType id);
-        void Delete(TKeyType id);
+        TModel Delete(TKeyType id);
         IQueryable<TModel> All();
         TModel InsertOrUpdate(TModel model, bool add);
         int SaveChanges();

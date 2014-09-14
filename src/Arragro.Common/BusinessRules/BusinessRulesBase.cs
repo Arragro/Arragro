@@ -28,5 +28,10 @@ namespace Arragro.Common.BusinessRules
         }
 
         public readonly RulesException<TModel> RulesException;
+
+        public int SaveChanges()
+        {
+            return Repository.SaveChanges();
+        }
     }
 }

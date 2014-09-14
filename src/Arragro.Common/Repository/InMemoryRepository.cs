@@ -72,10 +72,11 @@ namespace Arragro.Common.Repository
             return query.Provider.CreateQuery<TModel>(whereClause).SingleOrDefault();
         }
 
-        public void Delete(TKeyType id)
+        public TModel Delete(TKeyType id)
         {
             var model = Find(id);
             if (model != null) _models.Remove(model);
+            return model;
         }
 
         public IQueryable<TModel> All()
