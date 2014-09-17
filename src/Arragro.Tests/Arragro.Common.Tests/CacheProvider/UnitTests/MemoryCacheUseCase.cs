@@ -33,8 +33,7 @@ namespace Arragro.Common.Tests.CacheProvider.UnitTests
         [Fact]
         public void TestCacheUseCaseWithMemoryCache()
         {
-            Cache.Set("Hello", new TimeSpan(0, 0, 0, 0, 10), "Hello");
-            var data = Cache.Get<string>("Hello");
+            var data = Cache.Get<string>("Hello", new TimeSpan(0, 0, 0, 0, 10), () => "Hello");
             Assert.Equal("Hello", data);
 
             Thread.Sleep(11);

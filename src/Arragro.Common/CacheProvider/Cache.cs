@@ -60,12 +60,6 @@ namespace Arragro.Common.CacheProvider
             return default(T);
         }
 
-        public static void Set<T>(string key, TimeSpan? cacheDuration, T data, bool slidingExpiration = true)
-        {
-            _log.DebugFormat("Cache.Set:{0}", key);
-            CacheProvider.Set(key, data, cacheDuration, slidingExpiration);
-        }
-
         public static T Get<T>(
             string key, Func<T> func)
         {
