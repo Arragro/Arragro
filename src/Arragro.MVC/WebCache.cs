@@ -28,11 +28,11 @@ namespace Arragro.MVC
             }
         }
 
-        private static T ProcessRequest<T>(Func<T> func)
+        private static T ProcessRequest<T>(Func<ILog, T> func)
         {
             try
             {
-                return func.Invoke();
+                return func.Invoke(_log);
             }
             catch (NullReferenceException)
             {
@@ -47,9 +47,10 @@ namespace Arragro.MVC
                 return data;
 
             return ProcessRequest(
-                () =>
+                (log) =>
                 {
                     HttpContext.Current.Items[key] = data;
+                    log.DebugFormat("WebCache.SaveHttpCacheAndReturn:{0}", key);
                     return data;
                 });
         }
@@ -60,11 +61,12 @@ namespace Arragro.MVC
                 return default(T);
 
             return ProcessRequest(
-                () =>
+                (log) =>
                 {
                     if (HttpContext.Current.Items[key] != null)
                     {
                         var httpData = (T)HttpContext.Current.Items[key];
+                        log.DebugFormat("WebCache.GetHttpCache:{0}", key);
                         return httpData;
                     }
                     return default(T);
@@ -94,10 +96,10 @@ namespace Arragro.MVC
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException("key");
 
-            _log.DebugFormat("Cache.Get:{0}", key);
-
             var httpData = GetHttpCache<T>(key);
             if (httpData != null) return httpData;
+
+            _log.DebugFormat("Cache.Get:{0} From Cache", key);
 
             var data = Cache.Get<T>(key, cacheDuration, func);
             SaveHttpCacheAndReturn(key, data);
