@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 
@@ -14,11 +15,14 @@ namespace Arragro.Common.BusinessRules
      * is an extension in another Arragro library that will copy these issues
      * to the ModelState.  ModelState is still validated by the MVC framework.
      */
+
     [Serializable]
     public class RuleViolation
     {
         public string Prefix { get; set; }
+
         public LambdaExpression Property { get; set; }
+
         public string Message { get; set; }
     }
 
@@ -55,6 +59,27 @@ namespace Arragro.Common.BusinessRules
                                         string message, string prefix = "")
         {
             Errors.Add(new RuleViolation { Property = property, Message = message, Prefix = prefix });
+        }
+
+        public void ErrorsForValidationResults(IEnumerable<ValidationResult> validationResults)
+        {
+            var type = typeof(TModel);
+            foreach (var validationResult in validationResults)
+            {
+                foreach (var memberName in validationResult.MemberNames)
+                {
+                    var par = Expression.Parameter(type);
+                    var memberExpression = Expression.Property(par, memberName);
+                    var property = Expression.Lambda<Func<TModel, object>>(memberExpression, par);
+
+                    Errors.Add(
+                        new RuleViolation
+                        {
+                            Property = property,
+                            Message = validationResult.ErrorMessage
+                        });
+                }
+            }
         }
     }
 }

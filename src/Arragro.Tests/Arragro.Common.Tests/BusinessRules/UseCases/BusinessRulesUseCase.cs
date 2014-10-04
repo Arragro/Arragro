@@ -28,7 +28,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = "Test 2" });
+                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = "Test 2" });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {
@@ -44,7 +44,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = null });
+                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = null });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {
@@ -60,7 +60,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = "1" });
+                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = "1" });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {
@@ -76,12 +76,12 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 {
                     try
                     {
-                        modelFooService.EnsureValidModel(new ModelFoo { Id = 3, Name = "1234567" });
+                        modelFooService.ValidateModel(new ModelFoo { Id = 3, Name = "1234567" });
                     }
                     catch (RulesException<ModelFoo> ex)
                     {
-                        Assert.Equal(1, ex.Errors.Count());
-                        Assert.Equal(ModelFooService.RangeLengthName, ex.Errors[0].Message);
+                        Assert.Equal(2, ex.Errors.Count());
+                        Assert.Equal(ModelFooService.RangeLengthName, ex.Errors[1].Message);
                         throw;
                     }
                 });

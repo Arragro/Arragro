@@ -32,12 +32,10 @@ namespace Arragro.Common.Tests.Unity.UseCases
             {
             }
 
-            public override void EnsureValidModel(ModelFoo model, params object[] relatedModels)
+            protected override void ValidateModelRules(ModelFoo model)
             {
                 if (model.Name.Length > 4)
                     RulesException.ErrorFor(x => x.Name, INVALIDLENGTH);
-
-                if (RulesException.Errors.Any()) throw RulesException;
             }
 
             public override ModelFoo InsertOrUpdate(ModelFoo model)
@@ -89,7 +87,7 @@ namespace Arragro.Common.Tests.Unity.UseCases
                     }
                     catch (RulesException ex)
                     {
-                        Assert.Equal(ModelFooService.INVALIDLENGTH, ex.Errors[0].Message);
+                        Assert.Equal(ModelFooService.INVALIDLENGTH, ex.Errors[1].Message);
                         throw;
                     }
                 });

@@ -18,8 +18,8 @@ namespace Arragro.Common.BusinessRules
             Repository = repository;
             RulesException = new RulesException<TModel>();
         }
-        
-        public IList<ValidationResult> ValidateModel(TModel model)
+
+        protected IList<ValidationResult> ValidateModelProperties(TModel model)
         {
             var validationResults = new List<ValidationResult>();
             var validationContext = new ValidationContext(model, null, null);

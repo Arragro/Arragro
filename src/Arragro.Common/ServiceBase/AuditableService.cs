@@ -1,5 +1,6 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
+using System.Linq;
 
 namespace Arragro.Common.ServiceBase
 {
@@ -17,13 +18,21 @@ namespace Arragro.Common.ServiceBase
             return Repository.Find(id);
         }
 
-        public abstract void EnsureValidModel(TModel model, params object[] relatedModels);
+        protected abstract void ValidateModelRules(TModel model);
 
         public abstract TModel InsertOrUpdate(TModel model, TUserIdType userId);
 
-        public TModel ValidateAndInsertOrUpdate(TModel model, TUserIdType userId, params object[] relatedModels)
+        public void ValidateModel(TModel model)
         {
-            EnsureValidModel(model, relatedModels);
+            RulesException.ErrorsForValidationResults(ValidateModelProperties(model));
+            ValidateModelRules(model);
+
+            if (RulesException.Errors.Any()) throw RulesException;
+        }
+
+        public TModel ValidateAndInsertOrUpdate(TModel model, TUserIdType userId)
+        {
+            ValidateModel(model);
             return InsertOrUpdate(model, userId);
         }
     }
