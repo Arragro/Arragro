@@ -29,7 +29,7 @@ namespace Arragro.Common.Tests.Services.UseCase
                 {
                     try
                     {
-                        modelFooService.InsertOrUpdate(new ModelFoo());
+                        modelFooService.EnsureValidModel(new ModelFoo());
                     }
                     catch (RulesException<ModelFoo> ex)
                     {

@@ -21,10 +21,10 @@ namespace Arragro.Common.ServiceBase
 
         public abstract TModel InsertOrUpdate(TModel model, TUserIdType userId);
 
-        public TModel ValidateAndInsertOrUpdate(TModel model, params object[] relatedModels)
+        public TModel ValidateAndInsertOrUpdate(TModel model, TUserIdType userId, params object[] relatedModels)
         {
             EnsureValidModel(model, relatedModels);
-            return InsertOrUpdate(model);
+            return InsertOrUpdate(model, userId);
         }
     }
 }

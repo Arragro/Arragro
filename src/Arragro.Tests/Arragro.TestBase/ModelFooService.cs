@@ -12,15 +12,19 @@ namespace Arragro.TestBase
         public const string RequiredName = "The Name field is required";
         public const string RangeLengthName = "The Name field must have between 3 and 6 characters";
 
-        public ModelFooService(IRepository<ModelFoo, int> modelFooRepository) : base(modelFooRepository) { }
+        public ModelFooService(IRepository<ModelFoo, int> modelFooRepository)
+            : base(modelFooRepository)
+        {
+        }
 
-        /* 
+        /*
          * This function would be implemented further down the chain as
          * BusinessRulesBase provides the structure, not the implementation
          * which would be custom per Model.
-         * 
+         *
          * This would occur on a InsertOrUpdate at the service layer.
          */
+
         public override void EnsureValidModel(ModelFoo modelFoo, params object[] relatedObjects)
         {
             if (Repository.All()
@@ -30,7 +34,6 @@ namespace Arragro.TestBase
 
             if (String.IsNullOrEmpty(modelFoo.Name))
                 RulesException.ErrorFor(x => x.Name, RequiredName);
-
             else if (modelFoo.Name.Length < 2 || modelFoo.Name.Length > 6)
                 RulesException.ErrorFor(c => c.Name, RangeLengthName);
 
@@ -39,7 +42,6 @@ namespace Arragro.TestBase
 
         public override ModelFoo InsertOrUpdate(ModelFoo model)
         {
-            EnsureValidModel(model);
             model = Repository.InsertOrUpdate(model, model.Id == default(int));
             return model;
         }
