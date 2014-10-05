@@ -82,6 +82,23 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                     {
                         Assert.Equal(2, ex.Errors.Count());
                         Assert.Equal(ModelFooService.RangeLengthName, ex.Errors[1].Message);
+                        Assert.True(ex.ContainsErrorForProperty("Name"));
+                        throw;
+                    }
+                });
+            modelFooService.RulesException.Errors.Clear();
+
+            Assert.Throws<RulesException<ModelFoo>>(
+                () =>
+                {
+                    try
+                    {
+                        modelFooService.ValidateModel(new ModelFoo { Id = 3 });
+                    }
+                    catch (RulesException<ModelFoo> ex)
+                    {
+                        Assert.Equal(1, ex.Errors.Count());
+                        Assert.True(ex.ContainsErrorForProperty("Name"));
                         throw;
                     }
                 });

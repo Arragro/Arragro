@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 
@@ -81,6 +82,14 @@ namespace Arragro.Common.BusinessRules
                         });
                 }
             }
+        }
+    }
+
+    public static class RulesExceptionExtensions
+    {
+        public static bool ContainsErrorForProperty(this RulesException ex, string propertyName)
+        {
+            return ex.Errors.Any(x => x.Property.Body.ToString().Contains(string.Format(".{0}", propertyName)));
         }
     }
 }
