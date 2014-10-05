@@ -68,9 +68,10 @@ namespace Arragro.Common.BusinessRules
             {
                 foreach (var memberName in validationResult.MemberNames)
                 {
-                    var par = Expression.Parameter(type);
-                    var memberExpression = Expression.Property(par, memberName);
-                    var property = Expression.Lambda<Func<TModel, object>>(memberExpression, par);
+                    var parameterExpression = Expression.Parameter(type);
+                    var memberExpression = Expression.Property(parameterExpression, memberName);
+                    var conversion = Expression.Convert(memberExpression, typeof(object));
+                    var property = Expression.Lambda<Func<TModel, Object>>(conversion, parameterExpression);
 
                     Errors.Add(
                         new RuleViolation
