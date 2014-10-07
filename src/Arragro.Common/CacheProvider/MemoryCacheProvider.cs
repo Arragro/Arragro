@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Arragro.Common.CacheProvider
@@ -16,18 +16,6 @@ namespace Arragro.Common.CacheProvider
             new Lazy<MemoryCacheProvider>(() => new MemoryCacheProvider(), true);
 
         private readonly static ConcurrentDictionary<string, object> Dictionary = new ConcurrentDictionary<string, object>();
-
-        private DateTime? GetExpiration(TimeSpan? cacheDuration)
-        {
-            DateTime? expiration = DateTime.Now;
-
-            if (cacheDuration.HasValue)
-                expiration = expiration.Value.Add(cacheDuration.Value);
-            else
-                expiration = null;
-
-            return expiration;
-        }
 
         private bool CheckAndClearExpiredData(ICacheItem cacheItem)
         {
@@ -74,7 +62,7 @@ namespace Arragro.Common.CacheProvider
             var cacheItemList = GetCacheItem<ICacheItemList<T>>(key);
             if (cacheItemList != default(ICacheItemList<T>))
                 if (cacheItemList.SlidingExpiration)
-                    cacheItemList = SetList(key, cacheItemList.Items, cacheItemList.CacheDuration, cacheItemList.SlidingExpiration);
+                    cacheItemList = SetList(key, cacheItemList.Items, new CacheSettings(cacheItemList.CacheDuration, cacheItemList.SlidingExpiration));
             return cacheItemList;
         }
 
@@ -83,26 +71,24 @@ namespace Arragro.Common.CacheProvider
             var cacheItem = GetCacheItem<ICacheItem<T>>(key);
             if (cacheItem != default(ICacheItem<T>))
                 if (cacheItem.SlidingExpiration)
-                    cacheItem = Set(key, cacheItem.Item, cacheItem.CacheDuration, cacheItem.SlidingExpiration);
+                    cacheItem = Set(key, cacheItem.Item, new CacheSettings(cacheItem.CacheDuration, cacheItem.SlidingExpiration));
             return cacheItem;
         }
 
-        public ICacheItemList<T> SetList<T>(string key, IEnumerable<T> data, TimeSpan? cacheDuration, bool slidingExpiration)
+        public ICacheItemList<T> SetList<T>(string key, IEnumerable<T> data, CacheSettings cacheSettings)
         {
-            var expiration = GetExpiration(cacheDuration);
             return (ICacheItemList<T>)Dictionary.AddOrUpdate(
                 key,
-                new CacheItemList<T>(key, data, expiration, cacheDuration, slidingExpiration),
-                (keyToFind, oldItem) => new CacheItemList<T>(key, data, expiration, cacheDuration, slidingExpiration));
+                new CacheItemList<T>(key, data, cacheSettings),
+                (keyToFind, oldItem) => new CacheItemList<T>(key, data, cacheSettings));
         }
 
-        public ICacheItem<T> Set<T>(string key, T data, TimeSpan? cacheDuration, bool slidingExpiration)
+        public ICacheItem<T> Set<T>(string key, T data, CacheSettings cacheSettings)
         {
-            var expiration = GetExpiration(cacheDuration);
             return (ICacheItem<T>)Dictionary.AddOrUpdate(
                 key,
-                new CacheItem<T>(key, data, expiration, cacheDuration, slidingExpiration),
-                (keyToFind, oldItem) => new CacheItem<T>(key, data, expiration, cacheDuration, slidingExpiration));
+                new CacheItem<T>(key, data, cacheSettings),
+                (keyToFind, oldItem) => new CacheItem<T>(key, data, cacheSettings));
         }
 
         public void RemoveAll()

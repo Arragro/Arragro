@@ -32,13 +32,13 @@ namespace Arragro.Common.CacheProvider
             return CacheProvider.Get<T>(key);
         }
 
-        private static T SaveCachedDataAndReturn<T>(string key, TimeSpan? cacheDuration, Func<T> func, bool slidingExpiration = true)
+        private static T SaveCachedDataAndReturn<T>(string key, Func<T> func, CacheSettings cacheSettings)
         {
             _log.DebugFormat("Cache.SaveCachedDataAndReturn:{0}", key);
             _log.DebugFormat("Cache.SaveCachedDataAndReturn - Invoke:{0}", key);
             T newData = func.Invoke();
             _log.DebugFormat("Cache.SaveCachedDataAndReturn - Set:{0}", key);
-            CacheProvider.Set(key, newData, cacheDuration, slidingExpiration);
+            CacheProvider.Set(key, newData, cacheSettings);
             return newData;
         }
 
@@ -46,7 +46,7 @@ namespace Arragro.Common.CacheProvider
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException("key");
-            
+
             _log.DebugFormat("Cache.Get:{0}", key);
             if (CacheProvider != null)
             {
@@ -63,11 +63,11 @@ namespace Arragro.Common.CacheProvider
         public static T Get<T>(
             string key, Func<T> func)
         {
-            return Get(key, null, func);
+            return Get(key, func, new CacheSettings());
         }
 
         public static T Get<T>(
-            string key, TimeSpan? cacheDuration, Func<T> func)
+            string key, Func<T> func, CacheSettings cacheSettings)
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException("key");
@@ -79,7 +79,7 @@ namespace Arragro.Common.CacheProvider
             if (data == null)
             {
                 _log.DebugFormat("Cache.Get - SaveAndReturnCachedData:{0}", key);
-                return SaveCachedDataAndReturn(key, cacheDuration, func);
+                return SaveCachedDataAndReturn(key, func, cacheSettings);
             }
 
             _log.DebugFormat("Cache.Get - ReturnCachedData:{0}", key);

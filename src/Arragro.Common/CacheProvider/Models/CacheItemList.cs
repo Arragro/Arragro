@@ -8,21 +8,13 @@ namespace Arragro.Common.CacheProvider
     {
         public IEnumerable<T> Items { get; set; }
 
-        public CacheItemList() { }
-
         public CacheItemList(
-            string key, IEnumerable<T> item,
-            DateTime? expiration, TimeSpan? cacheDuration,
-            bool slidingExpiration)
+            string key,
+            IEnumerable<T> item,
+            CacheSettings cacheSettings)
+            : base(key, cacheSettings)
         {
-            Identifier = Guid.NewGuid();
-            Key = key;
             Items = item;
-            CreatedDate = DateTime.Now;
-            Expiration = expiration;
-            CacheDuration = cacheDuration;
-            if (cacheDuration.HasValue)
-                SlidingExpiration = slidingExpiration;
         }
     }
 }

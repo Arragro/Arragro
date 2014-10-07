@@ -50,6 +50,7 @@
     <Compile Include="BusinessRules\RulesException.cs" />
     <Compile Include="CacheProvider\Cache.cs" />
     <Compile Include="CacheProvider\CacheProviderManager.cs" />
+    <Compile Include="CacheProvider\CacheSettings.cs" />
     <Compile Include="CacheProvider\MemoryCacheProvider.cs" />
     <Compile Include="CacheProvider\Models\CacheItem.cs" />
     <Compile Include="CacheProvider\Models\CacheItemList.cs" />

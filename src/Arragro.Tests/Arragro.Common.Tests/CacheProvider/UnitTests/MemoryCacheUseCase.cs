@@ -13,13 +13,14 @@ namespace Arragro.Common.Tests.CacheProvider.UnitTests
             Assert.Equal(CacheProviderManager.CacheProvider.GetType(), typeof(MemoryCacheProvider));
         }
 
-		[Fact]
-		public void TestMemoryCacheProvider()
+        [Fact]
+        public void TestMemoryCacheProvider()
         {
-			CacheProviderManager.CacheProvider = MemoryCacheProvider.GetInstance();
+            CacheProviderManager.CacheProvider = MemoryCacheProvider.GetInstance();
             var cacheProvider = CacheProviderManager.CacheProvider;
+            var cacheSettings = new CacheSettings(new TimeSpan(0, 0, 0, 0, 10), true);
 
-            cacheProvider.Set("Test", "Hello", new TimeSpan(0, 0, 0, 0, 10), true);
+            cacheProvider.Set("Test", "Hello", cacheSettings);
 
             var data = cacheProvider.Get<string>("Test");
             Assert.Equal("Hello", data.Item);
@@ -33,7 +34,8 @@ namespace Arragro.Common.Tests.CacheProvider.UnitTests
         [Fact]
         public void TestCacheUseCaseWithMemoryCache()
         {
-            var data = Cache.Get<string>("Hello", new TimeSpan(0, 0, 0, 0, 10), () => "Hello");
+            var cacheSettings = new CacheSettings(new TimeSpan(0, 0, 0, 0, 10), true);
+            var data = Cache.Get<string>("Hello", () => "Hello", cacheSettings);
             Assert.Equal("Hello", data);
 
             Thread.Sleep(11);

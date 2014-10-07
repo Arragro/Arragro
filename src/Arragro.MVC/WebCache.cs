@@ -87,11 +87,11 @@ namespace Arragro.MVC
         public static T Get<T>(
             string key, Func<T> func)
         {
-            return Get(key, null, func);
+            return Get(key, func, new CacheSettings());
         }
 
         public static T Get<T>(
-            string key, TimeSpan? cacheDuration, Func<T> func)
+            string key, Func<T> func, CacheSettings cacheSettings)
         {
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentNullException("key");
@@ -101,7 +101,7 @@ namespace Arragro.MVC
 
             _log.DebugFormat("Cache.Get:{0} From Cache", key);
 
-            var data = Cache.Get<T>(key, cacheDuration, func);
+            var data = Cache.Get<T>(key, func, cacheSettings);
             SaveHttpCacheAndReturn(key, data);
 
             return data;

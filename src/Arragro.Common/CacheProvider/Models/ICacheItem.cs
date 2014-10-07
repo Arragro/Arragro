@@ -5,13 +5,13 @@ namespace Arragro.Common.CacheProvider
 {
     public interface ICacheItem
     {
-        Guid Identifier { get; set; }
-        string Key { get; set; }
-        DateTime CreatedDate { get; set; }
-        DateTime? Expiration { get; set; }
-        TimeSpan? CacheDuration { get; set; }
-        bool SlidingExpiration { get; set; }
-        int ByteLength { get; set; }
+        Guid Identifier { get; }
+        string Key { get; }
+        DateTime CreatedDate { get; }
+        DateTime? Expiration { get; }
+        TimeSpan? CacheDuration { get; }
+        bool SlidingExpiration { get; }
+        int ByteLength { get; }
     }
 
     public interface ICacheItem<T> : ICacheItem
