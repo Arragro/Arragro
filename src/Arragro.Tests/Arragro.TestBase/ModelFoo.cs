@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Arragro.TestBase
 {
+    [Serializable]
     public class ModelFoo
     {
         public int Id { get; set; }
@@ -12,7 +13,7 @@ namespace Arragro.TestBase
         [Required]
         public string Name { get; set; }
     }
-    
+
     public class ModelFooInt : Auditable<int>
     {
         public int Id { get; set; }

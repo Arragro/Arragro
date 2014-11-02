@@ -69,6 +69,7 @@
     <Compile Include="BusinessRules\UseCases\AuditableUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\BusinessRulesUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\RulesExceptionUseCase.cs" />
+    <Compile Include="Helpers\UnitTests\ObjectCopierTests.cs" />
     <Compile Include="Logging\UseCase\LoggingUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\UnitTests\InMemoryRepositoryUnitTests.cs" />
