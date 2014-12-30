@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Arragro.Common.Repository
 {
@@ -18,10 +18,10 @@ namespace Arragro.Common.Repository
             var name = type.Name;
             var properties = type.GetProperties();
             var key = properties.SingleOrDefault(x => x.IsDefined(typeof(KeyAttribute), true));
-                
-            if (key == null) 
+
+            if (key == null)
                 key = properties.SingleOrDefault(x => x.Name == name + "Id");
-            
+
             if (key == null)
                 key = properties.SingleOrDefault(x => x.Name == "Id");
 
@@ -34,13 +34,20 @@ namespace Arragro.Common.Repository
             return key;
         }
 
+        private TKeyType GetKeyPropertyValue(TModel model)
+        {
+            return (TKeyType)GetKeyProperty().GetValue(model);
+        }
+
         public InMemoryRepository()
         {
             _models = new HashSet<TModel>();
             _keyProperty = GetKeyProperty();
         }
 
-        public void TurnOnOffLazyLoading(bool on = true) { }
+        public void TurnOnOffLazyLoading(bool on = true)
+        {
+        }
 
         private MethodCallExpression GetFindWhereClause(IQueryable<TModel> query, TKeyType id)
         {
@@ -117,7 +124,7 @@ namespace Arragro.Common.Repository
             }
             else
             {
-                _models.Remove(model);
+                _models.Remove(Find(GetKeyPropertyValue(model)));
                 _models.Add(model);
             }
             return model;
