@@ -3,7 +3,7 @@ using Arragro.Common.Logging;
 using System;
 using System.Web;
 
-namespace Arragro.MVC
+namespace Arragro.Mvc
 {
     public static class WebCache
     {

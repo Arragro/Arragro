@@ -1,4 +1,4 @@
-﻿namespace Arragro.MVC.Helpers
+﻿namespace Arragro.Mvc.Helpers
 {
     public enum FlashEnum
     {

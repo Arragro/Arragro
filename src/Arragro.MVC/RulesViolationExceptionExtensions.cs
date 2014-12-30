@@ -1,8 +1,8 @@
 ﻿using Arragro.Common.BusinessRules;
-using Arragro.MVC.Helpers;
+using Arragro.Mvc.Helpers;
 using System.Web.Mvc;
 
-namespace Arragro.MVC
+namespace Arragro.Mvc
 {
     public static class RulesViolationExceptionExtensions
     {

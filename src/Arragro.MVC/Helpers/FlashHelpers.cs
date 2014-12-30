@@ -45,7 +45,7 @@ Add the following styles:
 }
  
 */
-namespace Arragro.MVC.Helpers
+namespace Arragro.Mvc.Helpers
 {
     public static class FlashHelpers
     {
