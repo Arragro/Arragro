@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Arragro.Mvc</id>
+    <id>Arragro.ObjectLogging</id>
     <version>1.0.0.0</version>
     <title>Arragro Object Logging Package</title>
     <authors>Mike Jewell</authors>
