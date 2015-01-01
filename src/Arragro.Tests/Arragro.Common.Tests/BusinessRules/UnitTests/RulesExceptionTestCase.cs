@@ -58,7 +58,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
                     catch (RulesException ex)
                     {
                         Assert.Equal(2, ex.Errors.Count);
-                        throw ex;
+                        throw;
                     }
                 });
         }
