@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Common", "Arragro.Common\Arragro.Common.csproj", "{DF7F6387-5D1A-4E62-B136-0C85E4175E1B}"
 EndProject
@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D
 		..\build\Arragro.EF6.nuspec = ..\build\Arragro.EF6.nuspec
 		..\build\Arragro.Log4Net.nuspec = ..\build\Arragro.Log4Net.nuspec
 		..\build\Arragro.Mvc.nuspec = ..\build\Arragro.Mvc.nuspec
+		..\build\Arragro.ObjectLogging.nuspec = ..\build\Arragro.ObjectLogging.nuspec
 		..\build\Arragro.PackageNuget.BuildTemplate.xaml = ..\build\Arragro.PackageNuget.BuildTemplate.xaml
 		..\build\Arragro.PublishToNuget.BuildTemplate.xaml = ..\build\Arragro.PublishToNuget.BuildTemplate.xaml
 		..\build\Nuget.Packager.ps1 = ..\build\Nuget.Packager.ps1
@@ -43,6 +44,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Log4Net", "Arragro.Log4Net\Arragro.Log4Net.csproj", "{EB030218-2E77-4852-97CA-23B97DA84BB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Mvc", "Arragro.Mvc\Arragro.Mvc.csproj", "{766BB180-76DB-4F74-889C-569D146F0F42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.ObjectLogging", "Arragro.ObjectLogging\Arragro.ObjectLogging.csproj", "{41EBB0E3-D075-49F5-BC23-67F034EBE8EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.ObjectLogging.Tests", "Arragro.Tests\Arragro.ObjectLogging.Tests\Arragro.ObjectLogging.Tests\Arragro.ObjectLogging.Tests.csproj", "{C980C73A-5897-4CEA-9433-A921106F71F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +83,14 @@ Global
 		{766BB180-76DB-4F74-889C-569D146F0F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{766BB180-76DB-4F74-889C-569D146F0F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{766BB180-76DB-4F74-889C-569D146F0F42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EBB0E3-D075-49F5-BC23-67F034EBE8EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EBB0E3-D075-49F5-BC23-67F034EBE8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EBB0E3-D075-49F5-BC23-67F034EBE8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EBB0E3-D075-49F5-BC23-67F034EBE8EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C980C73A-5897-4CEA-9433-A921106F71F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C980C73A-5897-4CEA-9433-A921106F71F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C980C73A-5897-4CEA-9433-A921106F71F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C980C73A-5897-4CEA-9433-A921106F71F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +99,6 @@ Global
 		{5F5858CD-B57E-40A5-BC7E-8B23C6511B23} = {FD2F2402-B615-4E1F-A90A-98E67D4C01BF}
 		{24A55230-FAF2-49C9-923C-49DF4A6B8590} = {FD2F2402-B615-4E1F-A90A-98E67D4C01BF}
 		{E2B0E486-599A-4996-92CA-6A8F258CBE79} = {FD2F2402-B615-4E1F-A90A-98E67D4C01BF}
+		{C980C73A-5897-4CEA-9433-A921106F71F4} = {FD2F2402-B615-4E1F-A90A-98E67D4C01BF}
 	EndGlobalSection
 EndGlobal
