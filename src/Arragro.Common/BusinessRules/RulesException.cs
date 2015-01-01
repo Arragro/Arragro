@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace Arragro.Common.BusinessRules
 {
@@ -25,13 +26,39 @@ namespace Arragro.Common.BusinessRules
         public LambdaExpression Property { get; set; }
 
         public string Message { get; set; }
+
+        public string GetPropertyPath()
+        {
+            var stack = new Stack<string>();
+
+            MemberExpression me;
+            switch (Property.Body.NodeType)
+            {
+                case ExpressionType.Convert:
+                case ExpressionType.ConvertChecked:
+                    var ue = Property.Body as UnaryExpression;
+                    me = ((ue != null) ? ue.Operand : null) as MemberExpression;
+                    break;
+                default:
+                    me = Property.Body as MemberExpression;
+                    break;
+            }
+
+            while (me != null)
+            {
+                stack.Push(me.Member.Name);
+                me = me.Expression as MemberExpression;
+            }
+
+            return string.Join(".", stack.ToArray());
+        }
     }
 
     [Serializable]
     public class RulesException : Exception
     {
         public readonly IList<RuleViolation> Errors = new List<RuleViolation>();
-        private readonly Expression<Func<object, object>> ThisObject = x => x;
+        protected readonly Expression<Func<object, object>> ThisObject = x => x;
 
         public void ErrorForModel(string message)
         {
@@ -50,6 +77,34 @@ namespace Arragro.Common.BusinessRules
         {
             base.GetObjectData(info, context);
             info.AddValue("Errors", Errors);
+        }
+
+        protected string ThisErrors()
+        {
+            var output = new StringBuilder();
+
+            var thisErrors = Errors.Where(x => x.Property == ThisObject);
+
+            if (thisErrors.Any())
+            {
+                output.AppendLine("The following error is against this object:\n");
+                foreach (var thisError in thisErrors)
+                {
+                    if (string.IsNullOrEmpty(thisError.Prefix))
+                        output.AppendLine(string.Format("\t{0}", thisError.Message));
+                    else
+                        output.AppendLine(string.Format("\t{0} - {1}", thisError.Prefix, thisError.Message));
+                }
+            }
+
+            return output.ToString();
+        }
+
+        public override string ToString()
+        {
+            var output = new StringBuilder();
+
+            return ThisErrors();
         }
     }
 
@@ -82,6 +137,31 @@ namespace Arragro.Common.BusinessRules
                         });
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            var output = new StringBuilder();
+
+            var thisErrors = ThisErrors();
+            var propertyErrors = Errors.Where(x => x.Property != ThisObject);
+
+            if (propertyErrors.Any())
+            {
+                if (!string.IsNullOrEmpty(thisErrors))
+                    output.AppendLine("\n\nWith errors against the following properties:\n");
+                else
+                    output.AppendLine("The following property errors are against this object:\n");
+                foreach (var propertyError in propertyErrors)
+                {
+                    if (string.IsNullOrEmpty(propertyError.Prefix))
+                        output.AppendLine(string.Format("\t{0} - {1}", propertyError.GetPropertyPath(), propertyError.Message));
+                    else
+                        output.AppendLine(string.Format("\t{0} - {1} - {1}", propertyError.Prefix, propertyError.GetPropertyPath(), propertyError.Message));
+                }
+            }
+
+            return thisErrors + output.ToString();
         }
     }
 

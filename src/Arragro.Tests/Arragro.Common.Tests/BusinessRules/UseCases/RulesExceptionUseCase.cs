@@ -30,6 +30,8 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
 
             // Should be used for property issues.
             rulesException.ErrorFor(x => modelFoo.Name, "The Name is not Unique");
+
+            var errorMessage = rulesException.ToString();
             Assert.Equal(2, rulesException.Errors.Count());
         }
     }
