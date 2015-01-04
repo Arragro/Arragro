@@ -45,9 +45,14 @@ namespace Arragro.EF6
             return DbSet;
         }
 
-        public virtual IQueryable<TEntity> All(Expression<Func<TEntity, bool>> whereClause)
+        public virtual IQueryable<TEntity> AllNoTracking()
         {
-            return DbSet.Where(whereClause);
+            return DbSet.AsNoTracking();
+        }
+
+        public virtual IQueryable<TEntity> AllNoTracking(Expression<Func<TEntity, bool>> whereClause)
+        {
+            return DbSet.Where(whereClause).AsNoTracking();
         }
 
         public TEntity InsertOrUpdate(TEntity model, bool add)
