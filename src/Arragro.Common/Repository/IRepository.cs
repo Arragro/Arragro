@@ -8,6 +8,7 @@ namespace Arragro.Common.Repository
         TModel Find(TKeyType id);
         TModel Delete(TKeyType id);
         IQueryable<TModel> All();
+        IQueryable<TModel> AllNoTracking();
         TModel InsertOrUpdate(TModel model, bool add);
         int SaveChanges();
     }

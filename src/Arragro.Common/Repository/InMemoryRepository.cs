@@ -91,6 +91,11 @@ namespace Arragro.Common.Repository
             return _models.AsQueryable();
         }
 
+        public IQueryable<TModel> AllNoTracking()
+        {
+            return _models.AsQueryable();
+        }
+
         private TKeyType GetMaxKeyValueInModels()
         {
             // See: http://msdn.microsoft.com/en-us/library/bb882637.aspx
