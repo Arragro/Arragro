@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arragro.Common.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,38 +12,11 @@ namespace Arragro.Common.Repository
     {
         private readonly HashSet<TModel> _models;
         private PropertyInfo _keyProperty;
-
-        private PropertyInfo GetKeyProperty()
-        {
-            var type = typeof(TModel);
-            var name = type.Name;
-            var properties = type.GetProperties();
-            var key = properties.SingleOrDefault(x => x.IsDefined(typeof(KeyAttribute), true));
-
-            if (key == null)
-                key = properties.SingleOrDefault(x => x.Name == name + "Id");
-
-            if (key == null)
-                key = properties.SingleOrDefault(x => x.Name == "Id");
-
-            if (key == null)
-                throw new Exception("Cannot find Key, use Id, {Type}Id, or Key attribute");
-
-            if (key.PropertyType != typeof(TKeyType))
-                throw new Exception(string.Format("Key is not the same defined on the class {0}", typeof(TKeyType).Name));
-
-            return key;
-        }
-
-        private TKeyType GetKeyPropertyValue(TModel model)
-        {
-            return (TKeyType)GetKeyProperty().GetValue(model);
-        }
-
+        
         public InMemoryRepository()
         {
             _models = new HashSet<TModel>();
-            _keyProperty = GetKeyProperty();
+            _keyProperty = ObjectHelpers.GetKeyProperty<TModel, TKeyType>();
         }
 
         public void TurnOnOffLazyLoading(bool on = true)
@@ -129,7 +103,7 @@ namespace Arragro.Common.Repository
             }
             else
             {
-                _models.Remove(Find(GetKeyPropertyValue(model)));
+                _models.Remove(Find(ObjectHelpers.GetKeyPropertyValue<TModel, TKeyType>(model)));
                 _models.Add(model);
             }
             return model;
