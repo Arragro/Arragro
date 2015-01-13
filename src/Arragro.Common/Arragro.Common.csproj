@@ -59,6 +59,7 @@
     <Compile Include="CacheProvider\Models\ICacheItem.cs" />
     <Compile Include="CacheProvider\ICacheProvider.cs" />
     <Compile Include="CacheProvider\Models\MasterKeys.cs" />
+    <Compile Include="Helpers\ObjectHelpers.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\DebugLogManager.cs" />
     <Compile Include="Logging\ILog.cs" />
