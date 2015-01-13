@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Arragro.ObjectLogging.Services
+namespace Arragro.ObjectLogging.Mvc.Services
 {
-    public class ObjectHistoryService : Service<IObjectHistoryRepository, ObjectHistory, Guid>
+    public class ObjectHistoryService : Service<IObjectHistoryRepository, ObjectHistory, Guid>, IObjectHistoryService
     {
         public ObjectHistoryService(IObjectHistoryRepository objectHistoryRepository)
             : base(objectHistoryRepository)
@@ -33,6 +33,13 @@ namespace Arragro.ObjectLogging.Services
         protected override void ValidateModelRules(ObjectHistory objectHistory)
         {
             if (RulesException.Errors.Any()) throw RulesException;
+        }
+
+        public ObjectHistory AddHistory<TModel, TKeyType>(TModel originalObject, TModel newObject, string userName)
+        {
+            var objectHistory = InsertOrUpdate(ObjectHistoryExtensions.BuildObjectHistory<TModel, TKeyType>(originalObject, newObject, userName));
+            SaveChanges();
+            return objectHistory;
         }
     }
 }

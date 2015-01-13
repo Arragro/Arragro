@@ -3,7 +3,7 @@ using Arragro.ObjectLogging;
 using Arragro.ObjectLogging.Interfaces;
 using System;
 
-namespace Arragro.ObjectLogging.EF6Repositories
+namespace Arragro.ObjectLogging.Mvc.EF6Repositories
 {
     public class ObjectHistoryRepository<TContext> : DbContextRepositoryBase<ObjectHistory, Guid>, IObjectHistoryRepository where TContext : BaseContext
     {

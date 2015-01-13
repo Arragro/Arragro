@@ -5,17 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 
-namespace Arragro.ObjectLogging.MVC.Helpers
+namespace Arragro.ObjectLogging.Mvc.Helpers
 {
     public static class ObjectHistoryHtmlHelper
     {
         private static IEnumerable<ObjectHistory> GetObjectHistories<TModel, TKeyType>(UnityContainer unityContainer, TModel obj)
         {
-            var key = Arragro.Common.Helpers.ObjectHelpers.GetKeyPropertyValue<TModel, TKeyType>(obj);
+            var keyId= Arragro.Common.Helpers.ObjectHelpers.GetKeyPropertyValue<TModel, TKeyType>(obj);
             var objectHistories = unityContainer.Resolve<Arragro.ObjectLogging.Interfaces.IObjectHistoryRepository>();
+            var key = obj.GetType().Name + ":" + keyId.ToString();
 
             return objectHistories.All()
-                        .Where(o => o.Key == obj.GetType().Name + ":" + key.ToString())
+                        .Where(o => o.Key == key)
                         .OrderBy(o => o.DateChanged)
                         .ToList();
         }

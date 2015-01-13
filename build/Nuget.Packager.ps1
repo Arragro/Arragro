@@ -63,6 +63,7 @@ Try
     BuildNugetCommon $buildDirectory $version "Arragro.Log4Net"
     BuildNugetCommon $buildDirectory $version "Arragro.Mvc"
     BuildNugetCommon $buildDirectory $version "Arragro.ObjectLogging"
+    BuildNugetCommon $buildDirectory $version "Arragro.ObjectLogging.Mvc"
 }
 Catch [System.Exception]
 {
