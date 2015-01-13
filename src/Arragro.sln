@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D
 		..\build\Arragro.EF6.nuspec = ..\build\Arragro.EF6.nuspec
 		..\build\Arragro.Log4Net.nuspec = ..\build\Arragro.Log4Net.nuspec
 		..\build\Arragro.Mvc.nuspec = ..\build\Arragro.Mvc.nuspec
+		..\build\Arragro.ObjectLogging.Mvc.nuspec = ..\build\Arragro.ObjectLogging.Mvc.nuspec
 		..\build\Arragro.ObjectLogging.nuspec = ..\build\Arragro.ObjectLogging.nuspec
 		..\build\Arragro.PackageNuget.BuildTemplate.xaml = ..\build\Arragro.PackageNuget.BuildTemplate.xaml
 		..\build\Arragro.PublishToNuget.BuildTemplate.xaml = ..\build\Arragro.PublishToNuget.BuildTemplate.xaml
@@ -48,6 +49,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.ObjectLogging", "Arragro.ObjectLogging\Arragro.ObjectLogging.csproj", "{41EBB0E3-D075-49F5-BC23-67F034EBE8EC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.ObjectLogging.Tests", "Arragro.Tests\Arragro.ObjectLogging.Tests\Arragro.ObjectLogging.Tests\Arragro.ObjectLogging.Tests.csproj", "{C980C73A-5897-4CEA-9433-A921106F71F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.ObjectLogging.Mvc", "Arragro.ObjectLogging.Mvc\Arragro.ObjectLogging.Mvc.csproj", "{91F09308-2498-4DA7-829B-B00CF95573B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +94,10 @@ Global
 		{C980C73A-5897-4CEA-9433-A921106F71F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C980C73A-5897-4CEA-9433-A921106F71F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C980C73A-5897-4CEA-9433-A921106F71F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91F09308-2498-4DA7-829B-B00CF95573B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91F09308-2498-4DA7-829B-B00CF95573B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91F09308-2498-4DA7-829B-B00CF95573B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91F09308-2498-4DA7-829B-B00CF95573B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
