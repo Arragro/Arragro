@@ -157,7 +157,7 @@ namespace Arragro.Common.BusinessRules
                     if (string.IsNullOrEmpty(propertyError.Prefix))
                         output.AppendLine(string.Format("\t{0} - {1}", propertyError.GetPropertyPath(), propertyError.Message));
                     else
-                        output.AppendLine(string.Format("\t{0} - {1} - {1}", propertyError.Prefix, propertyError.GetPropertyPath(), propertyError.Message));
+                        output.AppendLine(string.Format("\t{0} - {1} - {2}", propertyError.Prefix, propertyError.GetPropertyPath(), propertyError.Message));
                 }
             }
 
