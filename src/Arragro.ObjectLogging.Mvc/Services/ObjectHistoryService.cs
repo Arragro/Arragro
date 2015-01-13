@@ -35,6 +35,13 @@ namespace Arragro.ObjectLogging.Mvc.Services
             if (RulesException.Errors.Any()) throw RulesException;
         }
 
+        public ObjectHistory AddHistory<TModel, TKeyType>(TModel newObject, string userName)
+        {
+            var objectHistory = InsertOrUpdate(ObjectHistoryExtensions.BuildObjectHistory<TModel, TKeyType>(newObject, userName));
+            SaveChanges();
+            return objectHistory;
+        }
+
         public ObjectHistory AddHistory<TModel, TKeyType>(TModel originalObject, TModel newObject, string userName)
         {
             var objectHistory = InsertOrUpdate(ObjectHistoryExtensions.BuildObjectHistory<TModel, TKeyType>(originalObject, newObject, userName));
