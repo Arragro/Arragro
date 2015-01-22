@@ -18,7 +18,7 @@
     <tags>Arragro Arragro.EF6 Repository EntityFramework</tags>
     <dependencies>
       <dependency id="Arragro.Common" />
-      <dependency id="EntityFramework" version="6.1.1" />
+      <dependency id="EntityFramework" />
     </dependencies>
   </metadata>
   <files>
