@@ -20,7 +20,7 @@
       <dependency id="Newtonsoft.Json" />
       <dependency id="Arragro.Common" />
       <dependency id="Arragro.EF6" />
-      <dependency id="Arragro.ObjectLogging.Mvc" />
+      <dependency id="Arragro.ObjectLogging" />
       <dependency id="EntityFramework" />
       <dependency id="Unity" />
       <dependency id="Microsoft.AspNet.Mvc" />
