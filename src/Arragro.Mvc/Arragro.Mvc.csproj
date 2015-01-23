@@ -52,6 +52,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -83,6 +84,8 @@
     <Compile Include="Helpers\FlashHelpers.cs" />
     <Compile Include="RulesViolationExceptionExtensions.cs" />
     <Compile Include="Unity\HttpContextLifetimeManager.cs" />
+    <Compile Include="Unity\UnityMvcDependencyResolver.cs" />
+    <Compile Include="Unity\UnityWebApiDependencyResolver.cs" />
     <Compile Include="WebCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
