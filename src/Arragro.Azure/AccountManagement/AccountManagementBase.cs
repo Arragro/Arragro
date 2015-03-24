@@ -6,9 +6,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arragro.Azure.ServiceManagement
+namespace Arragro.Azure.AccountManagement
 {
-    public class ServiceManagementBase
+    public class AccountManagementBase
     {
         protected readonly CertificateCloudCredentials CertificateCloudCredentials = null;
 
@@ -19,7 +19,7 @@ namespace Arragro.Azure.ServiceManagement
         /// <param name="subscriptionId"></param>
         /// <param name="certificateName"></param>
         /// <returns></returns>
-        public ServiceManagementBase(string subscriptionId, string certificateName)
+        public AccountManagementBase(string subscriptionId, string certificateName)
         {
             var store = new X509Store(StoreLocation.CurrentUser);
             store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
