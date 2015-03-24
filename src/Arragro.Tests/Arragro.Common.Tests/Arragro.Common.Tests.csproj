@@ -71,6 +71,7 @@
     <Compile Include="BusinessRules\UseCases\AuditableUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\BusinessRulesUseCase.cs" />
     <Compile Include="BusinessRules\UseCases\RulesExceptionUseCase.cs" />
+    <Compile Include="Helpers\UnitTests\EnumHelperTests.cs" />
     <Compile Include="Helpers\UnitTests\ObjectCopierTests.cs" />
     <Compile Include="Logging\UseCase\LoggingUseCase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
