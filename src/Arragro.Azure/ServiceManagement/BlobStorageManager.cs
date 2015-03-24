@@ -7,21 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arragro.Azure.Service
+namespace Arragro.Azure.ServiceManagement
 {
-    public class BlobStorage
+    public class BlobStorageManager
     {        
         private readonly string _connectionString;
         private readonly CloudStorageAccount _cloudStorageAccount;
         private readonly CloudBlobClient _cloudBlobClient;
 
-        public BlobStorage(string connectionString)
+        public BlobStorageManager(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
 
             _connectionString = connectionString;
             _cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
             _cloudBlobClient = _cloudStorageAccount.CreateCloudBlobClient();
+
+            var blobProperties = _cloudBlobClient.GetServiceProperties();
         }
 
         private CloudBlobContainer GetBlobContainer(string containerName)
