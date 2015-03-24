@@ -50,6 +50,7 @@
     <x:Property Name="SupportedReasons" Type="mtbc1:BuildReason" />
     <x:Property Name="BuildProcessVersion" Type="x:String" />
     <x:Property Name="AssemblyVersion" Type="InArgument(x:String)" />
+    <x:Property Name="NugetApiKey" Type="InArgument(x:String)" />
   </x:Members>
   <this:Process.ProjectsToBuild>
     <InArgument x:TypeArguments="s:String[]" />
@@ -124,7 +125,6 @@
           <Sequence DisplayName="Compile, Test and Publish" sap2010:WorkflowViewState.IdRef="Sequence_1">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="BuildDirectory" />
-              <Variable x:TypeArguments="x:String" Default="c1c2d13c-ea31-4bf8-942c-eeaecf2581f3" Name="NugetApiKey" />
             </Sequence.Variables>
             <mtba:RunScript Arguments="[AdvancedBuildSettings.GetValue(Of String)(&quot;PreActionScriptArguments&quot;, String.Empty)]" DisplayName="Run optional script before MSBuild" Enabled="True" FilePath="[AdvancedBuildSettings.GetValue(Of String)(&quot;PreActionScriptPath&quot;, String.Empty)]" sap2010:WorkflowViewState.IdRef="RunScript_1" />
             <mtbwa:GetBuildDirectory sap2010:WorkflowViewState.IdRef="GetBuildDirectory_1" Result="[BuildDirectory]" />
@@ -176,7 +176,7 @@
         </TryCatch.Finally>
       </TryCatch>
     </mtbwa:AgentScope>
-    <sads:DebugSymbol.Symbol>d05EOlxEZXZlbG9wbWVudFxBcnJhZ3JvXEFycmFncm9cYnVpbGRcQXJyYWdyby5QdWJsaXNoVG9OdWdldC5CdWlsZFRlbXBsYXRlLnhhbWxZAY8MAd4QAQsBwgcB5AoBCgHjCwHqCwEJAfsUAYIVAQgBYgGeBwEHAcIUAd0UAQYB+xABgxQBBQGrFQGyFQEEAZ0UAaQUAQMBhQsBxAsBAnQDtAEOAgEBdQV1sgECAXJ2BbIBGAIBAnVFdVoCAXN28AF2zAICAQd2ggF24wECAQV23QJ2iwMCAQN3B3fFAQIBbngHeLwBAgFoeQd54QECAWR6B7EBEgIBCXelAXeqAQIBcXczdzgCAXB3vQF3wgECAW94Jng5AgFseEF4VQIBaniHAXiNAQIBaXnBAXneAQIBZnl1eXsCAWV8C5wBFgIBE6wBC68BFgIBD6QBD6cBGgIBCn88f2ICARSBAQ2BAd8CAgFeggENggF4AgFbgwENgwHvAQIBU4QBDYQB3wUCAUCFAQ2FAeACAgE6hgENhgHhAgIBNIcBDYcBpwICAS2IAQ2IAeICAgEniQENiQGuAQIBI4oBDZsBIwIBFa0BDa0BcQIBEa4BDa4BSwIBEKUBEaUBtQECAQymARGmAYMBAgELgQHCAYEByAECAWOBASeBAYgBAgFhgQHSAYEBrgICAV+CAWOCAXUCAVyDAdkBgwHsAQIBWYMBmgGDAa0BAgFXgwG+AYMB0AECAVWDAUKDAVACAVSEAbsDhAHOAwIBUYQBggOEAYgDAgFQhAHUBYQB3AUCAU+EAe0EhAHJBQIBTYQB+wOEAd8EAgFLhAFNhAHoAQIBSYQB/wGEAZgCAgFHhAGYA4QBqgMCAUWEAbsChAHBAgIBRIQBKYQBNwIBQoQB5AOEAeoDAgFBhQHCAYUByAECAT+FASeFAYkBAgE9hQHSAYUBrwICATuGAcUBhgHLAQIBOYYBJ4YBhwECATeGAdUBhgGwAgIBNYcBkgKHAaQCAgEyhwF+hwHQAQIBMIcBO4cBVAIBLogBxQGIAcsBAgEsiAEniAGIAQIBKogB1QGIAbECAgEoiQGYAYkBqwECASWJAUuJAVECASSKAd4CigHMAwIBIooBLIoB6QECAR6KAZACigGcAgIBHZABE5ABdgIBGpgBE5gB3gECARatAWitAW4CARKlAWalAXgCAQ2QAWaQAXMCARuYAWqYAXcCARg=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dw1DOlxFbXB0eS54YW1sAA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
