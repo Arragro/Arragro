@@ -120,7 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureStorageConnectionStrings.cs" />
-    <Compile Include="Models\Locations.cs" />
+    <Compile Include="Models\AustralianLocations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AccountManagement\AccountManagementBase.cs" />
     <Compile Include="AccountManagement\StorageAccountManager.cs" />
