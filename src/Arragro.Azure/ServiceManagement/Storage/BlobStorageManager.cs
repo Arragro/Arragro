@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arragro.Azure.ServiceManagement
+namespace Arragro.Azure.ServiceManagement.Storage
 {
     public class BlobStorageManager
-    {        
+    {
         private readonly string _connectionString;
         private readonly CloudStorageAccount _cloudStorageAccount;
         private readonly CloudBlobClient _cloudBlobClient;
@@ -51,7 +51,7 @@ namespace Arragro.Azure.ServiceManagement
             sharedPolicy.Permissions = sharedAccessBlobPermissions;
 
             //Get the container's existing permissions.
-            BlobContainerPermissions permissions = new BlobContainerPermissions();
+            var permissions = new BlobContainerPermissions();
 
             //Add the new policy to the container's permissions.
             permissions.SharedAccessPolicies.Clear();
@@ -59,7 +59,7 @@ namespace Arragro.Azure.ServiceManagement
             container.SetPermissions(permissions);
 
             //Generate the shared access signature on the container, setting the constraints directly on the signature.
-            string sasContainerToken = container.GetSharedAccessSignature(null, policyName);
+            var sasContainerToken = container.GetSharedAccessSignature(null, policyName);
 
             //Return the URI string for the container, including the SAS token.
             return container.Uri + sasContainerToken;
