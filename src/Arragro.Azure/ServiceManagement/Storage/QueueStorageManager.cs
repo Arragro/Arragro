@@ -37,8 +37,14 @@ namespace Arragro.Azure.ServiceManagement.Storage
             queue.CreateIfNotExists();
             return queue;
         }
+
+        public bool DeleteQueue(string queueName)
+        {
+            var queue = _cloudQueueClient.GetQueueReference(queueName);
+            return queue.DeleteIfExists();
+        }
         
-        public static string GetContainerSasUri(
+        public static string GetQueueSharedAccessSignatureUri(
             CloudQueue queue,
             string policyName,
             int sharedAccessExpiryTimeInHours = 24,

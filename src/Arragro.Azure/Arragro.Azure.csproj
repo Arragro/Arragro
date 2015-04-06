@@ -119,6 +119,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountManagement\SqlAccountManager.cs" />
     <Compile Include="AzureStorageConnectionStrings.cs" />
     <Compile Include="Models\AustralianLocations.cs" />
     <Compile Include="Models\AustralianWebSpaceName.cs" />
