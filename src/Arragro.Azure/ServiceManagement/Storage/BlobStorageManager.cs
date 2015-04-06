@@ -38,7 +38,13 @@ namespace Arragro.Azure.ServiceManagement.Storage
             return container;
         }
 
-        public static string GetContainerSasUri(
+        public bool DeleteBlobContainer(string containerName)
+        {
+            var container = GetBlobContainer(containerName);
+            return container.DeleteIfExists();
+        }
+
+        public static string GetContainerSharedAccessSignatureUri(
             CloudBlobContainer container,
             string policyName,
             int sharedAccessExpiryTimeInHours = 24,
@@ -58,34 +64,101 @@ namespace Arragro.Azure.ServiceManagement.Storage
             permissions.SharedAccessPolicies.Add(policyName, sharedPolicy);
             container.SetPermissions(permissions);
 
+            return GetContainerSharedAccessSignatureUri(container, policyName);
+        }
+
+        public static string GetContainerSharedAccessSignatureUri(
+            CloudBlobContainer container,
+            string policyName)
+        {
             //Generate the shared access signature on the container, setting the constraints directly on the signature.
             var sasContainerToken = container.GetSharedAccessSignature(null, policyName);
 
             //Return the URI string for the container, including the SAS token.
             return container.Uri + sasContainerToken;
+
         }
 
-        public CloudBlockBlob UploadStream(string containerName, Stream stream, string blobName)
+        public CloudBlockBlob UploadStream(string containerName, Stream stream, string blobName, bool replaceIfExists = true)
         {
             var container = GetBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(blobName);
-            blockBlob.UploadFromStream(stream);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    blockBlob.UploadFromStream(stream);
+            }
+            else
+                blockBlob.UploadFromStream(stream);
+
             return blockBlob;
         }
 
-        public static CloudBlockBlob UploadStream(Uri uri, Stream stream, string blobName)
+        public CloudBlockBlob UploadByteArray(string containerName, byte[] bytes, string blobName, bool replaceIfExists = true)
+        {
+            var container = GetBlobContainer(containerName);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+            }
+            else
+                blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+
+            return blockBlob;
+        }
+
+        public static CloudBlockBlob UploadStream(Uri uri, Stream stream, string blobName, bool replaceIfExists = true)
         {
             var container = new CloudBlobContainer(uri);
             var blockBlob = container.GetBlockBlobReference(blobName);
-            blockBlob.UploadFromStream(stream);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    blockBlob.UploadFromStream(stream);
+            }
+            else
+                blockBlob.UploadFromStream(stream);
             return blockBlob;
         }
 
+        public static CloudBlockBlob UploadByteArray(Uri uri, byte[] bytes, string blobName, bool replaceIfExists = true)
+        {
+            var container = new CloudBlobContainer(uri);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+            }
+            else
+                blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+
+            return blockBlob;
+        }
+        
         public void DeleteBlob(string containerName, string blobName)
         {
             var container = GetBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(blobName);
             blockBlob.Delete();
+        }
+
+        public void DownloadBlob(string containerName, string blobName, out Stream stream)
+        {
+            Stream blobStream = new MemoryStream();
+            var container = GetBlobContainer(containerName);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            blockBlob.DownloadToStream(blobStream);
+            stream = blobStream;
+        }
+
+        public bool BlobExists(string containerName, string blobName)
+        {
+            var container = GetBlobContainer(containerName);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            return blockBlob.Exists();
         }
     }
 }
