@@ -155,5 +155,44 @@ namespace Arragro.Azure.AccountManagement
 
             cloudQueueClient.SetServiceProperties(queueProperties);
         }
+
+        public void SetTableHourlyMetrics(
+            AzureStorageConnectionStrings azureConnectionString, MetricsLevel metricsLevel = MetricsLevel.Service, int retentionDays = 7)
+        {
+            var cloudStorageAccount = CloudStorageAccount.Parse(azureConnectionString.PrimaryConnectionString);
+            var cloudTableClient = cloudStorageAccount.CreateCloudTableClient();
+            var tableProperties = cloudTableClient.GetServiceProperties();
+
+            tableProperties.HourMetrics.MetricsLevel = metricsLevel;
+            tableProperties.HourMetrics.RetentionDays = retentionDays;
+
+            cloudTableClient.SetServiceProperties(tableProperties);
+        }
+
+        public void SetTableMinuteMetrics(
+            AzureStorageConnectionStrings azureConnectionString, MetricsLevel metricsLevel = MetricsLevel.Service, int retentionDays = 7)
+        {
+            var cloudStorageAccount = CloudStorageAccount.Parse(azureConnectionString.PrimaryConnectionString);
+            var cloudTableClient = cloudStorageAccount.CreateCloudTableClient();
+            var tableProperties = cloudTableClient.GetServiceProperties();
+
+            tableProperties.MinuteMetrics.MetricsLevel = metricsLevel;
+            tableProperties.MinuteMetrics.RetentionDays = retentionDays;
+
+            cloudTableClient.SetServiceProperties(tableProperties);
+        }
+
+        public void SetTableLogging(
+            AzureStorageConnectionStrings azureConnectionString, LoggingOperations loggingOperation = (LoggingOperations.Write | LoggingOperations.Delete), int retentionDays = 7)
+        {
+            var cloudStorageAccount = CloudStorageAccount.Parse(azureConnectionString.PrimaryConnectionString);
+            var cloudTableClient = cloudStorageAccount.CreateCloudTableClient();
+            var tableProperties = cloudTableClient.GetServiceProperties();
+
+            tableProperties.Logging.LoggingOperations = loggingOperation;
+            tableProperties.Logging.RetentionDays = retentionDays;
+
+            cloudTableClient.SetServiceProperties(tableProperties);
+        }
     }
 }
