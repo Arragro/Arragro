@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D
 		..\build\Arragro.Build.GitTemplate.12.xaml = ..\build\Arragro.Build.GitTemplate.12.xaml
 		..\build\Arragro.Common.nuspec = ..\build\Arragro.Common.nuspec
 		..\build\Arragro.EF6.nuspec = ..\build\Arragro.EF6.nuspec
+		..\build\Arragro.Google.Apis.nuspec = ..\build\Arragro.Google.Apis.nuspec
 		..\build\Arragro.Log4Net.nuspec = ..\build\Arragro.Log4Net.nuspec
 		..\build\Arragro.Mvc.nuspec = ..\build\Arragro.Mvc.nuspec
 		..\build\Arragro.ObjectLogging.Mvc.nuspec = ..\build\Arragro.ObjectLogging.Mvc.nuspec
@@ -55,6 +56,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.ObjectLogging.Mvc", "Arragro.ObjectLogging.Mvc\Arragro.ObjectLogging.Mvc.csproj", "{91F09308-2498-4DA7-829B-B00CF95573B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Azure", "Arragro.Azure\Arragro.Azure.csproj", "{7D6D09AC-11B9-41A9-BDA7-C1918DA85A6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Google.Apis", "Arragro.Google.Apis\Arragro.Google.Apis.csproj", "{00CC675B-3F4A-44A6-A458-2E2773B8652F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +109,10 @@ Global
 		{7D6D09AC-11B9-41A9-BDA7-C1918DA85A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D6D09AC-11B9-41A9-BDA7-C1918DA85A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D6D09AC-11B9-41A9-BDA7-C1918DA85A6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00CC675B-3F4A-44A6-A458-2E2773B8652F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00CC675B-3F4A-44A6-A458-2E2773B8652F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00CC675B-3F4A-44A6-A458-2E2773B8652F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00CC675B-3F4A-44A6-A458-2E2773B8652F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
