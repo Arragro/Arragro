@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arragro.Google.Apis.Maps.Maps.Elevation
+namespace Arragro.Google.Apis.Maps.Elevation
 {
 	/// <summary>
 	/// The Elevation service provides elevation data for all locations on the

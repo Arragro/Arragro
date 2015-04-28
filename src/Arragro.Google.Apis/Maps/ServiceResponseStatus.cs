@@ -1,4 +1,4 @@
-﻿namespace Arragro.Google.Apis.Maps.Maps
+﻿namespace Arragro.Google.Apis.Maps
 {
 	public enum ServiceResponseStatus
 	{

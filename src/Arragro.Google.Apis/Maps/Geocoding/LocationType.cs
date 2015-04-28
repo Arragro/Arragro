@@ -1,4 +1,4 @@
-﻿namespace Arragro.Google.Apis.Maps.Maps.Geocoding
+﻿namespace Arragro.Google.Apis.Maps.Geocoding
 {
 	public enum LocationType
 	{

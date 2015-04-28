@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Arragro.Google.Apis.Maps.Maps.Geocoding
+namespace Arragro.Google.Apis.Maps.Geocoding
 {
 	[DataContract]
 	public class Viewport

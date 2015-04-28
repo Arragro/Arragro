@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Arragro.Google.Apis.Maps.Maps
+namespace Arragro.Google.Apis.Maps
 {
     [DataContract]
 	public class GeographicPosition

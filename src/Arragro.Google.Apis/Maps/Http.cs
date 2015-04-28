@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace Arragro.Google.Apis.Maps.Maps
+namespace Arragro.Google.Apis.Maps
 {
     /// <summary>
     /// Provides an intuitive and simple HTTP client wrapper.

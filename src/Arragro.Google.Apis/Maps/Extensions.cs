@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arragro.Google.Apis.Maps.Maps
+namespace Arragro.Google.Apis.Maps
 {
 	internal static class Extensions
 	{

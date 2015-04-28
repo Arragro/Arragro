@@ -1,7 +1,7 @@
-﻿using Arragro.Google.Apis.Maps.Maps.Geocoding;
+﻿using Arragro.Google.Apis.Maps.Geocoding;
 using System;
 
-namespace Arragro.Google.Apis.Maps.Maps
+namespace Arragro.Google.Apis.Maps
 {
 	#region Private extensions
 

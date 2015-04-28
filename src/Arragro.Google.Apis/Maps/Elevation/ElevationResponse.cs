@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Arragro.Google.Apis.Maps.Maps.Elevation
+namespace Arragro.Google.Apis.Maps.Elevation
 {
 	[DataContract]
 	public class ElevationResponse

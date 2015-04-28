@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Arragro.Google.Apis.Maps.Maps.Geocoding
+namespace Arragro.Google.Apis.Maps.Geocoding
 {
 	/// <summary>
 	/// Provides a request for the Google Maps Geocoding web service.

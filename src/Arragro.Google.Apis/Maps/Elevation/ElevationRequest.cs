@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arragro.Google.Apis.Maps.Maps.Elevation
+namespace Arragro.Google.Apis.Maps.Elevation
 {
 	/// <summary>
 	/// Provides a request for the Google Maps Elevation web service.

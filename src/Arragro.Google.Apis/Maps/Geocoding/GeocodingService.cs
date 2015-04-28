@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arragro.Google.Apis.Maps.Maps.Geocoding
+namespace Arragro.Google.Apis.Maps.Geocoding
 {
 	/// <summary>
 	/// Provides a direct way to access a geocoder via an HTTP request.
