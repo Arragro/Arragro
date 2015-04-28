@@ -60,6 +60,7 @@ Try
     SetNugetApiKey $nugetApiKey
     BuildNugetCommon $buildDirectory $version "Arragro.Common"
     BuildNugetCommon $buildDirectory $version "Arragro.EF6"
+    BuildNugetCommon $buildDirectory $version "Arragro.Google.Apis"
     BuildNugetCommon $buildDirectory $version "Arragro.Log4Net"
     BuildNugetCommon $buildDirectory $version "Arragro.Mvc"
     BuildNugetCommon $buildDirectory $version "Arragro.ObjectLogging"
