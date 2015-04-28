@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage;
+﻿using Arragro.Azure.Models;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Microsoft.WindowsAzure.Storage.Queue.Protocol;
 using System;
@@ -43,8 +44,9 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var queue = _cloudQueueClient.GetQueueReference(queueName);
             return queue.DeleteIfExists();
         }
-        
-        public static string GetQueueSharedAccessSignatureUri(
+
+        public static SasUriDetails CreateAndGetQueueSharedAccessSignatureUri(
+            string accountName,
             CloudQueue queue,
             string policyName,
             int sharedAccessExpiryTimeInHours = 24,
@@ -62,13 +64,23 @@ namespace Arragro.Azure.ServiceManagement.Storage
             //Add the new policy to the container's permissions.
             permissions.SharedAccessPolicies.Clear();
             permissions.SharedAccessPolicies.Add(policyName, sharedPolicy);
-            queue.SetPermissions(permissions);
+            queue.SetPermissions(permissions);       
 
+            //Return the URI string for the container, including the SAS token.
+            return GetQueueSharedAccessSignatureUri(accountName, queue, policyName);
+        }
+
+        public static SasUriDetails GetQueueSharedAccessSignatureUri(
+            string accountName,
+            CloudQueue queue,
+            string policyName)
+        {
             //Generate the shared access signature on the container, setting the constraints directly on the signature.
             var sasContainerToken = queue.GetSharedAccessSignature(null, policyName);
 
             //Return the URI string for the container, including the SAS token.
-            return queue.Uri + sasContainerToken;
+            return new SasUriDetails(accountName, SasUriType.Queue, queue.Uri + sasContainerToken, policyName);
+
         }
 
         public void AddMessageToQueue(string queueName, string message)

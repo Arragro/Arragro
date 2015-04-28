@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage;
+﻿using Arragro.Azure.Models;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace Arragro.Azure.ServiceManagement.Storage
         private readonly CloudStorageAccount _cloudStorageAccount;
         private readonly CloudBlobClient _cloudBlobClient;
 
+        public CloudBlobClient CloudBlobClient { get { return _cloudBlobClient; } }
+
         public BlobStorageManager(string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString))
@@ -26,7 +29,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blobProperties = _cloudBlobClient.GetServiceProperties();
         }
 
-        private CloudBlobContainer GetBlobContainer(string containerName)
+        public CloudBlobContainer GetBlobContainer(string containerName)
         {
             return _cloudBlobClient.GetContainerReference(containerName);
         }
@@ -44,7 +47,8 @@ namespace Arragro.Azure.ServiceManagement.Storage
             return container.DeleteIfExists();
         }
 
-        public static string GetContainerSharedAccessSignatureUri(
+        public static SasUriDetails CreateAndGetContainerSharedAccessSignatureUri(
+            string accountName,
             CloudBlobContainer container,
             string policyName,
             int sharedAccessExpiryTimeInHours = 24,
@@ -64,10 +68,11 @@ namespace Arragro.Azure.ServiceManagement.Storage
             permissions.SharedAccessPolicies.Add(policyName, sharedPolicy);
             container.SetPermissions(permissions);
 
-            return GetContainerSharedAccessSignatureUri(container, policyName);
+            return GetContainerSharedAccessSignatureUri(accountName, container, policyName);
         }
 
-        public static string GetContainerSharedAccessSignatureUri(
+        public static SasUriDetails GetContainerSharedAccessSignatureUri(
+            string accountName,
             CloudBlobContainer container,
             string policyName)
         {
@@ -75,8 +80,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var sasContainerToken = container.GetSharedAccessSignature(null, policyName);
 
             //Return the URI string for the container, including the SAS token.
-            return container.Uri + sasContainerToken;
-
+            return new SasUriDetails(accountName, SasUriType.Blob, container.Uri + sasContainerToken, policyName);
         }
 
         public CloudBlockBlob UploadStream(string containerName, Stream stream, string blobName, bool replaceIfExists = true)
@@ -90,6 +94,21 @@ namespace Arragro.Azure.ServiceManagement.Storage
             }
             else
                 blockBlob.UploadFromStream(stream);
+
+            return blockBlob;
+        }
+
+        public async Task<CloudBlockBlob> UploadStreamAsync(string containerName, Stream stream, string blobName, bool replaceIfExists = true)
+        {
+            var container = GetBlobContainer(containerName);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    await blockBlob.UploadFromStreamAsync(stream);
+            }
+            else
+                await blockBlob.UploadFromStreamAsync(stream);
 
             return blockBlob;
         }
@@ -109,6 +128,21 @@ namespace Arragro.Azure.ServiceManagement.Storage
             return blockBlob;
         }
 
+        public async Task<CloudBlockBlob> UploadByteArrayAsync(string containerName, byte[] bytes, string blobName, bool replaceIfExists = true)
+        {
+            var container = GetBlobContainer(containerName);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    await blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
+            }
+            else
+                await blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
+
+            return blockBlob;
+        }
+
         public static CloudBlockBlob UploadStream(Uri uri, Stream stream, string blobName, bool replaceIfExists = true)
         {
             var container = new CloudBlobContainer(uri);
@@ -120,6 +154,20 @@ namespace Arragro.Azure.ServiceManagement.Storage
             }
             else
                 blockBlob.UploadFromStream(stream);
+            return blockBlob;
+        }
+
+        public async static Task<CloudBlockBlob> UploadStreamAsync(Uri uri, Stream stream, string blobName, bool replaceIfExists = true)
+        {
+            var container = new CloudBlobContainer(uri);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    await blockBlob.UploadFromStreamAsync(stream);
+            }
+            else
+                await blockBlob.UploadFromStreamAsync(stream);
             return blockBlob;
         }
 
@@ -137,7 +185,22 @@ namespace Arragro.Azure.ServiceManagement.Storage
 
             return blockBlob;
         }
-        
+
+        public async static Task<CloudBlockBlob> UploadByteArrayAsync(Uri uri, byte[] bytes, string blobName, bool replaceIfExists = true)
+        {
+            var container = new CloudBlobContainer(uri);
+            var blockBlob = container.GetBlockBlobReference(blobName);
+            if (!replaceIfExists)
+            {
+                if (!blockBlob.Exists())
+                    await blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
+            }
+            else
+                await blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
+
+            return blockBlob;
+        }
+
         public void DeleteBlob(string containerName, string blobName)
         {
             var container = GetBlobContainer(containerName);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAzure;
 using System;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Arragro.Azure.AccountManagement
@@ -22,8 +23,9 @@ namespace Arragro.Azure.AccountManagement
 
             var certificates = store.Certificates.Find(X509FindType.FindBySubjectName, certificateName, false);
             X509Certificate2 certificate = null;
-            if (certificates.Count > 0)
-                certificate = certificates[0];
+            foreach(var cert in certificates)
+                if (cert.SubjectName.Name.EndsWith(certificateName))
+                    certificate = cert;
             if (certificate == null)
                 throw new ApplicationException(
                     string.Format("Certificate '{0}' was not found in the local users Personel Certificate store.", certificateName));
