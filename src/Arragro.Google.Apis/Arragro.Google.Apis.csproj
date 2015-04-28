@@ -4,19 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DF7F6387-5D1A-4E62-B136-0C85E4175E1B}</ProjectGuid>
+    <ProjectGuid>{00CC675B-3F4A-44A6-A458-2E2773B8652F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Arragro.Common</RootNamespace>
-    <AssemblyName>Arragro.Common</AssemblyName>
+    <RootNamespace>Arragro.Google.Apis</RootNamespace>
+    <AssemblyName>Arragro.Google.Apis</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>5f984832</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,22 +23,27 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,38 +51,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessRules\Auditable.cs" />
-    <Compile Include="BusinessRules\AuditableBusinessRulesBase.cs" />
-    <Compile Include="BusinessRules\BusinessRulesBase.cs" />
-    <Compile Include="BusinessRules\RulesException.cs" />
-    <Compile Include="CacheProvider\Cache.cs" />
-    <Compile Include="CacheProvider\CacheProviderManager.cs" />
-    <Compile Include="CacheProvider\CacheSettings.cs" />
-    <Compile Include="CacheProvider\MemoryCacheProvider.cs" />
-    <Compile Include="CacheProvider\Models\CacheItem.cs" />
-    <Compile Include="CacheProvider\Models\CacheItemList.cs" />
-    <Compile Include="CacheProvider\Models\ICacheItem.cs" />
-    <Compile Include="CacheProvider\ICacheProvider.cs" />
-    <Compile Include="CacheProvider\Models\MasterKeys.cs" />
-    <Compile Include="Helpers\EnumHelper.cs" />
-    <Compile Include="Helpers\ObjectHelpers.cs" />
-    <Compile Include="Logging\DebugLogger.cs" />
-    <Compile Include="Logging\DebugLogManager.cs" />
-    <Compile Include="Logging\ILog.cs" />
-    <Compile Include="Logging\ILogFactory.cs" />
-    <Compile Include="Logging\LogManager.cs" />
-    <Compile Include="Helpers\ObjectCopier.cs" />
+    <Compile Include="Maps\Elevation\ElevationRequest.cs" />
+    <Compile Include="Maps\Elevation\ElevationResponse.cs" />
+    <Compile Include="Maps\Elevation\ElevationResult.cs" />
+    <Compile Include="Maps\Elevation\ElevationService.cs" />
+    <Compile Include="Maps\Extensions.cs" />
+    <Compile Include="Maps\Geocoding\AddressComponent.cs" />
+    <Compile Include="Maps\Geocoding\AddressType.cs" />
+    <Compile Include="Maps\Geocoding\GeocodingRequest.cs" />
+    <Compile Include="Maps\Geocoding\GeocodingResponse.cs" />
+    <Compile Include="Maps\Geocoding\GeocodingResult.cs" />
+    <Compile Include="Maps\Geocoding\GeocodingService.cs" />
+    <Compile Include="Maps\Geocoding\Geometry.cs" />
+    <Compile Include="Maps\Geocoding\LocationType.cs" />
+    <Compile Include="Maps\Geocoding\Viewport.cs" />
+    <Compile Include="Maps\GeographicPosition.cs" />
+    <Compile Include="Maps\Http.cs" />
+    <Compile Include="Maps\JsonEnumTypeConverter.cs" />
+    <Compile Include="Maps\ServiceResponseStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\InMemoryRepository.cs" />
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="ServiceBase\AuditableService.cs" />
-    <Compile Include="ServiceBase\Service.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

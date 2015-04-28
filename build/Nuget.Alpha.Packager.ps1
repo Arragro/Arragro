@@ -58,13 +58,7 @@ function BuildNugetCommon($buildDirectory, $version, $project) {
 Try
 {
     SetNugetApiKey $nugetApiKey
-    BuildNugetCommon $buildDirectory $version "Arragro.Common"
-    BuildNugetCommon $buildDirectory $version "Arragro.EF6"
-    BuildNugetCommon $buildDirectory $version "Arragro.Google.Apis"
-    BuildNugetCommon $buildDirectory $version "Arragro.Log4Net"
-    BuildNugetCommon $buildDirectory $version "Arragro.Mvc"
-    BuildNugetCommon $buildDirectory $version "Arragro.ObjectLogging"
-    BuildNugetCommon $buildDirectory $version "Arragro.ObjectLogging.Mvc"
+    BuildNugetCommon $buildDirectory $version "Arragro.Azure"
 }
 Catch [System.Exception]
 {
