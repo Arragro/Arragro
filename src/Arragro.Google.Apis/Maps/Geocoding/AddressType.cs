@@ -1,13 +1,15 @@
-﻿namespace Arragro.Google.Apis.Maps.Geocoding
+﻿using Newtonsoft.Json;
+
+namespace Arragro.Google.Apis.Maps.Geocoding
 {
 	public enum AddressType
 	{
-		Unknown,
+        Unknown,
 
 		/// <summary>
 		/// Indicates a precise street address.
 		/// </summary>
-		StreetAddress,
+        StreetAddress,
 
 		/// <summary>
 		/// Indicates a named route (such as "US 101").

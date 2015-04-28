@@ -36,12 +36,8 @@ namespace Arragro.Google.Apis.Maps
 			public T As<T>() where T : class
 			{
 				T output = null;
-
-				var stringReader = new StringReader(AsString());
-                var jsonTextReader = new JsonTextReader(stringReader);
-
-                var jsonSerializer = new JsonSerializer();
-                output = jsonSerializer.Deserialize<T>(jsonTextReader);
+                
+                output = JsonConvert.DeserializeObject<T>(AsString(), new JsonEnumTypeConverter());
 
 				return output;
 			}

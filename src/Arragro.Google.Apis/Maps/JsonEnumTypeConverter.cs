@@ -1,4 +1,5 @@
 ﻿using Arragro.Google.Apis.Maps.Geocoding;
+using Newtonsoft.Json;
 using System;
 
 namespace Arragro.Google.Apis.Maps
@@ -139,7 +140,6 @@ namespace Arragro.Google.Apis.Maps
 
 	#endregion
 
-/*
 	public class JsonEnumTypeConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
@@ -150,7 +150,7 @@ namespace Arragro.Google.Apis.Maps
 				|| objectType == typeof(LocationType);
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			object result = null;
 
@@ -170,6 +170,5 @@ namespace Arragro.Google.Apis.Maps
 		{
 			throw new System.NotImplementedException();
 		}
-	}
-*/
+    }
 }
