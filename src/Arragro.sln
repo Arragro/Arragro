@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D
 		..\build\Arragro.ObjectLogging.nuspec = ..\build\Arragro.ObjectLogging.nuspec
 		..\build\Arragro.PackageNuget.BuildTemplate.xaml = ..\build\Arragro.PackageNuget.BuildTemplate.xaml
 		..\build\Arragro.PublishToNuget.BuildTemplate.xaml = ..\build\Arragro.PublishToNuget.BuildTemplate.xaml
+		..\build\Arragro.WebApi.Client.nuspec = ..\build\Arragro.WebApi.Client.nuspec
+		..\build\Arragro.WebApi.nuspec = ..\build\Arragro.WebApi.nuspec
 		..\build\Nuget.Alpha.Packager.ps1 = ..\build\Nuget.Alpha.Packager.ps1
 		..\build\Nuget.Packager.ps1 = ..\build\Nuget.Packager.ps1
 	EndProjectSection

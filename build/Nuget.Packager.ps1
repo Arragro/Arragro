@@ -65,6 +65,8 @@ Try
     BuildNugetCommon $buildDirectory $version "Arragro.Mvc"
     BuildNugetCommon $buildDirectory $version "Arragro.ObjectLogging"
     BuildNugetCommon $buildDirectory $version "Arragro.ObjectLogging.Mvc"
+    BuildNugetCommon $buildDirectory $version "Arragro.WebApi"
+    BuildNugetCommon $buildDirectory $version "Arragro.WebApi.Client"
 }
 Catch [System.Exception]
 {
