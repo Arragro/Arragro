@@ -1,5 +1,7 @@
 param ( 
 	[parameter(mandatory=$true, valuefrompipeline=$true)]
+	[string]$project,
+	[parameter(mandatory=$true, valuefrompipeline=$true)]
 	[string]$buildDirectory,
 	[parameter(mandatory=$true, valuefrompipeline=$true)]
 	[string]$version,
@@ -58,7 +60,7 @@ function BuildNugetCommon($buildDirectory, $version, $project) {
 Try
 {
     SetNugetApiKey $nugetApiKey
-    BuildNugetCommon $buildDirectory $version "Arragro.Azure"
+    BuildNugetCommon $buildDirectory $version $project
 }
 Catch [System.Exception]
 {

@@ -1,10 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http.Dependencies;
+using System.Web.Mvc;
 
 namespace Arragro.Mvc.Unity
 {
@@ -17,12 +14,6 @@ namespace Arragro.Mvc.Unity
         {
             this.container = container;
             this.resolver = resolver;
-        }
-
-        public IDependencyScope BeginScope()
-        {
-            var child = container.CreateChildContainer();
-            return new UnityWebApiDependencyResolver(child, resolver);
         }
 
         public object GetService(Type serviceType)
