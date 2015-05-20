@@ -58,6 +58,7 @@ function BuildNugetCommon($buildDirectory, $version, $project) {
 Try
 {
     SetNugetApiKey $nugetApiKey
+    BuildNugetCommon $buildDirectory $version "Arragro.Azure"
     BuildNugetCommon $buildDirectory $version "Arragro.Common"
     BuildNugetCommon $buildDirectory $version "Arragro.EF6"
     BuildNugetCommon $buildDirectory $version "Arragro.Google.Apis"
