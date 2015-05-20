@@ -51,7 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseContext.cs" />
+    <Compile Include="DatabaseMigrator.cs" />
     <Compile Include="DbContextRepositoryAllIncludingBase.cs" />
+    <Compile Include="DropCreateDatabaseAlwaysAndUpdateForced.cs" />
     <Compile Include="Interfaces\IBaseContext.cs" />
     <Compile Include="Interfaces\IDbContextAllIncludingRepositoryBase.cs" />
     <Compile Include="Interfaces\IDbContextRepositoryBase.cs" />
