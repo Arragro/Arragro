@@ -17,6 +17,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.Logging</tags>
     <dependencies>
+      <dependency id="Arragro.Common" />
       <dependency id="Newtonsoft.Json" />
     </dependencies>
   </metadata>
