@@ -1,23 +1,26 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Arragro.ObjectLogging</id>
+    <id>Arragro.Redis</id>
     <version>1.0.0.0</version>
-    <title>Arragro Object Logging Package</title>
+    <title>Arragro Redis Implementation</title>
     <authors>Mike Jewell</authors>
     <owners>Mike Jewell</owners>
     <licenseUrl>https://github.com/mike-jewell/Arragro/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/mike-jewell/Arragro</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Arragro Object Logging library.
+      Arragro.Redis is a Redis base library.
     </description>
     <summary></summary>
     <releaseNotes>Initial Release.</releaseNotes>
     <copyright>Copyright 2014</copyright>
-    <tags>Arragro Arragro.Logging</tags>
+    <tags>Arragro Arragro.Redis</tags>
     <dependencies>
+      <dependency id="Arragro.Common" />
       <dependency id="Newtonsoft.Json" />
+      <dependency id="StackExchange.Redis" />
+      <dependency id="Zlib.Portable" />
     </dependencies>
   </metadata>
 </package>

@@ -21,8 +21,4 @@
       <dependency id="log4net" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="lib\**\*.*" target="lib" />
-    <file src="..\..\src\Arragro.Log4Net\**\*.cs" target="src" />
-  </files>
 </package>

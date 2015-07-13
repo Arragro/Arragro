@@ -26,8 +26,4 @@
       <dependency id="Microsoft.AspNet.Mvc" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="lib\**\*.*" target="lib" />
-    <file src="..\..\src\Arragro.ObjectLogging.Mvc\**\*.cs" target="src" />
-  </files>
 </package>

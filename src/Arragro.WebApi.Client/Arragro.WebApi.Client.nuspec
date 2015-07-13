@@ -22,8 +22,4 @@
       <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="lib\**\*.*" target="lib" />
-    <file src="..\..\src\Arragro.WebApi.Client\**\*.cs" target="src" />
-  </files>
 </package>

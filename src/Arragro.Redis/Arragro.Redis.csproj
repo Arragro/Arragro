@@ -58,6 +58,7 @@
     <Compile Include="JsonHelpers\TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Arragro.Redis.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

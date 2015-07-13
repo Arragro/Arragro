@@ -21,8 +21,4 @@
       <dependency id="EntityFramework" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="lib\**\*.*" target="lib" />
-    <file src="..\..\src\Arragro.EF6\**\*.cs" target="src" />
-  </files>
 </package>
