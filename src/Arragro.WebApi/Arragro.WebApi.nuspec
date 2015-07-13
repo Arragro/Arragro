@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Arragro.WebApi</id>
-    <version>1.0.0.0</version>
+    <version>$version$</version>
     <title>Arragro WebApi Library</title>
     <authors>Mike Jewell</authors>
     <owners>Mike Jewell</owners>

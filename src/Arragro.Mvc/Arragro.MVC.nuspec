@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Arragro.Mvc</id>
-    <version>1.0.0.0</version>
+    <version>$version$</version>
     <title>Arragro MVC Base Package</title>
     <authors>Mike Jewell</authors>
     <owners>Mike Jewell</owners>

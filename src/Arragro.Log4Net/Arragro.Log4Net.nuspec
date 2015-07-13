@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Arragro.Log4Net</id>
-    <version>1.0.0.0</version>
+    <version>$version$</version>
     <title>Arragro log4net Logging Manager Implementation</title>
     <authors>Mike Jewell</authors>
     <owners>Mike Jewell</owners>

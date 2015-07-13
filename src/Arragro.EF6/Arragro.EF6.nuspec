@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Arragro.EF6</id>
-    <version>1.0.0.0</version>
+    <version>$version$</version>
     <title>Arragro Entity Framework 6 Base Library</title>
     <authors>Mike Jewell</authors>
     <owners>Mike Jewell</owners>
