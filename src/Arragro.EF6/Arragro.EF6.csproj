@@ -63,6 +63,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Arragro.EF6.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

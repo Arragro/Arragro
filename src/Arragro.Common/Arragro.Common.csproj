@@ -74,6 +74,9 @@
     <Compile Include="ServiceBase\AuditableService.cs" />
     <Compile Include="ServiceBase\Service.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Arragro.Common.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

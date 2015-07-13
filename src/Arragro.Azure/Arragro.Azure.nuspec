@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arragro.Azure</id>
+    <version>1.0.0.0</version>
+    <title>Arragro Azure Library</title>
+    <authors>Mike Jewell</authors>
+    <owners>Mike Jewell</owners>
+    <licenseUrl>https://github.com/mike-jewell/Arragro/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mike-jewell/Arragro</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Abstractions on Azure service infrastructure to help Arragro interact with Azure.
+    </description>
+    <summary>  
+        Azure
+    </summary>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Arragro Arragro.Azure Azure Abstraction</tags>
+    <dependencies>
+      <dependency id="Microsoft.WindowsAzure.Management" version="[2.0]" />
+      <dependency id="WindowsAzure.Storage" version="[4.3.0]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\**\*.*" target="lib" />
+    <file src="..\..\src\Arragro.Azure\**\*.cs" target="src" />
+  </files>
+</package>

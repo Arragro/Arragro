@@ -1,0 +1,125 @@
+-
+  branches:
+    only:
+      - master
+  version: 1.0.0.42
+  configuration: Release
+  platform: Any CPU
+  services:
+    - mssql2014
+  nuget:
+    account_feed: true
+    project_feed: true
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"
+  before_build:
+  - ps: nuget restore src;
+  build:
+    publish_nuget: true
+    publish_nuget_symbols: true
+    include_nuget_references: true
+    verbosity: minimal
+  deploy:
+  - provider: NuGet
+    server: https://www.nuget.org/
+    api_key:
+      secure: F0ZPbEej7MlPRYAb43jRKMZdVDCWLEhfsgmx4o3YTSdcTKIGbOO92NL2LlHcjY1V
+    on:
+      branch: master
+  notifications:
+  - provider: Slack
+    auth_token:
+      secure: ykFbdC7lkZWbEgA8/5cQo3c2+ISttLd1AvhAiXyJqd2eaCdR8p32kE2aHlTxmwFU
+    channel: #github
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true
+
+# Test config
+-
+  branches:
+    only:
+      - test
+  version: 1.0.0.0-beta
+  configuration: Release
+  platform: Any CPU
+  services:
+    - mssql2014
+  nuget:
+    account_feed: true
+    project_feed: true
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"
+  before_build:
+  - ps: nuget restore src;
+  build:
+    publish_nuget: true
+    publish_nuget_symbols: true
+    include_nuget_references: true
+    verbosity: minimal
+  deploy:
+  - provider: NuGet
+    server: https://www.nuget.org/
+    api_key:
+      secure: F0ZPbEej7MlPRYAb43jRKMZdVDCWLEhfsgmx4o3YTSdcTKIGbOO92NL2LlHcjY1V
+    on:
+      branch: master
+  notifications:
+  - provider: Slack
+    auth_token:
+      secure: ykFbdC7lkZWbEgA8/5cQo3c2+ISttLd1AvhAiXyJqd2eaCdR8p32kE2aHlTxmwFU
+    channel: #github
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true
+
+
+# Dev config
+-
+  branches:
+    only:
+      - /[Dd]ev/
+  version: 1.0.0.0-alpha
+  configuration: Release
+  platform: Any CPU
+  services:
+    - mssql2014
+  nuget:
+    account_feed: true
+    project_feed: true
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"
+  before_build:
+  - ps: nuget restore src;
+  build:
+    publish_nuget: true
+    publish_nuget_symbols: true
+    include_nuget_references: true
+    verbosity: minimal
+  deploy:
+  - provider: NuGet
+    server: https://www.nuget.org/
+    api_key:
+      secure: F0ZPbEej7MlPRYAb43jRKMZdVDCWLEhfsgmx4o3YTSdcTKIGbOO92NL2LlHcjY1V
+    on:
+      branch: master
+  notifications:
+  - provider: Slack
+    auth_token:
+      secure: ykFbdC7lkZWbEgA8/5cQo3c2+ISttLd1AvhAiXyJqd2eaCdR8p32kE2aHlTxmwFU
+    channel: #github
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true

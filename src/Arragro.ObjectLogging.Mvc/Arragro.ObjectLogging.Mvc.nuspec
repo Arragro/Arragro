@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arragro.ObjectLogging.Mvc</id>
+    <version>1.0.0.0</version>
+    <title>Arragro Object Logging for Mvc Package</title>
+    <authors>Mike Jewell</authors>
+    <owners>Mike Jewell</owners>
+    <licenseUrl>https://github.com/mike-jewell/Arragro/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mike-jewell/Arragro</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Arragro Object Logging library.
+    </description>
+    <summary></summary>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Arragro Arragro.Logging</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" />
+      <dependency id="Arragro.Common" />
+      <dependency id="Arragro.EF6" />
+      <dependency id="Arragro.ObjectLogging" />
+      <dependency id="EntityFramework" />
+      <dependency id="Unity" />
+      <dependency id="Microsoft.AspNet.Mvc" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\**\*.*" target="lib" />
+    <file src="..\..\src\Arragro.ObjectLogging.Mvc\**\*.cs" target="src" />
+  </files>
+</package>

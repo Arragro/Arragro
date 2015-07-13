@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arragro.WebApi</id>
+    <version>1.0.0.0</version>
+    <title>Arragro WebApi Library</title>
+    <authors>Mike Jewell</authors>
+    <owners>Mike Jewell</owners>
+    <licenseUrl>https://github.com/mike-jewell/Arragro/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mike-jewell/Arragro</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Helpers for Asp.Net WebApi services
+    </description>
+    <summary>  
+        Azure
+    </summary>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Arragro Arragro.WebApi WebApi</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.WebApi" version="5.2.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\**\*.*" target="lib" />
+    <file src="..\..\src\Arragro.WebApi\**\*.cs" target="src" />
+  </files>
+</package>

@@ -1,4 +1,5 @@
 ﻿using Arragro.Common.CacheProvider;
+using Arragro.Redis.CacheProvider;
 using System.Threading;
 using Xunit;
 
