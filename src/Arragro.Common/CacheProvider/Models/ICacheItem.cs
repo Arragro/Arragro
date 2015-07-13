@@ -8,10 +8,11 @@ namespace Arragro.Common.CacheProvider
         Guid Identifier { get; }
         string Key { get; }
         DateTime CreatedDate { get; }
+        CacheSettings CacheSettings { get; }
         DateTime? Expiration { get; }
-        TimeSpan? CacheDuration { get; }
-        bool SlidingExpiration { get; }
         int ByteLength { get; }
+
+        void ResetExpiration();
     }
 
     public interface ICacheItem<T> : ICacheItem

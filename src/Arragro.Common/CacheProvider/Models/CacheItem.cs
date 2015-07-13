@@ -20,9 +20,8 @@ namespace Arragro.Common.CacheProvider
         public Guid Identifier { get; protected set; }
         public string Key { get; protected set; }
         public DateTime CreatedDate { get; protected set; }
+        public CacheSettings CacheSettings { get; protected set; }
         public DateTime? Expiration { get; protected set; }
-        public TimeSpan? CacheDuration { get; protected set; }
-        public bool SlidingExpiration { get; protected set; }
         public int ByteLength { get; protected set; }
 
         public CacheItem(
@@ -32,9 +31,17 @@ namespace Arragro.Common.CacheProvider
             Identifier = Guid.NewGuid();
             Key = key;
             CreatedDate = DateTime.Now;
-            Expiration = GetExpiration(cacheSettings.CacheDuration);
-            CacheDuration = cacheSettings.CacheDuration;
-            SlidingExpiration = cacheSettings.SlidingExpiration;
+            if (cacheSettings != null)
+            {
+                CacheSettings = cacheSettings;
+                Expiration = GetExpiration(cacheSettings.CacheDuration);
+            }
+        }
+
+        public void ResetExpiration()
+        {
+            var expiration = GetExpiration(CacheSettings.CacheDuration);
+            Expiration = expiration;
         }
     }
 

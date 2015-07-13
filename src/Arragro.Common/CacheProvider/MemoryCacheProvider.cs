@@ -61,8 +61,8 @@ namespace Arragro.Common.CacheProvider
         {
             var cacheItemList = GetCacheItem<ICacheItemList<T>>(key);
             if (cacheItemList != default(ICacheItemList<T>))
-                if (cacheItemList.SlidingExpiration)
-                    cacheItemList = SetList(key, cacheItemList.Items, new CacheSettings(cacheItemList.CacheDuration, cacheItemList.SlidingExpiration));
+                if (cacheItemList.CacheSettings.SlidingExpiration)
+                    cacheItemList = SetList(key, cacheItemList.Items, new CacheSettings(cacheItemList.CacheSettings.CacheDuration, cacheItemList.CacheSettings.SlidingExpiration));
             return cacheItemList;
         }
 
@@ -70,8 +70,8 @@ namespace Arragro.Common.CacheProvider
         {
             var cacheItem = GetCacheItem<ICacheItem<T>>(key);
             if (cacheItem != default(ICacheItem<T>))
-                if (cacheItem.SlidingExpiration)
-                    cacheItem = Set(key, cacheItem.Item, new CacheSettings(cacheItem.CacheDuration, cacheItem.SlidingExpiration));
+                if (cacheItem.CacheSettings.SlidingExpiration)
+                    cacheItem = Set(key, cacheItem.Item, new CacheSettings(cacheItem.CacheSettings.CacheDuration, cacheItem.CacheSettings.SlidingExpiration));
             return cacheItem;
         }
 
