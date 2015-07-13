@@ -23,8 +23,4 @@
       <dependency id="WindowsAzure.Storage" version="[4.3.0]" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="lib\**\*.*" target="lib" />
-    <file src="..\..\src\Arragro.Azure\**\*.cs" target="src" />
-  </files>
 </package>
