@@ -4,7 +4,6 @@ using System.Linq;
 using Arragro.Common.CacheProvider;
 using StackExchange.Redis;
 using Newtonsoft.Json;
-using Ionic.Zlib;
 using Arragro.Redis.JsonHelpers;
 
 namespace Arragro.Redis.CacheProvider
@@ -36,26 +35,26 @@ namespace Arragro.Redis.CacheProvider
 
         private byte[] CompressString(string str)
         {
-            return ZlibStream.CompressString(str);
+            return ZipHelper.ZipString(str);
         }
 
         private string DecompressString(byte[] bytes)
         {
-            return ZlibStream.UncompressString(bytes);
+            return ZipHelper.UnZipString(bytes);
         }
 
         private CacheItem<T> DecompressAndDeserializeCacheItem<T>(byte[] bytes)
         {
             if (bytes == null)
                 return null;
-            return JsonConvert.DeserializeObject<CacheItem<T>>(ZlibStream.UncompressString(bytes), _jsonSerializerSettings);
+            return JsonConvert.DeserializeObject<CacheItem<T>>(ZipHelper.UnZipString(bytes), _jsonSerializerSettings);
         }
 
         private CacheItemList<T> DecompressAndDeserializeCacheItemList<T>(byte[] bytes)
         {
             if (bytes == null)
                 return null;
-            return JsonConvert.DeserializeObject<CacheItemList<T>>(ZlibStream.UncompressString(bytes), _jsonSerializerSettings);
+            return JsonConvert.DeserializeObject<CacheItemList<T>>(ZipHelper.UnZipString(bytes), _jsonSerializerSettings);
         }
 
         private byte[] SerializeAndCompress<T>(CacheItem<T> cacheItem)

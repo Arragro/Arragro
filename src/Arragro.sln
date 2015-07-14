@@ -47,8 +47,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Redis", "Arragro.Re
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{89DA5227-7BAF-4778-9166-81D6D7FB7224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.CacheProvider.Redis.Integration.Tests", "..\tests\Arragro.CacheProvider.Redis.Integration.Tests\Arragro.CacheProvider.Redis.Integration.Tests.csproj", "{CA751D8D-8044-493C-8048-CF58BE57ACE9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Common.Tests", "..\tests\Arragro.Common.Tests\Arragro.Common.Tests.csproj", "{5F5858CD-B57E-40A5-BC7E-8B23C6511B23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.EF6.IntegrationTests", "..\tests\Arragro.EF6.IntegrationTests\Arragro.EF6.IntegrationTests.csproj", "{24A55230-FAF2-49C9-923C-49DF4A6B8590}"
@@ -109,10 +107,6 @@ Global
 		{59174687-5E0C-455D-91A4-FE05E7E70DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59174687-5E0C-455D-91A4-FE05E7E70DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59174687-5E0C-455D-91A4-FE05E7E70DA6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA751D8D-8044-493C-8048-CF58BE57ACE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA751D8D-8044-493C-8048-CF58BE57ACE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA751D8D-8044-493C-8048-CF58BE57ACE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA751D8D-8044-493C-8048-CF58BE57ACE9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F5858CD-B57E-40A5-BC7E-8B23C6511B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F5858CD-B57E-40A5-BC7E-8B23C6511B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F5858CD-B57E-40A5-BC7E-8B23C6511B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -138,7 +132,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{CA751D8D-8044-493C-8048-CF58BE57ACE9} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{5F5858CD-B57E-40A5-BC7E-8B23C6511B23} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{24A55230-FAF2-49C9-923C-49DF4A6B8590} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{C980C73A-5897-4CEA-9433-A921106F71F4} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
