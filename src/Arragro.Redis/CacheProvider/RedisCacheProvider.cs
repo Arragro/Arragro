@@ -134,21 +134,22 @@ namespace Arragro.Redis.CacheProvider
         public void RemoveAll()
         {
             var db = Connection.GetDatabase();
-            var server = Connection.GetServer(_connectionString, _port);
-            server.FlushDatabase(db.Database);
+            foreach(var endpoint in Connection.GetEndPoints())
+            {
+                var server = Connection.GetServer(endpoint, _port);
+                server.FlushAllDatabases();
+            }
         }
 
         public bool RemoveFromCache(string key, bool pattern)
         {
             var db = Connection.GetDatabase();
-            var server = Connection.GetServer(_connectionString, _port);
             try
             {
                 if (pattern)
-                {
-                    throw new NotImplementedException();
-                }
-                return db.KeyDelete(key);
+                    return !db.ScriptEvaluate("return redis.call('del', unpack(redis.call('keys', ARGV[1])))", values: new RedisValue[] { key }).IsNull;
+                else
+                    return db.KeyDelete(key);
             }
             catch
             {
