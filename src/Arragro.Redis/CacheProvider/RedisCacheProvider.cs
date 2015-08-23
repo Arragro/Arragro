@@ -88,6 +88,7 @@ namespace Arragro.Redis.CacheProvider
         public ICacheItem<T> Get<T>(string key)
         {
             var db = Connection.GetDatabase();
+            //var cacheItem = DecompressAndDeserializeCacheItem<T>(db.StringGet(key));
             var cacheItem = DecompressAndDeserializeCacheItem<T>(db.StringGet(key));
 
             if (cacheItem != null)

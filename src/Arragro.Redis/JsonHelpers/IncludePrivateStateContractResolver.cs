@@ -15,7 +15,7 @@ namespace Arragro.Redis.JsonHelpers
             var properties = objectType.GetProperties(BindingFlags);//.Where(p => p.HasSetter() && p.HasGetter());
             var fields = objectType.GetFields(BindingFlags);
 
-            var allMembers = properties.Cast<MemberInfo>().Union(fields);
+            var allMembers = properties.Cast<MemberInfo>().Union(fields).Where(p => !p.Name.Contains("k__BackingField"));
             return allMembers.ToList();
         }
 

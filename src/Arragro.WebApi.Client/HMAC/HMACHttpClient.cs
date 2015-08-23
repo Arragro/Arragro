@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace Arragro.WebApi.Client.HMAC
                 where TData : class 
                 where TResponse : class, new()
         {
-            HttpClient client = HttpClientFactory.Create(_hmacDelegateHandler);
+            var client = HttpClientFactory.Create(_hmacDelegateHandler);
 
             HttpResponseMessage response = await client.PostAsJsonAsync(requestUri, data).ConfigureAwait(continueOnCapturedContext: false);
 
