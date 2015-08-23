@@ -5,6 +5,8 @@
   version: 1.0.0.{build}
   configuration: Release
   platform: Any CPU
+  cache:
+  - src\packages
   services:
     - mssql2014
   nuget:
