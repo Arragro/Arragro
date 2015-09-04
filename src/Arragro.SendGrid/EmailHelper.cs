@@ -52,7 +52,7 @@ namespace Arragro.SendGrid
             message.Subject = string.Format("{0} - {1} - Originally To: {2}", _applicationName, subject, toEmail);
 #else
 
-            if (ConfigurationHelper.TestMode())
+            if (SendGridConfiguration.TestMode())
             {
                 message.AddTo("support@arragro.com");
                 message.Subject = string.Format("{0} - {1} - Originally To: {2}", _applicationName, subject, toEmail);
