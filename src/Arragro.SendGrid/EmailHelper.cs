@@ -80,24 +80,40 @@ namespace Arragro.SendGrid
             LogInfo("SendEmail took " + stopwatch.ElapsedMilliseconds + "ms");
         }
 
-
-        public void SendError(string errorText)
+        public async Task SendError(string errorText)
         {
             var message = new SG.SendGridMessage();
-            message.From = new MailAddress("suuport@arragro.com", _applicationName);
+            message.From = new MailAddress("support@arragro.com", _applicationName);
             message.AddTo("support@arragro.com");
 
 #if RELEASE
-            message.AddTo("support@arragro.co.nz");
-            message.Subject = string.Format("Something went wrong!");
+            await SendEmail(
+                "support@arragro.com", "support@arragro.co.nz",
+                "Something went wrong!", errorText, errorText,
+                _applicationName);
 #else
-            message.AddTo("support@arragro.co.nz");
-            message.Subject = string.Format("TEST - Something went wrong!");
+            await SendEmail(
+                "support@arragro.com", "support@arragro.co.nz",
+                "TEST - Something went wrong!", errorText, errorText,
+                _applicationName);
 #endif
-            message.Text = errorText;
-            message.Html = errorText;
+        }
 
-            _transportWeb.DeliverAsync(message);
+        public async Task SendError(Exception ex)
+        {
+            if (ex.ToString().Contains("Could not load file or assembly 'Microsoft.SqlServer.Types, Version=10.0.0.0"))
+            {
+                const string webConfigSqlServerTypes = @"
+Please add the following to you web config in the runtime\assemblyBinding section:
+
+<dependentAssembly>
+    <assemblyIdentity name=""Microsoft.SqlServer.Types"" publicKeyToken=""89845dcd8080cc91"" culture=""neutral"" />
+    <bindingRedirect oldVersion=""10.0.0.0-11.0.0.0"" newVersion=""11.0.0.0"" />
+</dependentAssembly>";
+                ex = new Exception(webConfigSqlServerTypes, ex);
+            }
+
+            await SendError(string.Format("<pre>{0}</pre>", ex.ToString()));
         }
     }
 }
