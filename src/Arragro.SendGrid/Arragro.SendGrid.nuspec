@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Arragro.SendGrid</id>
+    <version>$version$</version>
+    <title>Arragro SendGrid Implementation</title>
+    <authors>Mike Jewell</authors>
+    <owners>Mike Jewell</owners>
+    <licenseUrl>https://github.com/mike-jewell/Arragro/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mike-jewell/Arragro</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Arragro.SendGrid is a Redis base library.
+    </description>
+    <summary></summary>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Arragro Arragro.SendGrid</tags>
+    <dependencies>
+      <dependency id="Arragro.Common" />
+      <dependency id="Sendgrid" />
+      <dependency id="SendGrid.SmtpApi" />
+    </dependencies>
+  </metadata>
+</package>
