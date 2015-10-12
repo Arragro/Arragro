@@ -60,6 +60,13 @@ namespace Arragro.Common.BusinessRules
         public readonly IList<RuleViolation> Errors = new List<RuleViolation>();
         protected readonly Expression<Func<object, object>> ThisObject = x => x;
 
+        protected RulesException() { }
+
+        protected RulesException(string message, RulesException rulesException) : base(message)
+        {
+            Errors = rulesException.Errors;
+        }
+
         public void ErrorForModel(string message)
         {
             Errors.Add(new RuleViolation { Property = ThisObject, Message = message });
@@ -100,6 +107,36 @@ namespace Arragro.Common.BusinessRules
             return output.ToString();
         }
 
+        public override string Message
+        {
+            get
+            {
+                var thisErrors = Errors.Where(x => x.Property == ThisObject);
+                var output = new StringBuilder(base.Message);
+
+                if (thisErrors.Any())
+                {
+                    output.AppendLine("\n\n====================================");
+                    output.AppendLine(ThisErrors());
+                }
+                return output.ToString();
+            }
+        }
+
+        public void ThrowException()
+        {
+            var thisErrors = Errors.Where(x => x.Property == ThisObject);
+            var output = new StringBuilder(base.Message);
+
+            if (thisErrors.Any())
+            {
+                output.AppendLine("\n\n====================================");
+                output.AppendLine(ThisErrors());
+
+                throw new RulesException(output.ToString(), this);
+            }
+        }
+
         public override string ToString()
         {
             var output = new StringBuilder();
@@ -111,6 +148,10 @@ namespace Arragro.Common.BusinessRules
     [Serializable]
     public class RulesException<TModel> : RulesException
     {
+        public RulesException() : base() { }
+
+        private RulesException(string message, RulesException rulesException) : base(message, rulesException) { }
+
         public void ErrorFor<TProperty>(Expression<Func<TModel, TProperty>> property,
                                         string message, string prefix = "")
         {
@@ -162,6 +203,18 @@ namespace Arragro.Common.BusinessRules
             }
 
             return thisErrors + output.ToString();
+        }
+
+        public new void ThrowException()
+        {
+            var output = new StringBuilder(base.Message);
+
+            if (Errors.Any())
+            {
+                output.AppendLine("\n\n====================================");
+                output.AppendLine(ToString());
+                throw new RulesException<TModel>(output.ToString(), this);
+            }
         }
     }
 
