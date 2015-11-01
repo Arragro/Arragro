@@ -62,6 +62,7 @@
     <Compile Include="CacheProvider\Models\MasterKeys.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ObjectHelpers.cs" />
+    <Compile Include="Helpers\ObjectToDictionaryHelper.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\DebugLogManager.cs" />
     <Compile Include="Logging\ILog.cs" />
