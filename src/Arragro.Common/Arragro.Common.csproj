@@ -60,6 +60,7 @@
     <Compile Include="CacheProvider\Models\ICacheItem.cs" />
     <Compile Include="CacheProvider\ICacheProvider.cs" />
     <Compile Include="CacheProvider\Models\MasterKeys.cs" />
+    <Compile Include="Helpers\DictionaryHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ObjectHelpers.cs" />
     <Compile Include="Helpers\ObjectToDictionaryHelper.cs" />
