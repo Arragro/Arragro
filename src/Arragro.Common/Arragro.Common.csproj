@@ -63,6 +63,7 @@
     <Compile Include="Helpers\DictionaryHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\ObjectHelpers.cs" />
+    <Compile Include="Helpers\ObjectToKeyValuePairListExtension.cs" />
     <Compile Include="Helpers\ObjectToDictionaryHelper.cs" />
     <Compile Include="Logging\DebugLogger.cs" />
     <Compile Include="Logging\DebugLogManager.cs" />
