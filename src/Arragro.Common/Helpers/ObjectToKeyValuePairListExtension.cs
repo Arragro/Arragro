@@ -8,31 +8,31 @@ namespace Arragro.Common.Helpers
     public static class ObjectToKeyValuePairListExtension
     {
 
-        public static List<KeyValuePair<string, object>> ToKeyValuePairList(this object source)
+        public static List<KeyValuePair<string, string>> ToKeyValuePairList(this object source)
         {
             return source.ToKeyValuePairList<object>();
         }
 
-        public static List<KeyValuePair<string, object>> ToKeyValuePairList<T>(this object source)
+        public static List<KeyValuePair<string, string>> ToKeyValuePairList<T>(this object source)
         {
             if (source == null)
                 ThrowExceptionWhenSourceArgumentIsNull();
 
-            var keyValuePairs = new List<KeyValuePair<string, object>>();
+            var keyValuePairs = new List<KeyValuePair<string, string>>();
             foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(source))
                 AddPropertyToKeyValuePair<T>(property, source, keyValuePairs);
 
             return keyValuePairs;
         }
 
-        private static void AddPropertyToKeyValuePair<T>(PropertyDescriptor property, object source, List<KeyValuePair<string, object>> keyValuePairs)
+        private static void AddPropertyToKeyValuePair<T>(PropertyDescriptor property, object source, List<KeyValuePair<string, string>> keyValuePairs)
         {
             object value = property.GetValue(source);
             if (IsOfType<T>(value) && value != null)
             {
                 if (value is string)
                 {
-                    keyValuePairs.Add(new KeyValuePair<string, object>(property.Name, (T)value));
+                    keyValuePairs.Add(new KeyValuePair<string, string>(property.Name, ((T)value).ToString()));
                 }
                 else if (value is IEnumerable)
                 {
@@ -40,12 +40,12 @@ namespace Arragro.Common.Helpers
                     int count = 0;
                     foreach (var item in enumerable)
                     {
-                        keyValuePairs.Add(new KeyValuePair<string, object>(property.Name + "[" + count.ToString() + "]", (T)item));
+                        keyValuePairs.Add(new KeyValuePair<string, string>(property.Name + "[" + count.ToString() + "]", ((T)item).ToString()));
                         count++;
                     }
                 }
                 else
-                    keyValuePairs.Add(new KeyValuePair<string, object>(property.Name, (T)value));
+                    keyValuePairs.Add(new KeyValuePair<string, string>(property.Name, ((T)value).ToString()));
             }
         }
 
