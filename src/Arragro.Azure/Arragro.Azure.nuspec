@@ -19,8 +19,8 @@
     <copyright>Copyright 2015</copyright>
     <tags>Arragro Arragro.Azure Azure Abstraction</tags>
     <dependencies>
-      <dependency id="Microsoft.WindowsAzure.Management" version="[2.0]" />
-      <dependency id="WindowsAzure.Storage" version="[4.3.0]" />
+      <dependency id="Microsoft.WindowsAzure.Management" />
+      <dependency id="WindowsAzure.Storage" />
     </dependencies>
   </metadata>
 </package>
