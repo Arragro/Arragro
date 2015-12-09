@@ -5,6 +5,13 @@ namespace Arragro.EF6
 {
     public class BaseContext : DbContext, IBaseContext
     {
+        public BaseContext() : base() { }
+
+        public BaseContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        {
+
+        }
+
         public new IDbSet<TEntity> Set<TEntity>() where TEntity : class
         {
             return base.Set<TEntity>();
