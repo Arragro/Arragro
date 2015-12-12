@@ -26,18 +26,21 @@ namespace Arragro.Common.CacheProvider
                 Trace.Write(string.Format("Removing: {0} Over in milliseconds: {1}", cacheItem.Key, (now - cacheItem.Expiration).Value.TotalMilliseconds));
                 output = RemoveFromCache(cacheItem.Key);
             }
-            PurgeExpiredCacheItems();
+            PurgeExpiredCacheItems(cacheItem.Key);
             return output;
         }
 
-        private void PurgeExpiredCacheItems()
+        private void PurgeExpiredCacheItems(string excludeKey)
         {
             var now = DateTime.Now;
             var cacheItems = Dictionary.Values.Where(x => ((ICacheItem)x).Expiration < now).Select(x => ((ICacheItem)x));
             foreach(var cacheItem in cacheItems)
             {
-                Trace.Write(string.Format("Removing: {0} Over in milliseconds: {1}", cacheItem.Key, (now - cacheItem.Expiration).Value.TotalMilliseconds));
-                RemoveFromCache(cacheItem.Key);
+                if (cacheItem.Key != excludeKey)
+                {
+                    Trace.Write(string.Format("Removing: {0} Over in milliseconds: {1}", cacheItem.Key, (now - cacheItem.Expiration).Value.TotalMilliseconds));
+                    RemoveFromCache(cacheItem.Key);
+                }
             }
         }
 
