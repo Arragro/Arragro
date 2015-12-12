@@ -20,13 +20,14 @@ namespace Arragro.Common.CacheProvider
         private bool CheckAndClearExpiredData(ICacheItem cacheItem)
         {
             var now = DateTime.Now;
+            var output = false;
             if (cacheItem.Expiration < now)
             {
                 Trace.Write(string.Format("Removing: {0} Over in milliseconds: {1}", cacheItem.Key, (now - cacheItem.Expiration).Value.TotalMilliseconds));
-                return RemoveFromCache(cacheItem.Key);
+                output = RemoveFromCache(cacheItem.Key);
             }
             PurgeExpiredCacheItems();
-            return false;
+            return output;
         }
 
         private void PurgeExpiredCacheItems()
