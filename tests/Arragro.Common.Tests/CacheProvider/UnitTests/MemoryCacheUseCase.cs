@@ -1,5 +1,6 @@
 ﻿using Arragro.Common.CacheProvider;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using Xunit;
 
@@ -20,6 +21,8 @@ namespace Arragro.Common.Tests.CacheProvider.UnitTests
             var cacheProvider = CacheProviderManager.CacheProvider;
             var cacheSettingsShort = new CacheSettings(new TimeSpan(0, 0, 0, 0, 5), false);
             var cacheSettingsLong = new CacheSettings(new TimeSpan(0, 0, 0, 0, 10), true);
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             cacheProvider.Set("Test", "Hello", cacheSettingsLong);
             cacheProvider.Set("TestShort", "Hello", cacheSettingsShort);
@@ -30,7 +33,7 @@ namespace Arragro.Common.Tests.CacheProvider.UnitTests
             Thread.Sleep(6);
 
             data = cacheProvider.Get<string>("Test");
-            Assert.Equal("Hello", data.Item);
+            Assert.True("Hello" == data.Item, stopwatch.ElapsedMilliseconds + "ms");
 
             data = cacheProvider.Get<string>("TestShort");
             Assert.Null(data);
