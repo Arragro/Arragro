@@ -21,7 +21,7 @@
       <dependency id="Arragro.EF6" />
       <dependency id="Arragro.ObjectLogging" />
       <dependency id="Unity" version="[4.0.1" />
-      <dependency id="Microsoft.AspNet.Mvc" version="[5.2.3" />
+      <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
     </dependencies>
   </metadata>
 </package>

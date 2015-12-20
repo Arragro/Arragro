@@ -17,7 +17,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.Google.Apis</tags>
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="[7.0.1" />
+      <dependency id="Newtonsoft.Json" version="7.0.1" />
     </dependencies>
   </metadata>
 </package>
