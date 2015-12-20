@@ -18,7 +18,7 @@
     <tags>Arragro Arragro.Log4Net</tags>
     <dependencies>
       <dependency id="Arragro.Common" />
-      <dependency id="log4net" />
+      <dependency id="log4net" version="[2.0.5" />
     </dependencies>
   </metadata>
 </package>

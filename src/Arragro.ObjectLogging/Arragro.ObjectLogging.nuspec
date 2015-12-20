@@ -18,7 +18,7 @@
     <tags>Arragro Arragro.Logging</tags>
     <dependencies>
       <dependency id="Arragro.Common" />
-      <dependency id="Newtonsoft.Json" />
+      <dependency id="Newtonsoft.Json" version="[7.0.1" />
     </dependencies>
   </metadata>
 </package>

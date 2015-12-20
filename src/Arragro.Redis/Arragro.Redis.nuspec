@@ -18,9 +18,9 @@
     <tags>Arragro Arragro.Redis</tags>
     <dependencies>
       <dependency id="Arragro.Common" />
-      <dependency id="Newtonsoft.Json" />
-      <dependency id="StackExchange.Redis" />
-      <dependency id="Zlib.Portable" />
+      <dependency id="Newtonsoft.Json" version="[7.0.1" />
+      <dependency id="StackExchange.Redis" version="[1.0.488" />
+      <dependency id="Zlib.Portable" version="[1.11.0" />
     </dependencies>
   </metadata>
 </package>
