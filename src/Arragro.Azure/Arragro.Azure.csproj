@@ -152,7 +152,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountManagement\SqlAccountManager.cs" />
     <Compile Include="AzureStorageConnectionStrings.cs" />
     <Compile Include="Helpers\TableQueryExtensions.cs" />
     <Compile Include="Models\AustralianLocations.cs" />
@@ -161,7 +160,6 @@
     <Compile Include="Models\WebHostingPlanModes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AccountManagement\AccountManagementBase.cs" />
-    <Compile Include="AccountManagement\StorageAccountManager.cs" />
     <Compile Include="ServiceManagement\Storage\TableStorageManager.cs" />
     <Compile Include="ServiceManagement\Storage\BlobStorageManager.cs" />
     <Compile Include="ServiceManagement\Storage\QueueStorageManager.cs" />
