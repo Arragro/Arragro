@@ -21,7 +21,7 @@
     <dependencies>
       <dependency id="Microsoft.WindowsAzure.Management" version="2.0.0" />
       <dependency id="Microsoft.WindowsAzure.Management.Storage" version="5.1.1" />
-      <dependency id="WindowsAzure.Storage" version="6.1.0.0" />
+      <dependency id="WindowsAzure.Storage" version="5.0.2" />
     </dependencies>
   </metadata>
 </package>
