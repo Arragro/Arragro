@@ -37,10 +37,11 @@ namespace Arragro.WebApi
                                   string prefix)
         {
             prefix = string.IsNullOrEmpty(prefix) ? "" : prefix + ".";
+            modelState.Clear();
             foreach (var propertyError in ex.Errors)
             {
                 var errorPrefix = string.IsNullOrEmpty(propertyError.Prefix) ? prefix : propertyError.Prefix + ".";
-                var key = GetPropertyName(propertyError.Property);
+                var key = propertyError.GetPropertyPath();
                 modelState.AddModelError(errorPrefix + key, propertyError.Message);
             }
         }

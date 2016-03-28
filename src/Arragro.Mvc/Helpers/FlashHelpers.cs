@@ -83,6 +83,32 @@ namespace Arragro.Mvc.Helpers
         }
 
         public static void Flash(
+            this Controller controller, Dictionary<string, IEnumerable<string>> modelState, FlashEnum type = FlashEnum.Success)
+        {
+            var error = new TagBuilder("ul");
+            foreach (var key in modelState.Keys)
+            {
+                var li = new TagBuilder("li");
+                if (modelState[key].Any())
+                {
+                    if (modelState[key].Count() == 1)
+                        if (!string.IsNullOrEmpty(key))
+                            li.InnerHtml = string.Format("\t{0}: {1}", key, modelState[key].ElementAt(0));
+                        else
+                            li.InnerHtml = string.Format("\t{1}", key, modelState[key].ElementAt(0));
+                    else
+                        foreach (var text in modelState[key])
+                        {
+                            li.InnerHtml += string.Format("\t\t{0}\n", text);
+                        }
+
+                    error.InnerHtml += li.ToString();
+                }
+            }
+            controller.TempData[GetType(type)] = error.ToString();
+        }
+
+        public static void Flash(
             this Controller controller, IList<RuleViolation> ruleViolations, FlashEnum type = FlashEnum.Success)
         {
             var error = new TagBuilder("ul");
