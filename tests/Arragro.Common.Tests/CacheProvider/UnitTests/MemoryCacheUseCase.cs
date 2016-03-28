@@ -18,14 +18,14 @@ namespace Arragro.Common.Tests.CacheProvider.UnitTests
         {
             CacheProviderManager.CacheProvider = MemoryCacheProvider.GetInstance();
             var cacheProvider = CacheProviderManager.CacheProvider;
-            var cacheSettings = new CacheSettings(new TimeSpan(0, 0, 0, 0, 10), true);
+            var cacheSettings = new CacheSettings(new TimeSpan(0, 0, 0, 0, 20), true);
 
             cacheProvider.Set("Test", "Hello", cacheSettings);
 
             var data = cacheProvider.Get<string>("Test");
             Assert.Equal("Hello", data.Item);
 
-            Thread.Sleep(11);
+            Thread.Sleep(20);
 
             data = cacheProvider.Get<string>("Test");
             Assert.Null(data);
