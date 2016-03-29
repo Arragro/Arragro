@@ -59,7 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ApiErrorData.cs" />
+    <Compile Include="Exceptions\ApiHttpException.cs" />
     <Compile Include="Filters\HMACAuthenticationAttribute.cs" />
+    <Compile Include="Exceptions\ApiRulesException.cs" />
     <Compile Include="Models\ResultWithChallenge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RulesViolationExceptionExtensions.cs" />
