@@ -130,6 +130,8 @@
 
       nuget restore src;
 
+      appveyor-retry dotnet restore -v Minimal;
+
       nuget install redis-64 -excludeversion;
 
       redis-64\tools\redis-server.exe --service-install;
