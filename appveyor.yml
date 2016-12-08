@@ -147,7 +147,7 @@
   - dotnet build "tests\Arragro.TestBase" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
   - dotnet build "tests\Arragro.Common.Tests" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
   test_script:
-  - dotnet test "test\Arragro.Common.Tests" -c %CONFIGURATION%
+  - dotnet test "tests\Arragro.Common.Tests" -c %CONFIGURATION%
   build:
     publish_nuget: true
     publish_nuget_symbols: true
