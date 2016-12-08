@@ -103,7 +103,7 @@
   branches:
     only:
       - /[Dd]ev/
-  version: 1.0.0.{build}-alpha
+  version: 2.0.0.{build}-alpha
   configuration: Release
   platform: Any CPU
   services:
@@ -137,7 +137,7 @@
     api_key:
       secure: F0ZPbEej7MlPRYAb43jRKMZdVDCWLEhfsgmx4o3YTSdcTKIGbOO92NL2LlHcjY1V
     on:
-      branch: master
+      branch: dev
   notifications:
   - provider: Slack
     auth_token:

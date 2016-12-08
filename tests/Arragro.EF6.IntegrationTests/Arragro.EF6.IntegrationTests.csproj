@@ -87,10 +87,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Arragro.Common\Arragro.Common.csproj">
-      <Project>{df7f6387-5d1a-4e62-b136-0c85e4175e1b}</Project>
-      <Name>Arragro.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Arragro.EF6\Arragro.EF6.csproj">
       <Project>{2f1acb16-1b19-41e2-90c0-1d2b36405288}</Project>
       <Name>Arragro.EF6</Name>

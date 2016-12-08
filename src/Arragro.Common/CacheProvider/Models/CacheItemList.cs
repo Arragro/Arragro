@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Arragro.Common.CacheProvider
 {
-    [Serializable]
     public class CacheItemList<T> : CacheItem, ICacheItemList<T>
     {
         public IEnumerable<T> Items { get; set; }

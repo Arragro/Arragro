@@ -9,8 +9,7 @@ namespace Arragro.Common.BusinessRules
         DateTime CreatedDate { get; set; }
         DateTime ModifiedDate { get; set; }
     }
-
-    [Serializable]
+    
     public class Auditable<TUserIdType> : IAuditable<TUserIdType>
     {
         public TUserIdType CreatedBy { get; set; }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Serialization;
 using System.Text;
 
 namespace Arragro.Common.BusinessRules
@@ -17,8 +16,7 @@ namespace Arragro.Common.BusinessRules
      * is an extension in another Arragro library that will copy these issues
      * to the ModelState.  ModelState is still validated by the MVC framework.
      */
-
-    [Serializable]
+     
     public class RuleViolation
     {
         public string Prefix { get; set; }
@@ -53,8 +51,7 @@ namespace Arragro.Common.BusinessRules
             return string.Join(".", stack.ToArray());
         }
     }
-
-    [Serializable]
+    
     public class RulesException : Exception
     {
         public readonly IList<RuleViolation> Errors = new List<RuleViolation>();
@@ -78,12 +75,6 @@ namespace Arragro.Common.BusinessRules
             {
                 Errors.Add(error);
             }
-        }
-
-        protected new virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            info.AddValue("Errors", Errors);
         }
 
         protected string ThisErrors()
@@ -144,8 +135,7 @@ namespace Arragro.Common.BusinessRules
             return ThisErrors();
         }
     }
-
-    [Serializable]
+    
     public class RulesException<TModel> : RulesException
     {
         public RulesException() : base() { }

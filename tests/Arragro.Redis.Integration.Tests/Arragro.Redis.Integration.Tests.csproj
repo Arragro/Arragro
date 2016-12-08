@@ -64,10 +64,6 @@
     <Compile Include="RedisCacheProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Arragro.Common\Arragro.Common.csproj">
-      <Project>{df7f6387-5d1a-4e62-b136-0c85e4175e1b}</Project>
-      <Name>Arragro.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Arragro.Redis\Arragro.Redis.csproj">
       <Project>{59174687-5e0c-455d-91a4-fe05e7e70da6}</Project>
       <Name>Arragro.Redis</Name>

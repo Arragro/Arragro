@@ -19,7 +19,6 @@ namespace Arragro.TestBase
 
             //Build the methods exposed by the interface (not all will be required, but I have done anyway.
             //Later, this pattern can be put into a Base class using generics to make it work with any model.
-            moqRepository.Setup(x => x.TurnOnOffLazyLoading(true)).Verifiable();
             moqRepository.Setup(x => x.Find(It.IsAny<int>())).Returns((int id) => modelFoos.SingleOrDefault(x => x.Id == id));
             moqRepository.Setup(x => x.Delete(It.IsAny<int>())).Callback((int id) =>
             {

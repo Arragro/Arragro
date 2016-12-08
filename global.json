@@ -1,0 +1,10 @@
+{
+  "sources": [
+    "temp"
+  ],
+  "projects": [
+    "src",
+    "temp",
+    "tests"
+  ]
+}

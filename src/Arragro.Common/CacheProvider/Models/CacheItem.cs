@@ -2,7 +2,6 @@
 
 namespace Arragro.Common.CacheProvider
 {
-    [Serializable]
     public class CacheItem : ICacheItem
     {
         protected DateTime? GetExpiration(TimeSpan? cacheDuration)
@@ -44,8 +43,7 @@ namespace Arragro.Common.CacheProvider
             Expiration = expiration;
         }
     }
-
-    [Serializable]
+    
     public class CacheItem<T> : CacheItem, ICacheItem<T>
     {
         public T Item { get; set; }
