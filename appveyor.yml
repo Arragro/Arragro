@@ -124,6 +124,11 @@
     assembly_version: "{version}"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
+  environment:
+    # Don't report back to the mothership
+    DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  init:
+  - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
   before_build:
   - ps: >-
       nuget sources update -Name nuget.org -Source https://api.nuget.org/v3/index.json;
