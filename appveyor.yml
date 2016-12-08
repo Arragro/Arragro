@@ -21,6 +21,8 @@
     assembly_informational_version: "{version}"
   before_build:
   - ps: >-
+      nuget sources update -Name nuget.org -Source https://api.nuget.org/v3/index.json;
+
       nuget restore src;
 
       nuget install redis-64 -excludeversion;
@@ -71,6 +73,8 @@
     assembly_informational_version: "{version}"
   before_build:
   - ps: >-
+      nuget sources update -Name nuget.org -Source https://api.nuget.org/v3/index.json;
+
       nuget restore src;
 
       nuget install redis-64 -excludeversion;
@@ -122,6 +126,8 @@
     assembly_informational_version: "{version}"
   before_build:
   - ps: >-
+      nuget sources update -Name nuget.org -Source https://api.nuget.org/v3/index.json;
+
       nuget restore src;
 
       nuget install redis-64 -excludeversion;
