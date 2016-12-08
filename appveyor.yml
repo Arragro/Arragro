@@ -118,6 +118,7 @@
   nuget:
     account_feed: true
     project_feed: true
+    disable_publish_on_pr: true
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -127,8 +128,6 @@
   environment:
     # Don't report back to the mothership
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
-  init:
-  - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
   before_build:
   - ps: >-
       nuget sources update -Name nuget.org -Source https://api.nuget.org/v3/index.json;
@@ -143,11 +142,11 @@
 
       redis-64\tools\redis-server.exe --service-start;
   build_script:
-  - dotnet build "src\Arragro.Common" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
-  - dotnet build "tests\Arragro.TestBase" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
-  - dotnet build "tests\Arragro.Common.Tests" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+  - dotnet build "src\Arragro.Common" -c %CONFIGURATION% --no-dependencies
+  - dotnet build "tests\Arragro.TestBase" -c %CONFIGURATION% --no-dependencies
+  - dotnet build "tests\Arragro.Common.Tests" -c %CONFIGURATION% --no-dependencies
   after_build:
-    - dotnet pack "src\Arragro.Common" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts
+    - dotnet pack "src\Arragro.Common" -c %CONFIGURATION% --no-build -o artifacts
   test_script:
   - dotnet test "tests\Arragro.Common.Tests" -c %CONFIGURATION%
   build:
@@ -155,6 +154,10 @@
     publish_nuget_symbols: true
     include_nuget_references: true
     verbosity: minimal
+  test: off
+  artifacts:  
+    - path: .\artifacts\**\*.nupkg
+    name: NuGet
   deploy:
   - provider: NuGet
     server: https://www.nuget.org/
