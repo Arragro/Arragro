@@ -1,5 +1,5 @@
 ﻿{
-  "version": "2.0.0-alpha-*",
+  "version": "2.0.*-alpha",
 
   "dependencies": {
     "Arragro.Common": "2.0.0-*",
