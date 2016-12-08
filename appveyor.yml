@@ -5,6 +5,7 @@
   version: 1.0.0.{build}
   configuration: Release
   platform: Any CPU
+  image: Visual Studio 2015
   cache:
   - src\packages
   services:
@@ -56,6 +57,7 @@
   version: 1.0.0.{build}-beta
   configuration: Release
   platform: Any CPU
+  image: Visual Studio 2015
   services:
     - mssql2014
   nuget:
@@ -106,6 +108,7 @@
   version: 2.0.0.{build}-alpha
   configuration: Release
   platform: Any CPU
+  image: Visual Studio 2015
   services:
     - mssql2014
   nuget:
