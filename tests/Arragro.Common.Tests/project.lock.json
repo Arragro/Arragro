@@ -2817,7 +2817,7 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Arragro.Common/2.0.0": {
+      "Arragro.Common/2.0.0-alpha": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -2835,7 +2835,7 @@
           "netstandard1.6/Arragro.Common.dll": {}
         }
       },
-      "Arragro.TestBase/2.0.0": {
+      "Arragro.TestBase/2.0.0-alpha": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.0",
         "dependencies": {
@@ -8330,12 +8330,12 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Arragro.Common/2.0.0": {
+    "Arragro.Common/2.0.0-alpha": {
       "type": "project",
       "path": "../../src/Arragro.Common/project.json",
       "msbuildProject": "../../src/Arragro.Common/Arragro.Common.xproj"
     },
-    "Arragro.TestBase/2.0.0": {
+    "Arragro.TestBase/2.0.0-alpha": {
       "type": "project",
       "path": "../Arragro.TestBase/project.json",
       "msbuildProject": "../Arragro.TestBase/Arragro.TestBase.xproj"

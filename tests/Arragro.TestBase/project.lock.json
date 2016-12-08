@@ -2365,7 +2365,7 @@
           "lib/netstandard1.3/_._": {}
         }
       },
-      "Arragro.Common/2.0.0": {
+      "Arragro.Common/2.0.0-alpha": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -7474,7 +7474,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Arragro.Common/2.0.0": {
+    "Arragro.Common/2.0.0-alpha": {
       "type": "project",
       "path": "../../src/Arragro.Common/project.json",
       "msbuildProject": "../../src/Arragro.Common/Arragro.Common.xproj"
