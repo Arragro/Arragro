@@ -1,4 +1,7 @@
+#:D:\Development\Arragro\Arragro\src\Arragro.Common\Arragro.Common.xproj
 #:D:\Development\Arragro\Arragro\tests\Arragro.Common.Tests\Arragro.Common.Tests.xproj
 D:\Development\Arragro\Arragro\tests\Arragro.Common.Tests\Arragro.Common.Tests.xproj|D:\Development\Arragro\Arragro\src\Arragro.Common\Arragro.Common.xproj
 D:\Development\Arragro\Arragro\tests\Arragro.Common.Tests\Arragro.Common.Tests.xproj|D:\Development\Arragro\Arragro\tests\Arragro.TestBase\Arragro.TestBase.xproj
+D:\Development\Arragro\Arragro\tests\Arragro.TestBase\Arragro.TestBase.xproj|D:\Development\Arragro\Arragro\src\Arragro.Common\Arragro.Common.xproj
+#:D:\Development\Arragro\Arragro\tests\Arragro.TestBase\Arragro.TestBase.xproj
 D:\Development\Arragro\Arragro\tests\Arragro.TestBase\Arragro.TestBase.xproj|D:\Development\Arragro\Arragro\src\Arragro.Common\Arragro.Common.xproj
