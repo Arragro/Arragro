@@ -157,10 +157,9 @@
   test: off
   artifacts:  
     - path: .\artifacts\**\*.nupkg
-    name: NuGet
+      name: NuGet
   deploy:
   - provider: NuGet
-    server: https://www.nuget.org/
     api_key:
       secure: F0ZPbEej7MlPRYAb43jRKMZdVDCWLEhfsgmx4o3YTSdcTKIGbOO92NL2LlHcjY1V
     on:
