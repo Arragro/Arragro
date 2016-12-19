@@ -12,17 +12,17 @@ namespace Arragro.TestBase
         /// in the service layer.
         /// </summary>
         /// <returns>IRepository<ModelFoo, int></returns>
-        public static IRepository<ModelFoo, int> GetMockRepository(List<ModelFoo> modelFoos)
+        public static IRepository<ModelFoo> GetMockRepository(List<ModelFoo> modelFoos)
         {
             //Instantiate the Mock
-            var moqRepository = new Mock<IRepository<ModelFoo, int>>();
+            var moqRepository = new Mock<IRepository<ModelFoo>>();
 
             //Build the methods exposed by the interface (not all will be required, but I have done anyway.
             //Later, this pattern can be put into a Base class using generics to make it work with any model.
-            moqRepository.Setup(x => x.Find(It.IsAny<int>())).Returns((int id) => modelFoos.SingleOrDefault(x => x.Id == id));
-            moqRepository.Setup(x => x.Delete(It.IsAny<int>())).Callback((int id) =>
+            moqRepository.Setup(x => x.Find(It.IsAny<object[]>())).Returns((object[] ids) => modelFoos.SingleOrDefault(x => x.Id == (int)ids.First()));
+            moqRepository.Setup(x => x.Delete(It.IsAny<object[]>())).Callback((object[] ids) =>
             {
-                var modelFoo = modelFoos.SingleOrDefault(f => f.Id == id);
+                var modelFoo = modelFoos.SingleOrDefault(f => f.Id == (int)ids.First());
                 if (modelFoo != null)
                     modelFoos.Remove(modelFoo);
             });

@@ -3,9 +3,9 @@ using System;
 
 namespace Arragro.Common.BusinessRules
 {
-    public class AuditableBusinessRulesBase<TRepository, TModel, TKeyType, TUserIdType> : BusinessRulesBase<TRepository, TModel, TKeyType>
+    public class AuditableBusinessRulesBase<TRepository, TModel, TUserIdType> : BusinessRulesBase<TRepository, TModel>
         where TModel : class, IAuditable<TUserIdType>
-        where TRepository : IRepository<TModel, TKeyType>
+        where TRepository : IRepository<TModel>
     {
         protected new TRepository Repository { get { return base.Repository; } }
 

@@ -4,18 +4,18 @@ using System.Linq;
 
 namespace Arragro.Common.ServiceBase
 {
-    public abstract class Service<TRepository, TModel, TKeyType> : BusinessRulesBase<TRepository, TModel, TKeyType>
+    public abstract class Service<TRepository, TModel> : BusinessRulesBase<TRepository, TModel>
         where TModel : class
-        where TRepository : IRepository<TModel, TKeyType>
+        where TRepository : IRepository<TModel>
     {
         public Service(TRepository repository)
             : base(repository)
         {
         }
 
-        public TModel Find(TKeyType id)
+        public TModel Find(params object[] ids)
         {
-            return Repository.Find(id);
+            return Repository.Find(ids);
         }
 
         protected abstract void ValidateModelRules(TModel model);

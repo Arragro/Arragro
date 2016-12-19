@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace Arragro.TestBase
 {
-    public class ModelFooService : Service<IRepository<ModelFoo, int>, ModelFoo, int>
+    public class ModelFooService : Service<IRepository<ModelFoo>, ModelFoo>
     {
         public const string DuplicateName = "There is already a Model Foo with that name in the repository";
         public const string RequiredName = "The Name field is required.";
         public const string RangeLengthName = "The Name field must have between 3 and 6 characters";
 
-        public ModelFooService(IRepository<ModelFoo, int> modelFooRepository)
+        public ModelFooService(IRepository<ModelFoo> modelFooRepository)
             : base(modelFooRepository)
         {
         }

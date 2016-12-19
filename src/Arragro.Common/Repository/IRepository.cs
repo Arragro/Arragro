@@ -2,10 +2,10 @@
 
 namespace Arragro.Common.Repository
 {
-    public interface IRepository<TModel, TKeyType> where TModel : class
+    public interface IRepository<TModel> where TModel : class
     {
-        TModel Find(TKeyType id);
-        TModel Delete(TKeyType id);
+        TModel Find(params object[] ids);
+        TModel Delete(params object[] ids);
         IQueryable<TModel> All();
         IQueryable<TModel> AllNoTracking();
         TModel InsertOrUpdate(TModel model, bool add);

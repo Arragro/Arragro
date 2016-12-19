@@ -18,9 +18,9 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
      */
     public class AuditableBusinessRulesUnitTests
     {
-        public class ModelFooIntService : AuditableBusinessRulesBase<IRepository<ModelFooInt, int>, ModelFooInt, int, int>
+        public class ModelFooIntService : AuditableBusinessRulesBase<IRepository<ModelFooInt>, ModelFooInt, int>
         {
-            public ModelFooIntService(IRepository<ModelFooInt, int> modelFooRepository) : base(modelFooRepository) { }
+            public ModelFooIntService(IRepository<ModelFooInt> modelFooRepository) : base(modelFooRepository) { }
 
             public ModelFooInt TestAddOrUpdateAudit(ModelFooInt modelFooInt, int userId, bool add)
             {
@@ -29,9 +29,9 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
             }
         }
 
-        public class ModelFooGuidService : AuditableBusinessRulesBase<IRepository<ModelFooGuid, int>, ModelFooGuid, int, Guid>
+        public class ModelFooGuidService : AuditableBusinessRulesBase<IRepository<ModelFooGuid>, ModelFooGuid, Guid>
         {
-            public ModelFooGuidService(IRepository<ModelFooGuid, int> modelFooRepository) : base(modelFooRepository) { }
+            public ModelFooGuidService(IRepository<ModelFooGuid> modelFooRepository) : base(modelFooRepository) { }
 
             public ModelFooGuid TestAddOrUpdateAudit(ModelFooGuid modelFooGuid, Guid userId, bool add)
             {
@@ -45,7 +45,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
         {
             var startDateTime = DateTime.Now.AddMilliseconds(-5);
 
-            var mockRepository = new Mock<IRepository<ModelFooInt, int>>();
+            var mockRepository = new Mock<IRepository<ModelFooInt>>();
             var modelFooIntService = new ModelFooIntService(mockRepository.Object);
 
             var model = modelFooIntService.TestAddOrUpdateAudit(new ModelFooInt { Id = 1 }, 1, true);
@@ -68,7 +68,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
         {
             var startDateTime = DateTime.Now.AddSeconds(-1);
 
-            var mockRepository = new Mock<IRepository<ModelFooGuid, int>>();
+            var mockRepository = new Mock<IRepository<ModelFooGuid>>();
             var modelFooGuidService = new ModelFooGuidService(mockRepository.Object);
 
             var user1 = Guid.NewGuid();

@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Arragro.Common.BusinessRules
 {
-    public class BusinessRulesBase<TRepository, TModel, TKeyType>
+    public class BusinessRulesBase<TRepository, TModel>
         where TModel : class
-        where TRepository : IRepository<TModel, TKeyType>
+        where TRepository : IRepository<TModel>
     {
         protected readonly TRepository Repository;
 
