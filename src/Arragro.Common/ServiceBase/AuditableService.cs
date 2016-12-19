@@ -5,8 +5,8 @@ using System.Linq;
 namespace Arragro.Common.ServiceBase
 {
     public abstract class AuditableService<TRepository, TModel, TUserIdType> : AuditableBusinessRulesBase<TRepository, TModel, TUserIdType>
-       where TModel : class, IAuditable<TUserIdType>
-       where TRepository : IRepository<TModel>
+        where TModel : class, IAuditable<TUserIdType>
+        where TRepository : IRepository<TModel>
     {
         public AuditableService(TRepository repository)
             : base(repository)
