@@ -1,0 +1,89 @@
+﻿using Arragro.Common.Helpers;
+using Arragro.Common.Repository;
+using Arragro.EntityFrameworkCore.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+
+namespace ArragroCMS.Data.EFCore
+{
+    public class DbContextRepositoryBase<TEntity> :
+        IDbContextRepositoryBase<TEntity>,
+        IRepository<TEntity> where TEntity : class
+    {
+        private readonly IBaseContext _baseContext;
+
+        public IBaseContext BaseContext { get { return _baseContext; } }
+
+        public DbContextRepositoryBase(IBaseContext baseContext)
+        {
+            _baseContext = baseContext;
+        }
+
+        protected DbSet<TEntity> DbSet
+        {
+            get { return _baseContext.Set<TEntity>(); }
+        }
+        
+        public TEntity Find(params object[] ids)
+        {
+            // Turn the HashTable of models into a Queryable
+            var query = DbSet.AsQueryable();
+            var whereClause = ObjectHelpers.GetFindWhereClause(query, ids);
+            return query.Provider.CreateQuery<TEntity>(whereClause).SingleOrDefault();
+        }
+
+        public TEntity Delete(params object[] ids)
+        {
+            var entity = Find(ids);
+            return DbSet.Remove(entity).Entity;
+        }
+
+        public virtual IQueryable<TEntity> All()
+        {
+            return DbSet;
+        }
+
+        public virtual IQueryable<TEntity> AllNoTracking()
+        {
+            return DbSet.AsNoTracking();
+        }
+
+        public virtual IQueryable<TEntity> AllNoTracking(Expression<Func<TEntity, bool>> whereClause)
+        {
+            return DbSet.Where(whereClause).AsNoTracking();
+        }
+
+        public TEntity InsertOrUpdate(TEntity model, bool add)
+        {
+            if (add)
+            {
+                return DbSet.Add(model).Entity;
+            }
+            else
+            {
+                _baseContext.SetModified(model);
+                return model;
+            }
+        }
+
+        public int SaveChanges()
+        {
+            try
+            {
+                return _baseContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                var innerEx = ex.InnerException;
+                throw;
+            }
+        }
+
+        public void Dispose()
+        {
+            _baseContext.Dispose();
+        }
+    }
+}

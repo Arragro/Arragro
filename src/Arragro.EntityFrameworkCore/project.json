@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0-*",
+
+  "packOptions": {
+    "licenseUrl": "https://github.com/mike-jewell/Arragro/blob/master/LICENSE",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/mike-jewell/Arragro"
+    },
+    "summary": "Arragro Entity Framework base Repository classes.",
+    "iconUrl": "http://cdn.arragro.com/public/images/favicon.ico",
+    "owners": [
+      "Mike Jewell",
+      "Reece Beardsall"
+    ]
+  },
+
+  "dependencies": {
+    "Arragro.Common": "2.0.0-alpha-build98",
+    "Microsoft.EntityFrameworkCore": "1.0.1",
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.EntityFrameworkCore.InMemory": "1.0.0"
+  },
+
+  "frameworks": {
+    "netcoreapp1.1": {
+      "imports": [
+        "netcore50",
+        "netstandard1.6"
+      ]
+    }
+  }
+}

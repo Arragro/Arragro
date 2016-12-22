@@ -32,6 +32,10 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.Common.Tests", "tes
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.TestBase", "tests\Arragro.TestBase\Arragro.TestBase.xproj", "{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.EntityFrameworkCore", "src\Arragro.EntityFrameworkCore\Arragro.EntityFrameworkCore.xproj", "{3B45A7B5-1378-4422-BC33-A09F96D0F431}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.EntityFrameworkCore.IntegrationTests", "tests\Arragro.EntityFrameworkCore.IntegrationTests\Arragro.EntityFrameworkCore.IntegrationTests.xproj", "{2562E513-BDF0-4FA6-B518-B36428AF2FFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +54,14 @@ Global
 		{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B45A7B5-1378-4422-BC33-A09F96D0F431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B45A7B5-1378-4422-BC33-A09F96D0F431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B45A7B5-1378-4422-BC33-A09F96D0F431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B45A7B5-1378-4422-BC33-A09F96D0F431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2562E513-BDF0-4FA6-B518-B36428AF2FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2562E513-BDF0-4FA6-B518-B36428AF2FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2562E513-BDF0-4FA6-B518-B36428AF2FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2562E513-BDF0-4FA6-B518-B36428AF2FFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +69,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8D810B49-AF4F-4A7E-B24F-A94457D6ED6A} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
+		{2562E513-BDF0-4FA6-B518-B36428AF2FFC} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 	EndGlobalSection
 EndGlobal
