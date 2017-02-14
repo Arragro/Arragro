@@ -15,8 +15,8 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 Id = 1,
                 CreatedBy = 1,
                 ModifiedBy = 1,
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                CreatedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.UtcNow
             };
         }
 
@@ -29,8 +29,8 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
                 Id = 1,
                 CreatedBy = userId,
                 ModifiedBy = userId,
-                CreatedDate = DateTime.Now,
-                ModifiedDate = DateTime.Now
+                CreatedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.UtcNow
             };
         }
     }

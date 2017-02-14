@@ -24,11 +24,11 @@ namespace Arragro.EntityFrameworkCore.IntegrationTests
         {
             WithDbContext(x =>
                 {
-                    x.ModelFoos.Add(new ModelFoo { Name = "Test" });
+                    x.ModelFoos.Add(new ModelFoo { Name = "Test 2" });
                     x.SaveChanges();
 
-                    var modelFoo = x.ModelFoos.Single();
-                    Assert.Equal("Test", modelFoo.Name);
+                    var modelFoo = x.ModelFoos.Single(y => y.Name == "Test 2");
+                    Assert.Equal("Test 2", modelFoo.Name);
                     Assert.NotSame(default(int), modelFoo.Id);
                 });
         }
@@ -41,7 +41,7 @@ namespace Arragro.EntityFrameworkCore.IntegrationTests
                 var modelFooRepository = new ModelFooRepository(context);
                 var modelFooService = new ModelFooService(modelFooRepository);
 
-                var modelFoo = modelFooService.InsertOrUpdate(new ModelFoo { Name = "Test" });
+                var modelFoo = modelFooService.InsertOrUpdate(new ModelFoo { Name = "Test 1" });
                 modelFooService.SaveChanges();
 
                 Assert.NotSame(default(int), modelFoo);

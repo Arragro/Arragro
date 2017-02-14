@@ -29,7 +29,7 @@ namespace Arragro.Common.CacheProvider
         {
             Identifier = Guid.NewGuid();
             Key = key;
-            CreatedDate = DateTime.Now;
+            CreatedDate = DateTime.UtcNow;
             if (cacheSettings != null)
             {
                 CacheSettings = cacheSettings;
