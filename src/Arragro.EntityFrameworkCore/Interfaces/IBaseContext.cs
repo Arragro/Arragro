@@ -6,6 +6,7 @@ namespace Arragro.EntityFrameworkCore.Interfaces
 {
     public interface IBaseContext : IDisposable
     {
+        ChangeTracker ChangeTracker { get; }
         EntityEntry Entry(object entity);
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
         DbSet<TEntity> Set<TEntity>() where TEntity : class;

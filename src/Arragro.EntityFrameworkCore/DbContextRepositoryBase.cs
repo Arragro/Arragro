@@ -2,6 +2,7 @@
 using Arragro.Common.Repository;
 using Arragro.EntityFrameworkCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -72,7 +73,17 @@ namespace ArragroCMS.Data.EFCore
         {
             try
             {
-                return _baseContext.SaveChanges();
+                var result = _baseContext.SaveChanges();
+                
+                foreach (EntityEntry entityEntry in _baseContext.ChangeTracker.Entries().ToArray())
+                {
+                    if (entityEntry.Entity != null)
+                    {
+                        entityEntry.State = EntityState.Detached;
+                    }
+                }
+
+                return result;
             }
             catch (Exception ex)
             {
