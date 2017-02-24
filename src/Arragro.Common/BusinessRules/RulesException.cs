@@ -50,6 +50,17 @@ namespace Arragro.Common.BusinessRules
 
             return string.Join(".", stack.ToArray());
         }
+
+        public KeyValuePair<string, string> KeyValuePair
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Prefix))
+                    return new KeyValuePair<string, string>(GetPropertyPath(), Message);
+                else
+                    return new KeyValuePair<string, string>(string.Format("{0}.{1}", Prefix, GetPropertyPath()), Message);
+            }
+        }
     }
     
     public class RulesException : Exception
@@ -134,6 +145,11 @@ namespace Arragro.Common.BusinessRules
 
             return ThisErrors();
         }
+
+        public IDictionary<string, string> GetErrorDictionary()
+        {
+            return new Dictionary<string, string>(Errors.Select(x => x.KeyValuePair).ToDictionary(x => x.Key, x => x.Value));
+        }
     }
     
     public class RulesException<TModel> : RulesException
@@ -142,8 +158,9 @@ namespace Arragro.Common.BusinessRules
 
         private RulesException(string message, RulesException rulesException) : base(message, rulesException) { }
 
-        public void ErrorFor<TProperty>(Expression<Func<TModel, TProperty>> property,
-                                        string message, string prefix = "")
+        public void ErrorFor<TProperty>(
+            Expression<Func<TModel, TProperty>> property,
+            string message, string prefix = "")
         {
             Errors.Add(new RuleViolation { Property = property, Message = message, Prefix = prefix });
         }
