@@ -5,13 +5,15 @@
   "dependencies": {
     "Arragro.TestBase": "2.0.0-*",
     "Arragro.Common": "2.0.0-*",
+    "Arragro.EntityFrameworkCore": "2.0.0-*",
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0"
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",

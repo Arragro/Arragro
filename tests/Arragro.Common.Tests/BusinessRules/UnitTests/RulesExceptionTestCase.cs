@@ -1,7 +1,13 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
 using Arragro.Common.ServiceBase;
+using Arragro.EntityFrameworkCore;
+using Arragro.EntityFrameworkCore.Interfaces;
+using ArragroCMS.Data.EFCore;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
 
@@ -9,6 +15,12 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
 {
     public class RulesExceptionTestCase
     {
+        public class ValidateTestArrayItem
+        {
+            [Required]
+            public string ArrayItemValue { get; set; }
+        }
+
         public class ValidateTest
         {
             public int ValidateTestId { get; set; }
@@ -18,6 +30,13 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
 
             [Required]
             public string StringProperty { get; set; }
+            
+            public List<ValidateTestArrayItem> ValidateTestArrayItems { get; set; }
+
+            public ValidateTest()
+            {
+                ValidateTestArrayItems = new List<ValidateTestArrayItem>();
+            }
         }
 
         public class ValidateTestService : Service<IRepository<ValidateTest>, ValidateTest>
@@ -37,33 +56,71 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
             }
         }
 
-        //TODO: Reimplement this somehow....
-        /*
+        public class ValidateTestRepository : DbContextRepositoryAllIncludingBase<ValidateTest>
+        {
+            public ValidateTestRepository(IBaseContext baseContext) : base(baseContext)
+            {
+            }
+        }
+
+        public class ValidateTestContext : BaseContext
+        {
+            public virtual DbSet<ValidateTest> UrlRoutes { get; set; }
+
+
+            public ValidateTestContext(DbContextOptions<ValidateTestContext> options)
+                : base(options)
+            {
+            }
+
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            {
+                if (!optionsBuilder.IsConfigured)
+                {
+                    optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFProviders.InMemory;Trusted_Connection=True;");
+                }
+            }
+        }
+
         [Fact]
         public void RulesException_validation_converts_successfully()
         {
-            var validateTestRepository = new InMemoryRepository<ValidateTest>();
-            var validateTestService = new ValidateTestService(validateTestRepository);
-            var validateTest = new ValidateTest
-            {
-                StringProperty = String.Empty,
-                DecimalProperty = 2M
-            };
+            var options = new DbContextOptionsBuilder<ValidateTestContext>()
+                .UseInMemoryDatabase(databaseName: "RulesException")
+                .Options;
 
-            Assert.Throws<RulesException<ValidateTest>>(
-                () =>
+            // Run the test against one instance of the context
+            using (var context = new ValidateTestContext(options))
+            {
+                var validateTestRepository = new ValidateTestRepository(context);
+                var validateTestService = new ValidateTestService(validateTestRepository);
+                var validateTest = new ValidateTest
                 {
-                    try
+                    StringProperty = String.Empty,
+                    DecimalProperty = 2M,
+                    ValidateTestArrayItems = { new ValidateTestArrayItem(), new ValidateTestArrayItem() }
+                };
+
+
+                Assert.Throws<RulesException<ValidateTest>>(
+                    () =>
                     {
-                        validateTestService.ValidateModel(validateTest);
-                    }
-                    catch (RulesException ex)
-                    {
-                        Assert.Equal(2, ex.Errors.Count);
-                        throw;
-                    }
-                });
+                        try
+                        {
+                            validateTestService.ValidateModel(validateTest);
+                        }
+                        catch (RulesException ex)
+                        {
+                            var errorDict = ex.GetErrorDictionary();
+                            Assert.Equal(2, errorDict.Count);
+                            Assert.True(errorDict.ContainsKey("DecimalProperty"));
+                            Assert.True(errorDict.ContainsKey("StringProperty"));
+                            Assert.Equal(2, ex.Errors.Count);
+                            throw;
+                        }
+                    });
+            }
+
         }
-        */
     }
 }
