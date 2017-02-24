@@ -38,33 +38,13 @@ namespace Arragro.Common.RulesExceptions
         {
             ErrorMessage = rulesException.ToString();
             Errors = rulesException.GetErrorDictionary();
-            ErrorMessages.AddRange(rulesException.GetErrorMessages());
+            ErrorMessages.AddRange(rulesException.ErrorMessages);
         }
 
         public RulesExceptionDto(IEnumerable<RulesException> rulesExceptions) : this()
         {
             processDictionaries(rulesExceptions);
-            rulesExceptions.SelectMany(x => x.GetErrorMessages()).ToList().ForEach(x => ErrorMessages.Add(x));
-        }
-    }
-
-    public class RulesExceptionDto<TModel> : RulesExceptionDto
-    {
-        public RulesExceptionDto() : base() { }
-
-        public RulesExceptionDto(RulesException<TModel> rulesException) : this()
-        {
-            ErrorMessage = rulesException.ToString();
-            Errors = rulesException.GetErrorDictionary();
-            ErrorMessages.AddRange(rulesException.GetErrorMessages());
-        }
-
-        public RulesExceptionDto(IEnumerable<RulesException<TModel>> rulesExceptions) : this()
-        {
-            foreach (var rulesException in rulesExceptions)
-                ErrorMessage += rulesException.ToString();
-            processDictionaries(rulesExceptions);
-            rulesExceptions.SelectMany(x => x.GetErrorMessages()).ToList().ForEach(x => ErrorMessages.Add(x));
+            rulesExceptions.SelectMany(x => x.ErrorMessages).ToList().ForEach(x => ErrorMessages.Add(x));
         }
     }
 }

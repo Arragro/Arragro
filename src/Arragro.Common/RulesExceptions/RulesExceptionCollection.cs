@@ -22,24 +22,4 @@ namespace Arragro.Common.RulesExceptions
             return new RulesExceptionDto(RulesExceptions);
         }
     }
-
-    public class RulesExceptionCollection<TModel> : Exception
-    {
-        public List<RulesException<TModel>> RulesExceptions { get; protected set; }
-
-        public RulesExceptionCollection() : base()
-        {
-            RulesExceptions = new List<RulesException<TModel>>();
-        }
-
-        public RulesExceptionCollection(IEnumerable<RulesException<TModel>> rulesExceptions) : this()
-        {
-            RulesExceptions.AddRange(rulesExceptions);
-        }
-
-        public RulesExceptionDto<TModel> GetRulesExceptionDto()
-        {
-            return new RulesExceptionDto<TModel>(RulesExceptions);
-        }
-    }
 }

@@ -10,6 +10,7 @@ namespace Arragro.Common.RulesExceptions
     public class RulesException : Exception
     {
         public readonly IList<RuleViolation> Errors = new List<RuleViolation>();
+        public readonly IList<string> ErrorMessages = new List<string>();
         protected readonly Expression<Func<object, object>> ThisObject = x => x;
         protected readonly Type Type;
 
@@ -28,6 +29,8 @@ namespace Arragro.Common.RulesExceptions
         public void ErrorForModel(string message)
         {
             Errors.Add(new RuleViolation { Property = ThisObject, Message = message });
+
+            ErrorMessages.Add(message);
         }
 
         protected void Add(RulesException errors)
@@ -35,32 +38,11 @@ namespace Arragro.Common.RulesExceptions
             foreach (var error in errors.Errors)
             {
                 Errors.Add(error);
+                if (string.IsNullOrEmpty(error.Prefix))
+                    ErrorMessages.Add($"{error.GetPropertyPath()} - {error.Message}");
+                else
+                    ErrorMessages.Add($"{error.Prefix} - {error.GetPropertyPath()} - {error.Message}");
             }
-        }
-
-        private IEnumerable<string> ThisErrors()
-        {
-            var output = new List<string>();
-
-            var thisErrors = Errors.Where(x => x.Property == ThisObject);
-
-            if (thisErrors.Any())
-            {
-                foreach (var thisError in thisErrors)
-                {
-                    if (string.IsNullOrEmpty(thisError.Prefix))
-                        output.Add(string.Format("{0}", thisError.Message));
-                    else
-                        output.Add(string.Format("{0} - {1}", thisError.Prefix, thisError.Message));
-                }
-            }
-
-            return output;
-        }
-
-        public IEnumerable<string> GetErrorMessages()
-        {
-            return ThisErrors();
         }
 
         public override string Message
@@ -96,10 +78,9 @@ namespace Arragro.Common.RulesExceptions
         public override string ToString()
         {
             var output = new StringBuilder();
-            var errors = ThisErrors();
 
             output.AppendLine("The following error is against this object:\n");
-            foreach (var error in errors)
+            foreach (var error in Errors)
                 output.AppendLine($"\t{error}");
 
             return output.ToString();
@@ -121,7 +102,13 @@ namespace Arragro.Common.RulesExceptions
             Expression<Func<TModel, TProperty>> property,
             string message, string prefix = "")
         {
-            Errors.Add(new RuleViolation { Property = property, Message = message, Prefix = prefix });
+            var propertyError = new RuleViolation { Property = property, Message = message, Prefix = prefix };
+            Errors.Add(propertyError);
+
+            if (string.IsNullOrEmpty(prefix))
+                ErrorMessages.Add($"{propertyError.GetPropertyPath()} - {propertyError.Message}");
+            else
+                ErrorMessages.Add($"{propertyError.Prefix} - {propertyError.GetPropertyPath()} - {propertyError.Message}");
         }
 
         public void ErrorsForValidationResults(IEnumerable<ValidationResult> validationResults)
@@ -144,51 +131,6 @@ namespace Arragro.Common.RulesExceptions
                         });
                 }
             }
-        }
-
-        private IEnumerable<string> ThisErrors()
-        {
-            var output = new List<string>();
-
-            var propertyErrors = Errors.Where(x => x.Property != ThisObject);
-
-            foreach (var propertyError in propertyErrors)
-            {
-                if (string.IsNullOrEmpty(propertyError.Prefix))
-                    output.Add(string.Format("{0} - {1}", propertyError.GetPropertyPath(), propertyError.Message));
-                else
-                    output.Add(string.Format("{0} - {1} - {2}", propertyError.Prefix, propertyError.GetPropertyPath(), propertyError.Message));
-            }
-
-            return output;
-        }
-
-        public new IEnumerable<string> GetErrorMessages()
-        {
-            var baseErrors = base.GetErrorMessages().ToList();
-            baseErrors.AddRange(this.ThisErrors());
-            return baseErrors;
-        }
-
-        public override string ToString()
-        {
-            var output = new StringBuilder();
-
-            var thisErrors = base.ToString();
-            var errors = ThisErrors();
-
-            if (errors.Any())
-            {
-                if (!string.IsNullOrEmpty(thisErrors))
-                    output.AppendLine("\n\nWith errors against the following properties:\n");
-                else
-                    output.AppendLine("The following property errors are against this object:\n");
-
-                foreach (var error in errors)
-                    output.AppendLine($"\t{error}");
-            }
-
-            return thisErrors + output.ToString();
         }
 
         public new void ThrowException()

@@ -112,7 +112,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
                         }
                         catch (RulesException<ValidateTest> ex)
                         {
-                            var rulesExceptionDto = new RulesExceptionDto<ValidateTest>(ex);
+                            var rulesExceptionDto = new RulesExceptionDto(ex);
                             System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(rulesExceptionDto, Formatting.Indented));
                             var errorDict = ex.GetErrorDictionary();
                             Assert.Equal(2, errorDict.Count);
