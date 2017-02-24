@@ -21,10 +21,7 @@ namespace Arragro.Common.BusinessRules
 
         protected IList<ValidationResult> ValidateModelProperties(TModel model)
         {
-            var validationResults = new List<ValidationResult>();
-            var validationContext = new ValidationContext(model, null, null);
-            Validator.TryValidateObject(model, validationContext, validationResults, true);
-            return validationResults;
+            return model.ValidateModelProperties();
         }
 
         public readonly RulesException<TModel> RulesException;
