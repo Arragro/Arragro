@@ -7,6 +7,71 @@ using System.Text;
 
 namespace Arragro.Common.BusinessRules
 {
+    public class RulesExceptionDto
+    {
+        public string ErrorMessage { get; protected set; }
+        public IDictionary<string, object> Errors { get; protected set; }
+        public List<string> ErrorMessages { get; protected set; }
+
+        public RulesExceptionDto()
+        {
+            Errors = new Dictionary<string, object>();
+            ErrorMessages = new List<string>();
+        }
+
+        protected void processDictionaries(IEnumerable<RulesException> rulesExceptions)
+        {
+            foreach (var rulesException in rulesExceptions)
+            {
+                var errors = rulesException.GetErrorDictionary().ToList();
+                foreach (var error in errors)
+                {
+                    object value;
+                    if (Errors.TryGetValue(error.Key, out value))
+                    {
+                        Errors.Add($"{rulesException.TypeName}.{error.Key}", error.Value);
+                    }
+                    else
+                        Errors.Add(error.Key, error.Value);
+                }
+
+            }
+        }
+
+        public RulesExceptionDto(RulesException rulesException) : this()
+        {
+            ErrorMessage = rulesException.ToString();
+            Errors = rulesException.GetErrorDictionary();
+            ErrorMessages.AddRange(rulesException.GetErrorMessages());
+        }
+
+        public RulesExceptionDto(IEnumerable<RulesException> rulesExceptions) : this()
+        {
+            processDictionaries(rulesExceptions);
+            rulesExceptions.SelectMany(x => x.GetErrorMessages()).ToList().ForEach(x => ErrorMessages.Add(x));
+        }
+    }
+
+    public class RulesExceptionDto<TModel> : RulesExceptionDto
+    {
+        public RulesExceptionDto() : base() { }
+
+        public RulesExceptionDto(RulesException<TModel> rulesException) : this()
+        {
+            ErrorMessage = rulesException.ToString();
+            Errors = rulesException.GetErrorDictionary();
+            ErrorMessages.AddRange(rulesException.GetErrorMessages());
+        }
+
+        public RulesExceptionDto(IEnumerable<RulesException<TModel>> rulesExceptions) : this()
+        {
+            foreach (var rulesException in rulesExceptions)
+                ErrorMessage += rulesException.ToString();
+            processDictionaries(rulesExceptions);
+            rulesExceptions.SelectMany(x => x.GetErrorMessages()).ToList().ForEach(x => ErrorMessages.Add(x));
+        }
+    }
+
     /*
      * Taken from Steve Sanderson's Pro ASP.Net MVC 2 book around validation
      * of models, doesn't seem to be in the later books.
@@ -16,7 +81,7 @@ namespace Arragro.Common.BusinessRules
      * is an extension in another Arragro library that will copy these issues
      * to the ModelState.  ModelState is still validated by the MVC framework.
      */
-     
+
     public class RuleViolation
     {
         public string Prefix { get; set; }
@@ -51,14 +116,14 @@ namespace Arragro.Common.BusinessRules
             return string.Join(".", stack.ToArray());
         }
 
-        public KeyValuePair<string, string> KeyValuePair
+        public KeyValuePair<string, object> KeyValuePair
         {
             get
             {
                 if (string.IsNullOrEmpty(Prefix))
-                    return new KeyValuePair<string, string>(GetPropertyPath(), Message);
+                    return new KeyValuePair<string, object>(GetPropertyPath(), Message);
                 else
-                    return new KeyValuePair<string, string>(string.Format("{0}.{1}", Prefix, GetPropertyPath()), Message);
+                    return new KeyValuePair<string, object>(string.Format("{0}.{1}", Prefix, GetPropertyPath()), Message);
             }
         }
     }
@@ -67,8 +132,14 @@ namespace Arragro.Common.BusinessRules
     {
         public readonly IList<RuleViolation> Errors = new List<RuleViolation>();
         protected readonly Expression<Func<object, object>> ThisObject = x => x;
+        protected readonly Type Type;
 
-        protected RulesException() { }
+        protected RulesException(Type type)
+        {
+            Type = type;
+        }
+
+        public string TypeName { get { return Type.Name; } }
 
         protected RulesException(string message, RulesException rulesException) : base(message)
         {
@@ -88,25 +159,29 @@ namespace Arragro.Common.BusinessRules
             }
         }
 
-        protected string ThisErrors()
+        private IEnumerable<string> ThisErrors()
         {
-            var output = new StringBuilder();
+            var output = new List<string>();
 
             var thisErrors = Errors.Where(x => x.Property == ThisObject);
 
             if (thisErrors.Any())
             {
-                output.AppendLine("The following error is against this object:\n");
                 foreach (var thisError in thisErrors)
                 {
                     if (string.IsNullOrEmpty(thisError.Prefix))
-                        output.AppendLine(string.Format("\t{0}", thisError.Message));
+                        output.Add(string.Format("{0}", thisError.Message));
                     else
-                        output.AppendLine(string.Format("\t{0} - {1}", thisError.Prefix, thisError.Message));
+                        output.Add(string.Format("{0} - {1}", thisError.Prefix, thisError.Message));
                 }
             }
 
-            return output.ToString();
+            return output;
+        }
+        
+        public IEnumerable<string> GetErrorMessages()
+        {
+            return ThisErrors();
         }
 
         public override string Message
@@ -119,7 +194,7 @@ namespace Arragro.Common.BusinessRules
                 if (thisErrors.Any())
                 {
                     output.AppendLine("\n\n====================================");
-                    output.AppendLine(ThisErrors());
+                    output.AppendLine(ToString());
                 }
                 return output.ToString();
             }
@@ -133,7 +208,7 @@ namespace Arragro.Common.BusinessRules
             if (thisErrors.Any())
             {
                 output.AppendLine("\n\n====================================");
-                output.AppendLine(ThisErrors());
+                output.AppendLine(ToString());
 
                 throw new RulesException(output.ToString(), this);
             }
@@ -142,19 +217,24 @@ namespace Arragro.Common.BusinessRules
         public override string ToString()
         {
             var output = new StringBuilder();
+            var errors = ThisErrors();
 
-            return ThisErrors();
+            output.AppendLine("The following error is against this object:\n");
+            foreach (var error in errors)
+                output.AppendLine($"\t{error}");
+
+            return output.ToString();
         }
 
-        public IDictionary<string, string> GetErrorDictionary()
+        public IDictionary<string, object> GetErrorDictionary()
         {
-            return new Dictionary<string, string>(Errors.Select(x => x.KeyValuePair).ToDictionary(x => x.Key, x => x.Value));
+            return new Dictionary<string, object>(Errors.Select(x => x.KeyValuePair).ToDictionary(x => x.Key, x => x.Value));
         }
     }
     
     public class RulesException<TModel> : RulesException
     {
-        public RulesException() : base() { }
+        public RulesException() : base(typeof(TModel)) { }
 
         private RulesException(string message, RulesException rulesException) : base(message, rulesException) { }
 
@@ -187,26 +267,46 @@ namespace Arragro.Common.BusinessRules
             }
         }
 
+        private IEnumerable<string> ThisErrors()
+        {
+            var output = new List<string>();
+
+            var propertyErrors = Errors.Where(x => x.Property != ThisObject);
+
+            foreach (var propertyError in propertyErrors)
+            {
+                if (string.IsNullOrEmpty(propertyError.Prefix))
+                    output.Add(string.Format("{0} - {1}", propertyError.GetPropertyPath(), propertyError.Message));
+                else
+                    output.Add(string.Format("{0} - {1} - {2}", propertyError.Prefix, propertyError.GetPropertyPath(), propertyError.Message));
+            }
+
+            return output;
+        }
+
+        public new IEnumerable<string> GetErrorMessages()
+        {
+            var baseErrors = base.GetErrorMessages().ToList();
+            baseErrors.AddRange(this.ThisErrors());
+            return baseErrors;
+        }
+
         public override string ToString()
         {
             var output = new StringBuilder();
 
-            var thisErrors = ThisErrors();
-            var propertyErrors = Errors.Where(x => x.Property != ThisObject);
+            var thisErrors = base.ToString();
+            var errors = ThisErrors();
 
-            if (propertyErrors.Any())
+            if (errors.Any())
             {
                 if (!string.IsNullOrEmpty(thisErrors))
                     output.AppendLine("\n\nWith errors against the following properties:\n");
                 else
                     output.AppendLine("The following property errors are against this object:\n");
-                foreach (var propertyError in propertyErrors)
-                {
-                    if (string.IsNullOrEmpty(propertyError.Prefix))
-                        output.AppendLine(string.Format("\t{0} - {1}", propertyError.GetPropertyPath(), propertyError.Message));
-                    else
-                        output.AppendLine(string.Format("\t{0} - {1} - {2}", propertyError.Prefix, propertyError.GetPropertyPath(), propertyError.Message));
-                }
+
+                foreach (var error in errors)
+                    output.AppendLine($"\t{error}");
             }
 
             return thisErrors + output.ToString();
