@@ -1,4 +1,5 @@
 ﻿using Arragro.Common.Repository;
+using Arragro.Common.RulesExceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

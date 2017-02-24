@@ -1,5 +1,6 @@
 ﻿using Arragro.Common.BusinessRules;
 using Arragro.Common.Repository;
+using Arragro.Common.RulesExceptions;
 using Arragro.Common.ServiceBase;
 using Arragro.TestBase;
 using System;

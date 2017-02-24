@@ -5,129 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Arragro.Common.BusinessRules
+namespace Arragro.Common.RulesExceptions
 {
-    public class RulesExceptionDto
-    {
-        public string ErrorMessage { get; protected set; }
-        public IDictionary<string, object> Errors { get; protected set; }
-        public List<string> ErrorMessages { get; protected set; }
-
-        public RulesExceptionDto()
-        {
-            Errors = new Dictionary<string, object>();
-            ErrorMessages = new List<string>();
-        }
-
-        protected void processDictionaries(IEnumerable<RulesException> rulesExceptions)
-        {
-            foreach (var rulesException in rulesExceptions)
-            {
-                var errors = rulesException.GetErrorDictionary().ToList();
-                foreach (var error in errors)
-                {
-                    object value;
-                    if (Errors.TryGetValue(error.Key, out value))
-                    {
-                        Errors.Add($"{rulesException.TypeName}.{error.Key}", error.Value);
-                    }
-                    else
-                        Errors.Add(error.Key, error.Value);
-                }
-
-            }
-        }
-
-        public RulesExceptionDto(RulesException rulesException) : this()
-        {
-            ErrorMessage = rulesException.ToString();
-            Errors = rulesException.GetErrorDictionary();
-            ErrorMessages.AddRange(rulesException.GetErrorMessages());
-        }
-
-        public RulesExceptionDto(IEnumerable<RulesException> rulesExceptions) : this()
-        {
-            processDictionaries(rulesExceptions);
-            rulesExceptions.SelectMany(x => x.GetErrorMessages()).ToList().ForEach(x => ErrorMessages.Add(x));
-        }
-    }
-
-    public class RulesExceptionDto<TModel> : RulesExceptionDto
-    {
-        public RulesExceptionDto() : base() { }
-
-        public RulesExceptionDto(RulesException<TModel> rulesException) : this()
-        {
-            ErrorMessage = rulesException.ToString();
-            Errors = rulesException.GetErrorDictionary();
-            ErrorMessages.AddRange(rulesException.GetErrorMessages());
-        }
-
-        public RulesExceptionDto(IEnumerable<RulesException<TModel>> rulesExceptions) : this()
-        {
-            foreach (var rulesException in rulesExceptions)
-                ErrorMessage += rulesException.ToString();
-            processDictionaries(rulesExceptions);
-            rulesExceptions.SelectMany(x => x.GetErrorMessages()).ToList().ForEach(x => ErrorMessages.Add(x));
-        }
-    }
-
-    /*
-     * Taken from Steve Sanderson's Pro ASP.Net MVC 2 book around validation
-     * of models, doesn't seem to be in the later books.
-     * It is useful for the validation to occur at the service layer (business
-     * layer) as the service layer then doesn't depend on MVC at all.  It will
-     * throw the RulesException IF there are any error.  When it does, there
-     * is an extension in another Arragro library that will copy these issues
-     * to the ModelState.  ModelState is still validated by the MVC framework.
-     */
-
-    public class RuleViolation
-    {
-        public string Prefix { get; set; }
-
-        public LambdaExpression Property { get; set; }
-
-        public string Message { get; set; }
-
-        public string GetPropertyPath()
-        {
-            var stack = new Stack<string>();
-
-            MemberExpression me;
-            switch (Property.Body.NodeType)
-            {
-                case ExpressionType.Convert:
-                case ExpressionType.ConvertChecked:
-                    var ue = Property.Body as UnaryExpression;
-                    me = ((ue != null) ? ue.Operand : null) as MemberExpression;
-                    break;
-                default:
-                    me = Property.Body as MemberExpression;
-                    break;
-            }
-
-            while (me != null)
-            {
-                stack.Push(me.Member.Name);
-                me = me.Expression as MemberExpression;
-            }
-
-            return string.Join(".", stack.ToArray());
-        }
-
-        public KeyValuePair<string, object> KeyValuePair
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Prefix))
-                    return new KeyValuePair<string, object>(GetPropertyPath(), Message);
-                else
-                    return new KeyValuePair<string, object>(string.Format("{0}.{1}", Prefix, GetPropertyPath()), Message);
-            }
-        }
-    }
-    
     public class RulesException : Exception
     {
         public readonly IList<RuleViolation> Errors = new List<RuleViolation>();
@@ -178,7 +57,7 @@ namespace Arragro.Common.BusinessRules
 
             return output;
         }
-        
+
         public IEnumerable<string> GetErrorMessages()
         {
             return ThisErrors();
@@ -231,7 +110,7 @@ namespace Arragro.Common.BusinessRules
             return new Dictionary<string, object>(Errors.Select(x => x.KeyValuePair).ToDictionary(x => x.Key, x => x.Value));
         }
     }
-    
+
     public class RulesException<TModel> : RulesException
     {
         public RulesException() : base(typeof(TModel)) { }

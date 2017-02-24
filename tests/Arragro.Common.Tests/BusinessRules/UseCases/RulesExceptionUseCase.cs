@@ -1,4 +1,5 @@
 ﻿using Arragro.Common.BusinessRules;
+using Arragro.Common.RulesExceptions;
 using System.Linq;
 using Xunit;
 
