@@ -109,8 +109,10 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
                         {
                             validateTestService.ValidateModel(validateTest);
                         }
-                        catch (RulesException ex)
+                        catch (RulesException<ValidateTest> ex)
                         {
+                            var rulesExceptionDto = new RulesExceptionDto<ValidateTest>(ex);
+                            System.Diagnostics.Debug.WriteLine(JsonConvert.SerializeObject(rulesExceptionDto, Formatting.Indented));
                             var errorDict = ex.GetErrorDictionary();
                             Assert.Equal(2, errorDict.Count);
                             Assert.True(errorDict.ContainsKey("DecimalProperty"));
