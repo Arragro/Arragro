@@ -24,7 +24,7 @@ namespace Arragro.Common.ServiceBase
 
         public void ValidateModel(TModel model)
         {
-            RulesException.ErrorsForValidationResults(ValidateModelProperties(model));
+            ValidateModelPropertiesAndBuildRulesException(model);
             ValidateModelRules(model);
 
             if (RulesException.Errors.Any()) throw RulesException;
