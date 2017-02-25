@@ -72,5 +72,13 @@ namespace Arragro.Common.Helpers
                             equals.ToArray());
             return whereClause;
         }
+
+        public static IList<ValidationResult> ValidateModelProperties<TModel>(this TModel model)
+        {
+            var validationResults = new List<ValidationResult>();
+            var validationContext = new ValidationContext(model, null, null);
+            Validator.TryValidateObject(model, validationContext, validationResults, true);
+            return validationResults;
+        }
     }
 }
