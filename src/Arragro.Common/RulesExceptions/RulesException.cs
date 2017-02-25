@@ -81,7 +81,7 @@ namespace Arragro.Common.RulesExceptions
 
             output.AppendLine("The following error is against this object:\n");
             foreach (var error in Errors)
-                output.AppendLine($"\t{error}");
+                output.AppendLine($"\t{error.Message}");
 
             return output.ToString();
         }
