@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Arragro.Common.RulesExceptions
 {
     public class RulesExceptionDto
     {
-        public string ErrorMessage { get; protected set; }
         public IDictionary<string, object> Errors { get; protected set; }
         public List<string> ErrorMessages { get; protected set; }
 
@@ -36,9 +36,19 @@ namespace Arragro.Common.RulesExceptions
 
         public RulesExceptionDto(RulesException rulesException) : this()
         {
-            ErrorMessage = rulesException.ToString();
             Errors = rulesException.GetErrorDictionary();
             ErrorMessages.AddRange(rulesException.ErrorMessages);
+        }
+
+        public override string ToString()
+        {
+            var output = new StringBuilder();
+
+            output.AppendLine("The following error is against this object:\n");
+            foreach (var error in ErrorMessages)
+                output.AppendLine($"\t{error}");
+
+            return output.ToString();
         }
 
         public RulesExceptionDto(IEnumerable<RulesException> rulesExceptions) : this()
