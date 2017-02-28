@@ -5,8 +5,9 @@ namespace Arragro.EntityFrameworkCore
 {
     public class BaseContext : DbContext, IBaseContext
     {
-        public BaseContext(DbContextOptions options) : base(options)
+        public BaseContext(DbContextOptions options, QueryTrackingBehavior queryTrackingBehaviour = QueryTrackingBehavior.NoTracking) : base(options)
         {
+            ChangeTracker.QueryTrackingBehavior = queryTrackingBehaviour;
         }
 
         public new DbSet<TEntity> Set<TEntity>() where TEntity : class
