@@ -30,9 +30,7 @@ namespace ArragroCMS.Data.EFCore
         public TEntity Find(params object[] ids)
         {
             // Turn the HashTable of models into a Queryable
-            var query = DbSet.AsQueryable();
-            var whereClause = ObjectHelpers.GetFindWhereClause(query, ids);
-            return query.Provider.CreateQuery<TEntity>(whereClause).SingleOrDefault();
+            return DbSet.Find(ids);
         }
 
         public TEntity Delete(params object[] ids)

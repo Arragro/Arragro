@@ -47,5 +47,22 @@ namespace Arragro.EntityFrameworkCore.IntegrationTests
                 Assert.NotSame(default(int), modelFoo);
             }
         }
+
+        [Fact]
+        public void composite_foo_tests()
+        {
+            using (var context = new FooContext(optionsBuilder.Options))
+            {
+                var compositeFooRepository = new CompositeFooRepository(context);
+                var compositeFooService = new CompositeFooService(compositeFooRepository);
+
+                var modelFoo = compositeFooService.InsertOrUpdate(new CompositeFoo { Name = "Test 1" }, true);
+                compositeFooService.SaveChanges();
+
+                modelFoo = compositeFooService.Find(0, 0);
+
+                Assert.NotNull(modelFoo);
+            }
+        }
     }
 }

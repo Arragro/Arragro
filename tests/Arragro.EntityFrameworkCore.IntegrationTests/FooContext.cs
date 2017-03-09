@@ -10,10 +10,14 @@ namespace Arragro.EntityFrameworkCore.IntegrationTests
         }
 
         public DbSet<ModelFoo> ModelFoos { get; set; }
+        public DbSet<CompositeFoo> CompositeFoo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<CompositeFoo>()
+                .HasKey(x => new { x.Id, x.SecondId });
         }
     }
 }
