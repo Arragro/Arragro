@@ -152,8 +152,8 @@
   - dotnet build "tests\Arragro.Common.Tests" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
   - dotnet build "tests\Arragro.EntityFrameworkCore.IntegrationTests" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
   after_build:
-    - dotnet pack "src\Arragro.Common" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts
-    - dotnet pack "src\Arragro.EntityFrameworkCore" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts
+    - dotnet pack "src\Arragro.Common" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o %APPVEYOR_BUILD_FOLDER%\artifacts
+    - dotnet pack "src\Arragro.EntityFrameworkCore" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o %APPVEYOR_BUILD_FOLDER%\artifacts
   test_script:
   - dotnet test "tests\Arragro.Common.Tests" -c %CONFIGURATION%
   - dotnet test "tests\Arragro.EntityFrameworkCore.IntegrationTests" -c %CONFIGURATION%
