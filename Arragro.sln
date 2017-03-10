@@ -1,14 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D8E-F79C-4F5D-B055-DDDE4C07723D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		change-log.md = change-log.md
-		global.json = global.json
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
@@ -27,15 +26,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{89DA5227-7BAF-4778-9166-81D6D7FB7224}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.Common", "src\Arragro.Common\Arragro.Common.xproj", "{0C03CE78-3696-42E6-8E59-900592D4E583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.Common", "src\Arragro.Common\Arragro.Common.csproj", "{0C03CE78-3696-42E6-8E59-900592D4E583}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.Common.Tests", "tests\Arragro.Common.Tests\Arragro.Common.Tests.xproj", "{8D810B49-AF4F-4A7E-B24F-A94457D6ED6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.Common.Tests", "tests\Arragro.Common.Tests\Arragro.Common.Tests.csproj", "{8D810B49-AF4F-4A7E-B24F-A94457D6ED6A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.TestBase", "tests\Arragro.TestBase\Arragro.TestBase.xproj", "{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.TestBase", "tests\Arragro.TestBase\Arragro.TestBase.csproj", "{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.EntityFrameworkCore", "src\Arragro.EntityFrameworkCore\Arragro.EntityFrameworkCore.xproj", "{3B45A7B5-1378-4422-BC33-A09F96D0F431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.EntityFrameworkCore", "src\Arragro.EntityFrameworkCore\Arragro.EntityFrameworkCore.csproj", "{3B45A7B5-1378-4422-BC33-A09F96D0F431}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Arragro.EntityFrameworkCore.IntegrationTests", "tests\Arragro.EntityFrameworkCore.IntegrationTests\Arragro.EntityFrameworkCore.IntegrationTests.xproj", "{2562E513-BDF0-4FA6-B518-B36428AF2FFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.EntityFrameworkCore.IntegrationTests", "tests\Arragro.EntityFrameworkCore.IntegrationTests\Arragro.EntityFrameworkCore.IntegrationTests.csproj", "{2562E513-BDF0-4FA6-B518-B36428AF2FFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
