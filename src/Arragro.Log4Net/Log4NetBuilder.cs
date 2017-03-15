@@ -20,7 +20,7 @@ namespace Arragro.Log4Net
             patternLayout.ActivateOptions();
 
             var roller = new RollingFileAppender();
-            roller.File = $@"{appPath}\{fileName}";
+            roller.File = appPath + "\\" + fileName;
             roller.AppendToFile = true;
             roller.RollingStyle = RollingFileAppender.RollingMode.Size;
             roller.MaxSizeRollBackups = 5;
