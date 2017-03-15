@@ -16,7 +16,7 @@ namespace Arragro.Log4Net
         {
             var patternLayout = new CsvPatternLayout();
             patternLayout.Header = "DateTime,Thread,Level,Logger,Message\r\n";
-            patternLayout.ConversionPattern = "date{M/d/yyyy H:mm:ss.fff}%newfield[%thread]%newfield%level%newfield%logger%newfield%message%endrow";
+            patternLayout.ConversionPattern = "%date{M/d/yyyy H:mm:ss.fff}%newfield[%thread]%newfield%level%newfield%logger%newfield%message%endrow";
             patternLayout.ActivateOptions();
 
             var roller = new RollingFileAppender();
