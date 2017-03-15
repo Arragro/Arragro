@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Common", "Arragro.Common\Arragro.Common.csproj", "{DF7F6387-5D1A-4E62-B136-0C85E4175E1B}"
 EndProject
@@ -58,6 +58,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.TestBase", "..\tests\Arragro.TestBase\Arragro.TestBase.csproj", "{E2B0E486-599A-4996-92CA-6A8F258CBE79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.SendGrid", "Arragro.SendGrid\Arragro.SendGrid.csproj", "{43C06F71-61EF-47FB-B476-D1A8E4F14B8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Log4Net.Tests", "..\tests\Arragro.Log4Net.Tests\Arragro.Log4Net.Tests.csproj", "{7F42945F-F3E9-40FF-84DE-BFD89C1A0878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,6 +135,10 @@ Global
 		{43C06F71-61EF-47FB-B476-D1A8E4F14B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C06F71-61EF-47FB-B476-D1A8E4F14B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C06F71-61EF-47FB-B476-D1A8E4F14B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F42945F-F3E9-40FF-84DE-BFD89C1A0878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F42945F-F3E9-40FF-84DE-BFD89C1A0878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F42945F-F3E9-40FF-84DE-BFD89C1A0878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F42945F-F3E9-40FF-84DE-BFD89C1A0878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,5 +149,6 @@ Global
 		{C980C73A-5897-4CEA-9433-A921106F71F4} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{ABF94BBD-B164-47C5-80D2-1CECECC184C5} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{E2B0E486-599A-4996-92CA-6A8F258CBE79} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
+		{7F42945F-F3E9-40FF-84DE-BFD89C1A0878} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 	EndGlobalSection
 EndGlobal

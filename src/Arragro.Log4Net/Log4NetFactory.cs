@@ -7,7 +7,7 @@ namespace Arragro.Log4Net
     public class Log4NetFactory : ILogFactory
     {
         public Log4NetFactory() : this(false) { }
-
+        
         public Log4NetFactory(bool configureLog4Net)
         {
             if (configureLog4Net)

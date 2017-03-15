@@ -1,4 +1,5 @@
 ﻿using Arragro.Common.Logging;
+using log4net.Repository;
 using System;
 
 namespace Arragro.Log4Net
@@ -6,7 +7,7 @@ namespace Arragro.Log4Net
     public class Log4NetLogger : ILog
     {
         private readonly log4net.ILog _log;
-
+        
         public Log4NetLogger(string typeName)
         {
             _log = log4net.LogManager.GetLogger(typeName);

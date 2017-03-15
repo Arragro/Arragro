@@ -51,13 +51,16 @@
     <Compile Include="CSV\NewFieldConverter.cs" />
     <Compile Include="Helpers\LogProcessingHelper.cs" />
     <Compile Include="Helpers\TimeToComplete.cs" />
+    <Compile Include="Log4NetBuilder.cs" />
     <Compile Include="Log4NetFactory.cs" />
     <Compile Include="Log4NetLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Arragro.Log4Net.nuspec" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arragro.Common\Arragro.Common.csproj">
