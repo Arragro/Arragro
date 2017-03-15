@@ -10,8 +10,8 @@
   services:
     - mssql2014
   nuget:
-    account_feed: true
-    project_feed: true
+    account_feed: false
+    project_feed: false
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -59,8 +59,8 @@
   services:
     - mssql2014
   nuget:
-    account_feed: true
-    project_feed: true
+    account_feed: false
+    project_feed: false
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -109,8 +109,8 @@
   services:
     - mssql2014
   nuget:
-    account_feed: true
-    project_feed: true
+    account_feed: false
+    project_feed: false
   assembly_info:
     patch: true
     file: AssemblyInfo.*
