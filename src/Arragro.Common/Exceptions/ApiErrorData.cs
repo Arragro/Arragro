@@ -7,6 +7,9 @@ namespace Arragro.Common.Exceptions
         public string Message { get; set; }
         public Dictionary<string, IEnumerable<string>> ModelState { get; set; }
 
-        public ApiErrorData() { }
+        public ApiErrorData()
+        {
+            ModelState = new Dictionary<string, IEnumerable<string>>();
+        }
     }
 }
