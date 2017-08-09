@@ -1,4 +1,7 @@
 ﻿using Arragro.Common.Repository;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Arragro.EntityFrameworkCore.Interfaces
 {
@@ -6,5 +9,7 @@ namespace Arragro.EntityFrameworkCore.Interfaces
         IRepository<TEntity> where TEntity : class
     {
         IBaseContext BaseContext { get; }
+        
+        IQueryable<TEntity> AllNoTracking(Expression<Func<TEntity, bool>> whereClause);
     }
 }

@@ -9,5 +9,7 @@ namespace Arragro.EntityFrameworkCore.Interfaces
     {
         IQueryable<TEntity> AllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);
         IQueryable<TEntity> AllIncluding(Expression<Func<TEntity, bool>> whereClause, params Expression<Func<TEntity, object>>[] includeProperties);
+        IQueryable<TEntity> AllIncludingNoTracking(Expression<Func<TEntity, bool>> whereClause, params Expression<Func<TEntity, object>>[] includeProperties);
+        IQueryable<TEntity> AllIncludingNoTracking(params Expression<Func<TEntity, object>>[] includeProperties);
     }
 }

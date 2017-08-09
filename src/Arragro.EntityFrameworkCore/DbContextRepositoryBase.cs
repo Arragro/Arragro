@@ -1,5 +1,4 @@
-﻿using Arragro.Common.Helpers;
-using Arragro.Common.Repository;
+﻿using Arragro.Common.Repository;
 using Arragro.EntityFrameworkCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -10,7 +9,7 @@ using System.Linq.Expressions;
 namespace Arragro.EntityFrameworkCore
 {
     public class DbContextRepositoryBase<TEntity> :
-        IDbContextRepositoryBase<TEntity>,
+        IDbContextRepositoryBase<TEntity>, 
         IRepository<TEntity> where TEntity : class
     {
         private readonly IBaseContext _baseContext;
