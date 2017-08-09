@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ArragroCMS.Data.EFCore
+namespace Arragro.EntityFrameworkCore
 {
     public class DbContextRepositoryBase<TEntity> :
         IDbContextRepositoryBase<TEntity>,

@@ -1,5 +1,5 @@
 ﻿using Arragro.TestBase;
-using ArragroCMS.Data.EFCore;
+using Arragro.EntityFrameworkCore;
 
 namespace Arragro.EntityFrameworkCore.IntegrationTests
 {
