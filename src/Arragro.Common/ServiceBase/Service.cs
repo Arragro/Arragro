@@ -1,10 +1,11 @@
 ﻿using Arragro.Common.BusinessRules;
+using Arragro.Common.Interfaces;
 using Arragro.Common.Repository;
 using System.Linq;
 
 namespace Arragro.Common.ServiceBase
 {
-    public abstract class Service<TRepository, TModel> : BusinessRulesBase<TRepository, TModel>
+    public abstract class Service<TRepository, TModel> : BusinessRulesBase<TRepository, TModel>, IService<TModel> 
         where TModel : class
         where TRepository : IRepository<TModel>
     {

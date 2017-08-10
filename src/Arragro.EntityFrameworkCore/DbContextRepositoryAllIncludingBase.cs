@@ -9,7 +9,7 @@ namespace Arragro.EntityFrameworkCore
 {
     public class DbContextRepositoryAllIncludingBase<TEntity> :
         DbContextRepositoryBase<TEntity>,
-        IDbContextAllIncludingRepositoryBase<TEntity>,
+        Interfaces.IDbContextRepositoryAllIncludingBase<TEntity>,
         IRepository<TEntity> where TEntity : class
     {
         public DbContextRepositoryAllIncludingBase(IBaseContext baseContext) : base(baseContext) { }

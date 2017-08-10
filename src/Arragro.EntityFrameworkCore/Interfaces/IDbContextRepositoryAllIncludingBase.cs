@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Arragro.EntityFrameworkCore.Interfaces
 {
-    public interface IDbContextAllIncludingRepositoryBase<TEntity> :
+    public interface IDbContextRepositoryAllIncludingBase<TEntity> :
         IDbContextRepositoryBase<TEntity> where TEntity : class
     {
         IQueryable<TEntity> AllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);
