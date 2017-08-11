@@ -6,7 +6,7 @@ namespace Arragro.Common.RulesExceptions
 {
     public class RulesBase<TModel> where TModel : class
     {
-        public readonly RulesException<TModel> RulesException;
+        protected readonly RulesException<TModel> RulesException;
 
         public RulesBase()
         {
