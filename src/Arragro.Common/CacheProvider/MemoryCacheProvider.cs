@@ -19,7 +19,7 @@ namespace Arragro.Common.CacheProvider
 
         private bool CheckAndClearExpiredData(ICacheItem cacheItem)
         {
-            var now = DateTime.Now;
+            var now = DateTime.UtcNow;
             var output = false;
             if (cacheItem.Expiration < now)
             {
@@ -32,7 +32,7 @@ namespace Arragro.Common.CacheProvider
 
         private void PurgeExpiredCacheItems(string excludeKey)
         {
-            var now = DateTime.Now;
+            var now = DateTime.UtcNow;
             var cacheItems = Dictionary.Values.Where(x => ((ICacheItem)x).Expiration < now).Select(x => ((ICacheItem)x));
             foreach(var cacheItem in cacheItems)
             {

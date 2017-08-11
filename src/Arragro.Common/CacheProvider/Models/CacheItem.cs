@@ -6,7 +6,7 @@ namespace Arragro.Common.CacheProvider
     {
         protected DateTime? GetExpiration(TimeSpan? cacheDuration)
         {
-            DateTime? expiration = DateTime.Now;
+            DateTime? expiration = DateTime.UtcNow;
 
             if (cacheDuration.HasValue)
                 expiration = expiration.Value.Add(cacheDuration.Value);
