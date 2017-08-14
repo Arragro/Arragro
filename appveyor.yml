@@ -162,7 +162,7 @@
     publish_nuget_symbols: true
     include_nuget_references: true
     verbosity: minimal
-  test: off
+  test: on
   artifacts:  
     - path: .\artifacts\**\*.nupkg
       name: NuGet
