@@ -37,7 +37,7 @@ namespace Arragro.TestBase
                 RulesException.ErrorFor(c => c.Name, RangeLengthName);
         }
 
-        public override ModelFoo InsertOrUpdate(ModelFoo model)
+        protected override ModelFoo InsertOrUpdate(ModelFoo model)
         {
             model = Repository.InsertOrUpdate(model, model.Id == default(int));
             return model;

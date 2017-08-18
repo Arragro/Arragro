@@ -37,7 +37,7 @@ namespace Arragro.TestBase
                 RulesException.ErrorFor(c => c.Name, RangeLengthName);
         }
 
-        public override CompositeFoo InsertOrUpdate(CompositeFoo compositeFoo)
+        protected override CompositeFoo InsertOrUpdate(CompositeFoo compositeFoo)
         {
             compositeFoo = Repository.InsertOrUpdate(compositeFoo, compositeFoo.Id == default(int) && compositeFoo.SecondId == default(int));
             return compositeFoo;

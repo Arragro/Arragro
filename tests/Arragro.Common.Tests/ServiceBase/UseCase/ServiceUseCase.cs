@@ -42,7 +42,7 @@ namespace Arragro.Common.Tests.Services.UseCase
 
             modelFooService = new ModelFooService(modelFooRepository);
 
-            modelFooService.InsertOrUpdate(new ModelFoo { Name = "Test" });
+            modelFooService.ValidateAndInsertOrUpdate(new ModelFoo { Name = "Test" });
             Assert.Equal(3, ModelFoos.Count);
             Assert.Equal("Test", ModelFoos[2].Name);
         }

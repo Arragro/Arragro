@@ -21,7 +21,7 @@ namespace Arragro.Common.ServiceBase
 
         protected abstract void ValidateModelRules(TModel model);
 
-        public abstract TModel InsertOrUpdate(TModel model);
+        protected abstract TModel InsertOrUpdate(TModel model);
 
         public void ValidateModel(TModel model)
         {

@@ -41,7 +41,7 @@ namespace Arragro.EntityFrameworkCore.IntegrationTests
                 var modelFooRepository = new ModelFooRepository(context);
                 var modelFooService = new ModelFooService(modelFooRepository);
 
-                var modelFoo = modelFooService.InsertOrUpdate(new ModelFoo { Name = "Test 1" });
+                var modelFoo = modelFooService.ValidateAndInsertOrUpdate(new ModelFoo { Name = "Test 1" });
                 modelFooService.SaveChanges();
 
                 Assert.NotSame(default(int), modelFoo);

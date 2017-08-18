@@ -3,7 +3,6 @@
     public interface IService<TModel> where TModel : class
     {
         TModel Find(params object[] ids);
-        TModel InsertOrUpdate(TModel model);
         TModel ValidateAndInsertOrUpdate(TModel model);
         void ValidateModel(TModel model);
         int SaveChanges();

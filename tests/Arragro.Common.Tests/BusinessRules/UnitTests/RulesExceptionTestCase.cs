@@ -51,7 +51,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
             {
             }
 
-            public override ValidateTest InsertOrUpdate(ValidateTest model)
+            protected override ValidateTest InsertOrUpdate(ValidateTest model)
             {
                 throw new System.NotImplementedException();
             }
