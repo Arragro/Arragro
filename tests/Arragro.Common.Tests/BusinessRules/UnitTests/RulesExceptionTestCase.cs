@@ -16,6 +16,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
     {
         public class ValidateTestArrayItem
         {
+            public int ValidateTestArrayItemId { get; set; }
             [Required]
             public string ArrayItemValue { get; set; }
         }

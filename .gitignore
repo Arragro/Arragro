@@ -158,3 +158,5 @@ $RECYCLE.BIN/
 
 .vs/restore.dg
 project.lock.json
+
+/.vs

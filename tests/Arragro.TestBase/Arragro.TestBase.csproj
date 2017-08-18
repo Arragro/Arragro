@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <VersionPrefix>2.0.0</VersionPrefix>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>Arragro.TestBase</AssemblyName>
     <PackageId>Arragro.TestBase</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -17,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.7.1" />
+    <PackageReference Include="Moq" Version="4.7.99" />
   </ItemGroup>
 
 </Project>
