@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Arragro.Providers.InMemoryStorageProvider
 {
-    public class InMemoryStorageProvider<FolderIdType, FileIdType> : IStorageProvider<FolderIdType, FileIdType>
+    public class StorageProvider<FolderIdType, FileIdType> : IStorageProvider<FolderIdType, FileIdType>
     {
-        private readonly IImageProcessor _imageService;
+        private readonly IImageProvider _imageService;
         private readonly InMemoryFileProvider _provider;
 
-        public InMemoryStorageProvider(
-            IImageProcessor imageProcessor)
+        public StorageProvider(
+            IImageProvider imageProcessor)
         {
             _imageService = imageProcessor;
             _provider = new InMemoryFileProvider();

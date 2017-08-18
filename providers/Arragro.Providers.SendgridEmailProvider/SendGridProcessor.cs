@@ -5,11 +5,11 @@ using SendGrid.Helpers.Mail;
 
 namespace Arragro.Providers.SendgridEmailProvider
 {
-    public class SendgridEmailProvider : IEmailProcessor
+    public class EmailProvider : IEmailProvider
     {
         private readonly SmtpSettings _smtpSettings;
 
-        public SendgridEmailProvider(SmtpSettings smtpSettings)
+        public EmailProvider(SmtpSettings smtpSettings)
         {
             _smtpSettings = smtpSettings;
         }

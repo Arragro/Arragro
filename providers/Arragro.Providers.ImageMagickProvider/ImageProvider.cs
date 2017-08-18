@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Arragro.Providers.ImageMagickProvider
 {
-    public class ImageMagickProvider : IImageProcessor
+    public class ImageProvider : IImageProvider
     {
         class ProcessImageResult
         {

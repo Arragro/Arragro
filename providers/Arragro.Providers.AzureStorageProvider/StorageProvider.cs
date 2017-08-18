@@ -8,28 +8,28 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Arragro.Providers.StorageProvider
+namespace Arragro.Providers.AzureStorageProvider
 {
-    public class AzureStorageProvider<FolderIdType, FileIdType> : IStorageProvider<FolderIdType, FileIdType>
+    public class StorageProvider<FolderIdType, FileIdType> : IStorageProvider<FolderIdType, FileIdType>
     {
-        private readonly IImageProcessor _imageService;
+        private readonly IImageProvider _imageService;
 
-        private readonly ConnectionStrings _connectionStrings;
-        private readonly WebCacheSettings _cacheSettings;
+        private readonly string _storageConnectionString;
+        private readonly int _cacheControlMaxAge;
 
         private readonly CloudStorageAccount _account;
         private readonly CloudBlobClient _client;
         private readonly CloudBlobContainer _assetContainer;
 
-        public AzureStorageProvider(
-            IImageProcessor imageProcessor,
-            WebCacheSettings cacheSettings,
-            ConnectionStrings connectionStrings)
+        public StorageProvider(
+            IImageProvider imageProcessor,
+            string storageConnectionString,
+            int cacheControlMaxAge = 0)
         {
             _imageService = imageProcessor;
-            _connectionStrings = connectionStrings;
-            _cacheSettings = cacheSettings;
-             _account = CloudStorageAccount.Parse(_connectionStrings.StorageConnection);
+            _storageConnectionString = storageConnectionString;
+            _cacheControlMaxAge = cacheControlMaxAge;
+             _account = CloudStorageAccount.Parse(_storageConnectionString);
             _client = _account.CreateCloudBlobClient();
 
             _assetContainer = _client.GetContainerReference("assets");
@@ -207,24 +207,23 @@ namespace Arragro.Providers.StorageProvider
         public async Task ResetCacheControl()
         {
             var blobs = await _assetContainer.ListBlobsSegmentedAsync((BlobContinuationToken)null);
-            var cacheSettings = _cacheSettings;
             do
             {
                 foreach (IListBlobItem blob in blobs.Results)
                 {
-                    await this.ResetCloudBlobCacheControl(blob, cacheSettings);
+                    await this.ResetCloudBlobCacheControl(blob, _cacheControlMaxAge);
                 }
                 blobs = await this._assetContainer.ListBlobsSegmentedAsync(blobs.ContinuationToken);
             }
             while (blobs.ContinuationToken != null);
         }
 
-        private async Task ResetCloudBlobCacheControl(IListBlobItem blobItem, WebCacheSettings _cacheSettings)
+        private async Task ResetCloudBlobCacheControl(IListBlobItem blobItem, int cacheControlMaxAge)
         {
             if (blobItem is CloudBlockBlob)
             {
                 CloudBlockBlob blob = blobItem as CloudBlockBlob;
-                blob.Properties.CacheControl = string.Format("public, max-age={0}", _cacheSettings.CacheControlMaxAge);
+                blob.Properties.CacheControl = string.Format("public, max-age={0}", cacheControlMaxAge);
                 await blob.SetPropertiesAsync();
             }
             else
@@ -235,7 +234,7 @@ namespace Arragro.Providers.StorageProvider
                 {
                     foreach (IListBlobItem blob in blobs.Results)
                     {
-                        await ResetCloudBlobCacheControl(blob, _cacheSettings);
+                        await ResetCloudBlobCacheControl(blob, cacheControlMaxAge);
                     }
                     blobs = await this._assetContainer.ListBlobsSegmentedAsync(blobDirectory.Prefix, blobs.ContinuationToken);
                 }

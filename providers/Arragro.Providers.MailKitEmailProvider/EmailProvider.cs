@@ -5,11 +5,11 @@ using Arragro.Common.Models;
 
 namespace Arragro.Providers.MailKitEmailProvider
 {
-    public class MailKitProvider : IEmailProcessor
+    public class EmailProvider : IEmailProvider
     {
         private readonly SmtpSettings _smtpSettings;
 
-        public MailKitProvider(SmtpSettings smtpSettings)
+        public EmailProvider(SmtpSettings smtpSettings)
         {
             _smtpSettings = smtpSettings;
         }
