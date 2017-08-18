@@ -160,3 +160,4 @@ $RECYCLE.BIN/
 project.lock.json
 
 /.vs
+/packages

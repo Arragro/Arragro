@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D8E-F79C-4F5D-B055-DDDE4C07723D}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,13 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{20754D
 		appveyor.yml = appveyor.yml
 		change-log.md = change-log.md
 		Readme.md = Readme.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5F0404D1-7F74-4860-B1C7-A0B58894D7BE}"
-	ProjectSection(SolutionItems) = preProject
-		src\Arragro\.nuget\NuGet.Config = src\Arragro\.nuget\NuGet.Config
-		src\Arragro\.nuget\NuGet.exe = src\Arragro\.nuget\NuGet.exe
-		src\Arragro\.nuget\NuGet.targets = src\Arragro\.nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{673557DB-A079-469B-AD62-BE5741F71865}"
@@ -35,6 +28,18 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.EntityFrameworkCore", "src\Arragro.EntityFrameworkCore\Arragro.EntityFrameworkCore.csproj", "{3B45A7B5-1378-4422-BC33-A09F96D0F431}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.EntityFrameworkCore.IntegrationTests", "tests\Arragro.EntityFrameworkCore.IntegrationTests\Arragro.EntityFrameworkCore.IntegrationTests.csproj", "{2562E513-BDF0-4FA6-B518-B36428AF2FFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "providers", "providers", "{D03E4D11-AE80-42FB-9896-DAC7C09F5146}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.Providers.ImageMagickProvider", "providers\Arragro.Providers.ImageMagickProvider\Arragro.Providers.ImageMagickProvider.csproj", "{CB95C43F-F322-4D73-B72A-EB5EB9746328}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.Providers.InMemoryStorageProvider", "providers\Arragro.Providers.InMemoryStorageProvider\Arragro.Providers.InMemoryStorageProvider.csproj", "{A9ABD117-5FFF-4EFB-80C4-386A7C75BF06}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.Providers.SendgridEmailProvider", "providers\Arragro.Providers.SendgridEmailProvider\Arragro.Providers.SendgridEmailProvider.csproj", "{5A7DC02A-032E-4A6A-A071-C134ABC3CFC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.Providers.StorageProvider", "providers\Arragro.Providers.StorageProvider\Arragro.Providers.StorageProvider.csproj", "{5DDC17FE-520E-45C3-AB9E-929F4C25DEE7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arragro.Providers.MailKitEmailProvider", "providers\Arragro.Providers.MailKitEmailProvider\Arragro.Providers.MailKitEmailProvider.csproj", "{BAAE6A96-6477-435C-A72C-EF834C78FDEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +67,26 @@ Global
 		{2562E513-BDF0-4FA6-B518-B36428AF2FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2562E513-BDF0-4FA6-B518-B36428AF2FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2562E513-BDF0-4FA6-B518-B36428AF2FFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB95C43F-F322-4D73-B72A-EB5EB9746328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB95C43F-F322-4D73-B72A-EB5EB9746328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB95C43F-F322-4D73-B72A-EB5EB9746328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB95C43F-F322-4D73-B72A-EB5EB9746328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9ABD117-5FFF-4EFB-80C4-386A7C75BF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9ABD117-5FFF-4EFB-80C4-386A7C75BF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9ABD117-5FFF-4EFB-80C4-386A7C75BF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9ABD117-5FFF-4EFB-80C4-386A7C75BF06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7DC02A-032E-4A6A-A071-C134ABC3CFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7DC02A-032E-4A6A-A071-C134ABC3CFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7DC02A-032E-4A6A-A071-C134ABC3CFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7DC02A-032E-4A6A-A071-C134ABC3CFC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DDC17FE-520E-45C3-AB9E-929F4C25DEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DDC17FE-520E-45C3-AB9E-929F4C25DEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DDC17FE-520E-45C3-AB9E-929F4C25DEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DDC17FE-520E-45C3-AB9E-929F4C25DEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAAE6A96-6477-435C-A72C-EF834C78FDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAAE6A96-6477-435C-A72C-EF834C78FDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAAE6A96-6477-435C-A72C-EF834C78FDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAAE6A96-6477-435C-A72C-EF834C78FDEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +95,13 @@ Global
 		{8D810B49-AF4F-4A7E-B24F-A94457D6ED6A} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{2CDDDAE4-3D27-4A18-AAEF-27C7F06E17E8} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{2562E513-BDF0-4FA6-B518-B36428AF2FFC} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
+		{CB95C43F-F322-4D73-B72A-EB5EB9746328} = {D03E4D11-AE80-42FB-9896-DAC7C09F5146}
+		{A9ABD117-5FFF-4EFB-80C4-386A7C75BF06} = {D03E4D11-AE80-42FB-9896-DAC7C09F5146}
+		{5A7DC02A-032E-4A6A-A071-C134ABC3CFC4} = {D03E4D11-AE80-42FB-9896-DAC7C09F5146}
+		{5DDC17FE-520E-45C3-AB9E-929F4C25DEE7} = {D03E4D11-AE80-42FB-9896-DAC7C09F5146}
+		{BAAE6A96-6477-435C-A72C-EF834C78FDEF} = {D03E4D11-AE80-42FB-9896-DAC7C09F5146}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05912F50-9A13-43DC-8B8C-1265FFEA0F3E}
 	EndGlobalSection
 EndGlobal
