@@ -1,10 +1,8 @@
-﻿using Arragro.Common.BusinessRules;
-using Arragro.Common.Repository;
+﻿using Arragro.Common.Repository;
 using Arragro.Common.RulesExceptions;
 using Arragro.Common.ServiceBase;
 using Arragro.EntityFrameworkCore;
 using Arragro.EntityFrameworkCore.Interfaces;
-using Arragro.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
