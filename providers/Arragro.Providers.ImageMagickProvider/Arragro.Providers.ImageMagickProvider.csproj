@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Arragro.Providers.ImageProceesor</AssemblyName>
-    <PackageId>Arragro.Providers.ImageProceesor</PackageId>
-    <Title>Arragro Providers Image Processor</Title>
+    <AssemblyName>Arragro.Providers.ImageMagickProvider</AssemblyName>
+    <PackageId>Arragro.Providers.ImageMagickProvider</PackageId>
+    <Title>Arragro Providers Image Magick Processor</Title>
     <Copyright>Arragro 2017 (c) Arragro Ltd.</Copyright>
-    <Description>Arragro provider for image manipulation.</Description>
+    <Description>Arragro provider for image manipulation vis ImageMagick.</Description>
     <PackageTags>dotnet core netstandard imagemagick</PackageTags>
     <Authors>Mike Jewell,Reece Beardsall</Authors>
     <PackageIconUrl>http://cdn.arragro.com/public/images/favicon.ico</PackageIconUrl>

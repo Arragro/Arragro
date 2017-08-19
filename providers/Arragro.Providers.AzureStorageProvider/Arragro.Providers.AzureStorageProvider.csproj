@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Arragro.Providers.StorageProvider</AssemblyName>
-    <PackageId>Arragro.Providers.StorageProvider</PackageId>
-    <Title>Arragro Providers Storage Provider</Title>
+    <AssemblyName>Arragro.Providers.AzureStorageProvider</AssemblyName>
+    <PackageId>Arragro.Providers.AzureStorageProvider</PackageId>
+    <Title>Arragro Providers Azure Storage Provider</Title>
     <Copyright>Arragro 2017 (c) Arragro Ltd.</Copyright>
     <Description>Arragro provider for Storage (Azure).</Description>
     <PackageTags>dotnet core netstandard storage azure</PackageTags>
