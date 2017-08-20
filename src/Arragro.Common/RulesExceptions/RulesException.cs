@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Arragro.Common.RulesExceptions
@@ -18,12 +19,27 @@ namespace Arragro.Common.RulesExceptions
         {
             Type = type;
         }
-
+        
         public string TypeName { get { return Type.Name; } }
+        public string ErrorMessage { get; set; }
 
         protected RulesException(string message, RulesException rulesException) : base(message)
         {
             Errors = rulesException.Errors;
+        }
+
+        public RulesException(SerializationInfo info, StreamingContext context)
+        {
+            if (info != null)
+                ErrorMessage = info.GetString("ErrorMessage");
+        }
+        
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            if (info != null)
+                info.AddValue("ErrorMessage", this.ErrorMessage);
         }
 
         public void ErrorForModel(string message)
@@ -95,6 +111,10 @@ namespace Arragro.Common.RulesExceptions
     public class RulesException<TModel> : RulesException
     {
         public RulesException() : base(typeof(TModel)) { }
+
+        public RulesException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
 
         private RulesException(string message, RulesException rulesException) : base(message, rulesException) { }
 

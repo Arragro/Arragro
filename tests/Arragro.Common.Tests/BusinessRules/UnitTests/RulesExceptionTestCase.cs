@@ -86,7 +86,7 @@ namespace Arragro.Common.Tests.BusinessRules.UnitTests
         public void RulesException_validation_converts_successfully()
         {
             var options = new DbContextOptionsBuilder<ValidateTestContext>()
-                .UseInMemoryDatabase(databaseName: "RulesException")
+                .UseInMemoryDatabase("RulesException")
                 .Options;
 
             // Run the test against one instance of the context
