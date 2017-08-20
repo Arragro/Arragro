@@ -31,7 +31,19 @@ namespace Arragro.Common.RulesExceptions
         public RulesException(SerializationInfo info, StreamingContext context)
         {
             if (info != null)
-                ErrorMessage = info.GetString("ErrorMessage");
+            {
+                foreach (SerializationEntry entry in info)
+                {
+                    switch (entry.Name)
+                    {
+                        case "ErrorMessage":
+                            ErrorMessage = info.GetString("ErrorMessage");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
         
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
