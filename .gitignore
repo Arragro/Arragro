@@ -161,3 +161,5 @@ project.lock.json
 
 /.vs
 /packages
+
+**/*/sqlite3

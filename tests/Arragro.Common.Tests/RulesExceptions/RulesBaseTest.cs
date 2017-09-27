@@ -26,5 +26,15 @@ namespace Arragro.Common.Tests.RulesExceptions
 
             var obj = JsonConvert.DeserializeObject(json, type);
         }
+
+        [Fact]
+        public void rules_base()
+        {
+            var foo = new RulesException<Foo>();
+            foo.ErrorForModel("Test1");
+            foo.ErrorForModel("Test2");
+
+            Assert.Equal(foo.ErrorMessages.Count, 2);
+        }
     }
 }
