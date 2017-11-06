@@ -142,6 +142,9 @@
       redis-64\tools\redis-server.exe --service-install;
 
       redis-64\tools\redis-server.exe --service-start;
+
+      C:\Tools\nuget\nuget.exe update -self
+
   build_script:
   - dotnet build "src\Arragro.Common" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
   - dotnet build "src\Arragro.EntityFrameworkCore" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
@@ -161,11 +164,6 @@
   test_script:
   - dotnet test "tests\Arragro.Common.Tests\Arragro.Common.Tests.csproj" -c %CONFIGURATION%
   - dotnet test "tests\Arragro.EntityFrameworkCore.IntegrationTests\Arragro.EntityFrameworkCore.IntegrationTests.csproj" -c %CONFIGURATION%
-  build:
-    publish_nuget: true
-    publish_nuget_symbols: true
-    include_nuget_references: true
-    verbosity: minimal
   test: on
   artifacts:  
     - path: .\artifacts\**\*.nupkg
