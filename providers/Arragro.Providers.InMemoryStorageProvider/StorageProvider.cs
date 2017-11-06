@@ -154,7 +154,7 @@ namespace Arragro.Providers.InMemoryStorageProvider
             }
         }
 
-        public async Task Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
+        public async Task<Uri> Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
         {
             await Task.Run(() =>
             {
@@ -164,6 +164,7 @@ namespace Arragro.Providers.InMemoryStorageProvider
                     _provider.Directory.AddFile($"/{folderId}", new MemoryStreamFileInfo(ms, Encoding.UTF8, fileId.ToString()));
                 }
             });
+            return new Uri($"http://inmemoryfileprovider.com/{folderId}/{fileId}");
         }
 
         private async Task Upload(FolderIdType folderId, FileIdType fileId, int quality, int width, byte[] data, string mimeType)
@@ -178,7 +179,7 @@ namespace Arragro.Providers.InMemoryStorageProvider
             });
         }
 
-        public async Task UploadThumbnail(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
+        public async Task<Uri> UploadThumbnail(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
         {
             await Task.Run(() =>
             {
@@ -188,6 +189,8 @@ namespace Arragro.Providers.InMemoryStorageProvider
                     _provider.Directory.AddFile($"/{folderId}/thumbnails", new MemoryStreamFileInfo(ms, Encoding.UTF8, fileId.ToString()));
                 }
             });
+
+            return new Uri($"http://inmemoryfileprovider.com/{folderId}/thumbnails/{fileId}");
         }
 
         private async Task DeleteBlob(Uri uri)
