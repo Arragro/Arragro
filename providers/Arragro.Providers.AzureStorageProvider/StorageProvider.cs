@@ -94,13 +94,14 @@ namespace Arragro.Providers.AzureStorageProvider
             return null;
         }
 
-        public async Task Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
+        public async Task<Uri> Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
         {
             var blob = _assetContainer.GetBlockBlobReference($"{folderId}/{fileId}");
             using (var stream = new MemoryStream(data))
             {
                 blob.Properties.ContentType = mimeType;
                 await blob.UploadFromStreamAsync(stream);
+                return blob.Uri;
             }
         }
 
@@ -242,13 +243,14 @@ namespace Arragro.Providers.AzureStorageProvider
             }
         }
 
-        public async Task UploadThumbnail(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
+        public async Task<Uri> UploadThumbnail(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
         {
             var blob = _assetContainer.GetBlockBlobReference($"{folderId}/thumbnails/{fileId}");
             using (var stream = new MemoryStream(data))
             {
                 blob.Properties.ContentType = mimeType;
                 await blob.UploadFromStreamAsync(stream);
+                return blob.Uri;
             }
         }
     }
