@@ -191,7 +191,7 @@ namespace Arragro.Providers.AzureStorageProvider
             return await Get(folderId, fileId);
         }
 
-        public async Task<Tuple<Uri, Uri>> CreateImageFromExistingImage(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, int quality, int width, bool asProgressive = true)
+        public async Task<CreateImageFromImageResult> CreateImageFromExistingImage(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, int quality, int width, bool asProgressive = true)
         {
             var fileName =$"{folderId}/{fileId}";
             var newFileName =$"{folderId}/{newFileId}";
@@ -214,8 +214,13 @@ namespace Arragro.Providers.AzureStorageProvider
                     var imageResult = _imageService.GetImage(bytes, quality, width, asProgressive);
                     var uri = await Upload(folderId, newFileId, imageResult.Bytes, "");
                     var thumbnailUri = await Upload(folderId, newFileId, imageResult.Bytes, "", true);
-                    
-                    return new Tuple<Uri, Uri>(uri, thumbnailUri);
+
+                    return new CreateImageFromImageResult
+                    {
+                        ImageProcessResult = imageResult,
+                        Uri = uri,
+                        ThumbnailUri = thumbnailUri
+                    };
                 }
                 else
                 {

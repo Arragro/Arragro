@@ -157,7 +157,7 @@ namespace Arragro.Providers.InMemoryStorageProvider
             return await Get(folderId, fileId);
         }
 
-        public async Task<Tuple<Uri, Uri>> CreateImageFromExistingImage(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, int quality, int width, bool asProgressive)
+        public async Task<CreateImageFromImageResult> CreateImageFromExistingImage(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, int quality, int width, bool asProgressive)
         {
             var fileName = $"{folderId}/{fileId}";
             var fileInfo = _provider.GetFileInfo(fileName);
@@ -167,7 +167,12 @@ namespace Arragro.Providers.InMemoryStorageProvider
             var uri = await Upload(folderId, newFileId, imageResult.Bytes, "");
             var thumbnailUri = await Upload(folderId, newFileId, imageResult.Bytes, "", true);
 
-            return new Tuple<Uri, Uri>(uri, thumbnailUri);
+            return new CreateImageFromImageResult
+            {
+                ImageProcessResult = imageResult,
+                Uri = uri,
+                ThumbnailUri = thumbnailUri
+            };
         }
 
         public async Task<Uri> Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType, bool thumbnail = false)
