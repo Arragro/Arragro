@@ -74,7 +74,7 @@ namespace Arragro.Providers.AzureStorageProvider
             await DeleteFolder($"{folderId}");
         }
 
-        public async Task<Uri> Get(FolderIdType folderId, FileIdType fileId)
+        private async Task<Uri> Get(FolderIdType folderId, FileIdType fileId)
         {
             var key = $"{ASSET_ASSETKEY}{folderId}:{fileId}";
             var cacheItem = CacheProviderManager.CacheProvider.Get<Uri>(key);
@@ -94,7 +94,7 @@ namespace Arragro.Providers.AzureStorageProvider
             return null;
         }
 
-        public async Task<Uri> Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
+        private async Task<Uri> Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
         {
             var blob = _assetContainer.GetBlockBlobReference($"{folderId}/{fileId}");
             using (var stream = new MemoryStream(data))
@@ -118,7 +118,7 @@ namespace Arragro.Providers.AzureStorageProvider
             }
         }
 
-        public async Task<Uri> GetImageThumbnail(FolderIdType folderId, FileIdType fileId)
+        private async Task<Uri> GetImageThumbnail(FolderIdType folderId, FileIdType fileId)
         {
             var key = $"{THUMBNAIL_ASSETKEY}{folderId}:{fileId}";
             var cacheItem = CacheProviderManager.CacheProvider.Get<Uri>(key);
@@ -132,76 +132,6 @@ namespace Arragro.Providers.AzureStorageProvider
                 return blob.Uri;
             }
 
-            return null;
-        }
-
-        public async Task<Uri> GetImage(FolderIdType folderId, FileIdType fileId, int quality, int width, bool canCreate = false)
-        {
-            var key = $"{ASSET_QUALITY_WIDTH_ASSETKEY}{folderId}:{fileId}:{quality}:{width}";
-            var cacheItem = CacheProviderManager.CacheProvider.Get<Uri>(key);
-            if (cacheItem != null && cacheItem.Item != null)
-                return cacheItem.Item;
-
-            var qualityPath = $"/{quality}/";
-            var widthPath = $"{width}";
-
-            CloudBlob blob;
-
-            blob = _assetContainer.GetBlobReference($"{folderId}/{fileId}{qualityPath}{widthPath}");
-
-            if (await blob.ExistsAsync())
-                return blob.Uri;
-            else
-                if (await GetImageBytes(folderId, fileId, quality, width, canCreate) != null)
-                return blob.Uri;
-            return null;
-        }
-
-        private async Task<byte[]> GetImageBytes(FolderIdType folderId, FileIdType fileId, int quality, int width, bool canCreate = false)
-        {
-            var qualityPath = $"/{quality}/";
-            var widthPath = $"{width}";
-
-            CloudBlob blob;
-
-            blob = _assetContainer.GetBlobReference($"{folderId}/{fileId}{qualityPath}{widthPath}");
-
-            if (!await blob.ExistsAsync())
-            {
-                if (canCreate)
-                {
-                    return await CreateImageIfNotExists(folderId, fileId, quality, width);
-                }
-                return null;
-            }
-
-            using (var ms = new MemoryStream())
-            {
-                await blob.DownloadRangeToStreamAsync(ms, null, null);
-                return ms.ToArray();
-            }
-        }
-
-        private async Task<byte[]> CreateImageIfNotExists(FolderIdType folderId, FileIdType fileId, int quality, int width)
-        {
-            var originalBlob = _assetContainer.GetBlobReference($"{folderId}/{fileId}");
-
-            if (await originalBlob.ExistsAsync())
-            {
-                using (var ms = new MemoryStream())
-                {
-                    await originalBlob.DownloadRangeToStreamAsync(ms, null, null);
-                    var data = ms.ToArray();
-
-                    ImageProcessResult result = _imageService.GetImage(data, width, quality, true);
-
-                    if (result != null)
-                    {
-                        await Upload(folderId, fileId, quality, width, result.Bytes, originalBlob.Properties.ContentType);
-                        return result.Bytes;
-                    }
-                }
-            }
             return null;
         }
 
@@ -243,7 +173,7 @@ namespace Arragro.Providers.AzureStorageProvider
             }
         }
 
-        public async Task<Uri> UploadThumbnail(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
+        private async Task<Uri> UploadThumbnail(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType)
         {
             var blob = _assetContainer.GetBlockBlobReference($"{folderId}/thumbnails/{fileId}");
             using (var stream = new MemoryStream(data))
@@ -252,6 +182,76 @@ namespace Arragro.Providers.AzureStorageProvider
                 await blob.UploadFromStreamAsync(stream);
                 return blob.Uri;
             }
+        }
+
+        public async Task<Uri> Get(FolderIdType folderId, FileIdType fileId, bool thumbnail = false)
+        {
+            if (thumbnail)
+                return await GetImageThumbnail(folderId, fileId);
+            return await Get(folderId, fileId);
+        }
+
+        public async Task<Tuple<Uri, Uri>> CreateImageFromExistingImage(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, int quality, int width, bool asProgressive = true)
+        {
+            var fileName =$"{folderId}/{fileId}";
+            var newFileName =$"{folderId}/{newFileId}";
+
+            var blobCopy = _assetContainer.GetBlobReference(newFileName);
+            if (!await blobCopy.ExistsAsync())
+            {
+                CloudBlockBlob blob = _assetContainer.GetBlockBlobReference(fileName);
+
+                if (await blob.ExistsAsync())
+                {
+                    byte[] bytes;
+
+                    using (var ms = new MemoryStream())
+                    {
+                        await blob.DownloadToStreamAsync(ms);
+                        bytes = ms.ToArray();
+                    }
+
+                    var imageResult = _imageService.GetImage(bytes, quality, width, asProgressive);
+                    var uri = await Upload(folderId, newFileId, imageResult.Bytes, "");
+                    var thumbnailUri = await Upload(folderId, newFileId, imageResult.Bytes, "", true);
+                    
+                    return new Tuple<Uri, Uri>(uri, thumbnailUri);
+                }
+                else
+                {
+                    throw new Exception($"The blob you want to copy doesn't exists - {blob.Uri}!");
+                }
+            }
+            else
+            {
+                throw new Exception($"The blob you want to create already exists - {blobCopy.Uri}!");
+            }
+        }
+
+        public async Task<Uri> Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType, bool thumbnail = false)
+        {
+            if (thumbnail)
+                return await UploadThumbnail(folderId, fileId, data, mimeType);
+            return await Upload(folderId, fileId, data, mimeType);
+        }
+
+        public async Task<Uri> Rename(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, bool thumbnail = false)
+        {
+            var fileName = thumbnail ? $"{folderId}/thumbnails/{fileId}" : $"{folderId}/{fileId}";
+            var newFileName = thumbnail ? $"{folderId}/thumbnails/{newFileId}" : $"{folderId}/{newFileId}";
+
+            var blobCopy = _assetContainer.GetBlobReference(newFileName);
+            if (!await blobCopy.ExistsAsync())
+            {
+                CloudBlockBlob blob = _assetContainer.GetBlockBlobReference(fileName);
+
+                if (await blob.ExistsAsync())
+                {
+                    await blobCopy.StartCopyAsync(blob.Uri);
+                    await blob.DeleteIfExistsAsync();
+                }
+            }
+            return blobCopy.Uri;
         }
     }
 }

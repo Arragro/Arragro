@@ -2,6 +2,7 @@
 using Arragro.Common.Interfaces.Providers;
 using Arragro.Common.Models;
 using Arragro.Providers.InMemoryStorageProvider.FileInfo;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.IO;
 using System.Text;
@@ -63,7 +64,7 @@ namespace Arragro.Providers.InMemoryStorageProvider
             await DeleteFolder($"/{folderId}");
         }
 
-        public async Task<Uri> Get(FolderIdType folderId, FileIdType fileId)
+        private async Task<Uri> Get(FolderIdType folderId, FileIdType fileId)
         {
             var fileInfo = _provider.GetFileInfo($"/{folderId}/{fileId}");
 
@@ -78,7 +79,7 @@ namespace Arragro.Providers.InMemoryStorageProvider
             return null;
         }
 
-        public async Task<Uri> GetImageThumbnail(FolderIdType folderId, FileIdType fileId)
+        private async Task<Uri> GetImageThumbnail(FolderIdType folderId, FileIdType fileId)
         {
             var fileInfo = _provider.GetFileInfo($"/{folderId}/thumbnails/{fileId}");
 
@@ -93,63 +94,11 @@ namespace Arragro.Providers.InMemoryStorageProvider
             return null;
         }
 
-        public async Task<Uri> GetImage(FolderIdType folderId, FileIdType fileId, int quality, int width, bool canCreate = false)
+        private async Task<byte[]> GetImageBytes(IFileInfo fileInfo)
         {
-            var qualityPath = $"/{quality}/";
-            var widthPath = $"{width}";
-
-            var fileInfo = _provider.GetFileInfo($"/{folderId}/{fileId}{qualityPath}{widthPath}");
-
-            if (fileInfo != null)
-                return new Uri($"http://inmemoryfileprovider.com/{folderId}/{fileId}");
-            else
-                if (await GetImageBytes(folderId, fileId, quality, width, canCreate) != null)
-                    return new Uri($"http://inmemoryfileprovider.com/{folderId}/{fileId}");
-            return null;
-        }
-
-        private async Task<byte[]> CreateImageIfNotExists(FolderIdType folderId, FileIdType fileId, int quality, int width)
-        {
-            var fileInfo = _provider.GetFileInfo($"/{folderId}/{fileId}");
-
-            if (fileInfo == null)
-            {
-                using (var ms = new MemoryStream()) 
-                {
-                    await fileInfo.CreateReadStream().CopyToAsync(ms);
-                    var data = ms.ToArray();
-
-                    ImageProcessResult result = _imageService.GetImage(data, width, quality, true);
-
-                    if (result != null)
-                    {
-                        await Upload(folderId, fileId, quality, width, result.Bytes, "mime-type-in-memory");
-                        return result.Bytes;
-                    }
-                }
-            }
-            return null;
-        }
-
-        private async Task<byte[]> GetImageBytes(FolderIdType folderId, FileIdType fileId, int quality, int width, bool canCreate = false)
-        {
-            var qualityPath = $"/{quality}/";
-            var widthPath = $"{width}";
-                        
-            var fileInfo = _provider.GetFileInfo($"{folderId}/{fileId}{qualityPath}{widthPath}");
-
-            if (fileInfo == null)
-            {
-                if (canCreate)
-                {
-                    return await CreateImageIfNotExists(folderId, fileId, quality, width);
-                }
-                return null;
-            }
-
             using (var ms = new MemoryStream())
             {
-                fileInfo.CreateReadStream().CopyTo(ms);
+                await fileInfo.CreateReadStream().CopyToAsync(ms);
                 return ms.ToArray();
             }
         }
@@ -192,22 +141,6 @@ namespace Arragro.Providers.InMemoryStorageProvider
 
             return new Uri($"http://inmemoryfileprovider.com/{folderId}/thumbnails/{fileId}");
         }
-
-        private async Task DeleteBlob(Uri uri)
-        {
-            await Task.Run(() =>
-            {
-                var filePath = uri.ToString().Replace("http://inmemoryfileprovider.com", "");
-                var fileInfo = _provider.Directory.GetFile(filePath);
-                if (fileInfo != null)
-                    fileInfo.Delete();
-            });
-        }
-
-        private bool Contains(string source, string toCheck, StringComparison comp)
-        {
-            return source != null && toCheck != null && source.IndexOf(toCheck, comp) >= 0;
-        }
         
         public async Task ResetCacheControl()
         {
@@ -215,6 +148,44 @@ namespace Arragro.Providers.InMemoryStorageProvider
             {
                 return;
             });
+        }
+
+        public async Task<Uri> Get(FolderIdType folderId, FileIdType fileId, bool thumbnail = false)
+        {
+            if (thumbnail)
+                return await GetImageThumbnail(folderId, fileId);
+            return await Get(folderId, fileId);
+        }
+
+        public async Task<Tuple<Uri, Uri>> CreateImageFromExistingImage(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, int quality, int width, bool asProgressive)
+        {
+            var fileName = $"{folderId}/{fileId}";
+            var fileInfo = _provider.GetFileInfo(fileName);
+            var bytes = await GetImageBytes(fileInfo);
+
+            var imageResult = _imageService.GetImage(bytes, quality, width, asProgressive);
+            var uri = await Upload(folderId, newFileId, imageResult.Bytes, "");
+            var thumbnailUri = await Upload(folderId, newFileId, imageResult.Bytes, "", true);
+
+            return new Tuple<Uri, Uri>(uri, thumbnailUri);
+        }
+
+        public async Task<Uri> Upload(FolderIdType folderId, FileIdType fileId, byte[] data, string mimeType, bool thumbnail = false)
+        {
+            if (thumbnail)
+                return await UploadThumbnail(folderId, fileId, data, mimeType);
+            return await Upload(folderId, fileId, data, mimeType);
+        }
+
+        public async Task<Uri> Rename(FolderIdType folderId, FileIdType fileId, FileIdType newFileId, bool thumbnail = false)
+        {
+            var fileName = thumbnail ? $"{folderId}/thumbnails/{fileId}" : $"{folderId}/{fileId}";
+
+            var fileInfo = _provider.GetFileInfo(fileName);
+            var bytes = await GetImageBytes(fileInfo);
+
+            await Delete(folderId, fileId, thumbnail);
+            return await Upload(folderId, newFileId, bytes, "", thumbnail);
         }
     }
 }
