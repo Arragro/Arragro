@@ -212,8 +212,8 @@ namespace Arragro.Providers.AzureStorageProvider
                     }
 
                     var imageResult = _imageService.GetImage(bytes, quality, width, asProgressive);
-                    var uri = await Upload(folderId, newFileId, imageResult.Bytes, "");
-                    var thumbnailUri = await Upload(folderId, newFileId, imageResult.Bytes, "", true);
+                    var uri = await Upload(folderId, newFileId, imageResult.Bytes, blob.Properties.ContentType);
+                    var thumbnailUri = await Upload(folderId, newFileId, imageResult.Bytes, blob.Properties.ContentType, true);
 
                     return new CreateImageFromImageResult
                     {
