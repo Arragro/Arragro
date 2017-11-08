@@ -105,19 +105,6 @@ namespace Arragro.Providers.AzureStorageProvider
             }
         }
 
-        private async Task Upload(FolderIdType folderId, FileIdType fileId, int quality, int width, byte[] data, string mimeType)
-        {
-            var blob = _assetContainer.GetBlockBlobReference($"{folderId}/{fileId}/{quality}/{width}");
-            using (var stream = new MemoryStream(data))
-            {
-                blob.Properties.ContentType = mimeType;
-                await blob.UploadFromStreamAsync(stream);
-
-                blob.Properties.CacheControl = "public, max-age=2593000";
-                await blob.SetPropertiesAsync();
-            }
-        }
-
         private async Task<Uri> GetImageThumbnail(FolderIdType folderId, FileIdType fileId)
         {
             var key = $"{THUMBNAIL_ASSETKEY}{folderId}:{fileId}";
@@ -211,7 +198,7 @@ namespace Arragro.Providers.AzureStorageProvider
                         bytes = ms.ToArray();
                     }
 
-                    var imageResult = _imageService.GetImage(bytes, quality, width, asProgressive);
+                    var imageResult = _imageService.GetImage(bytes, width, quality, asProgressive);
                     var uri = await Upload(folderId, newFileId, imageResult.Bytes, blob.Properties.ContentType);
                     var thumbnailUri = await Upload(folderId, newFileId, imageResult.Bytes, blob.Properties.ContentType, true);
 
