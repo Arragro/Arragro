@@ -169,7 +169,7 @@ namespace Arragro.Common.RulesExceptions
         {
             var output = new StringBuilder(base.Message);
 
-            if (Errors.Any())
+            if (Errors.Any() || ErrorMessages.Any())
             {
                 output.AppendLine("\n\n====================================");
                 output.AppendLine(ToString());
