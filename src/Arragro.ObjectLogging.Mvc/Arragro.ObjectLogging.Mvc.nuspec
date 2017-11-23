@@ -17,8 +17,8 @@
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.Logging</tags>
     <dependencies>
-      <dependency id="Arragro.Common" />
-      <dependency id="Arragro.EF6" />
+      <dependency id="Arragro.Common" version="1.0.157" />
+      <dependency id="Arragro.EF6" version="1.0.157" />
       <dependency id="Arragro.ObjectLogging" />
       <dependency id="Unity" version="4.0.1" />
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />

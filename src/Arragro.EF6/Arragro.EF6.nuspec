@@ -17,7 +17,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.EF6 Repository EntityFramework</tags>
     <dependencies>
-      <dependency id="Arragro.Common" />
+      <dependency id="Arragro.Common" version="1.0.157" />
       <dependency id="EntityFramework" version="6.2.0" />
     </dependencies>
   </metadata>

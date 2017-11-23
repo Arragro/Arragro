@@ -17,7 +17,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.Redis</tags>
     <dependencies>
-      <dependency id="Arragro.Common" />
+      <dependency id="Arragro.Common" version="1.0.157" />
       <dependency id="Newtonsoft.Json" version="10.0.3" />
       <dependency id="StackExchange.Redis" version="1.2.6" />
       <dependency id="SharpZipLib" version="0.86.0" />

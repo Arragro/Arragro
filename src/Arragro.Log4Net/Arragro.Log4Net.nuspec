@@ -17,7 +17,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>Arragro Arragro.Log4Net</tags>
     <dependencies>
-      <dependency id="Arragro.Common" />
+      <dependency id="Arragro.Common" version="1.0.157" />
       <dependency id="log4net" version="2.0.8" />
     </dependencies>
   </metadata>
