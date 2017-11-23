@@ -5,10 +5,11 @@
   version: 1.0.0.{build}
   configuration: Release
   platform: Any CPU
+  image: Visual Studio 2017
   cache:
   - src\packages
   services:
-    - mssql2014
+    - mssql2016
   nuget:
     account_feed: false
     project_feed: false
@@ -56,8 +57,11 @@
   version: 1.0.0.{build}-beta
   configuration: Release
   platform: Any CPU
+  image: Visual Studio 2017
+  cache:
+  - src\packages
   services:
-    - mssql2014
+    - mssql2016
   nuget:
     account_feed: false
     project_feed: false
@@ -106,8 +110,11 @@
   version: 1.0.0.{build}-alpha
   configuration: Release
   platform: Any CPU
+  image: Visual Studio 2017
+  cache:
+  - src\packages
   services:
-    - mssql2014
+    - mssql2016
   nuget:
     account_feed: false
     project_feed: false
