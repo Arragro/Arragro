@@ -10,14 +10,14 @@
     <projectUrl>https://github.com/mike-jewell/Arragro</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Helpers for Asp.Net WebApi Clients
+      Helpers for Asp.Net WebApi services
     </description>
     <summary>  
         Azure
     </summary>
     <releaseNotes>Initial Release.</releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>Arragro Arragro.WebApi.Client WebApi</tags>
+    <tags>Arragro Arragro.WebApi WebApi</tags>
     <dependencies>
       <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
       <dependency id="Newtonsoft.Json" version="10.0.3" />

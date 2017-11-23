@@ -1,84 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2F1ACB16-1B19-41E2-90C0-1D2B36405288}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Arragro.EF6</RootNamespace>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Arragro.EF6</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
+    <PackageId>Arragro.EF6</PackageId>
+    <Title>Arragro EF6</Title>
+    <Copyright>Arragro 2017 (c) Arragro Ltd.</Copyright>
+    <Description>
+      Implementation of the Arragro.Common IRepository for Entity Framework 6+.
+    </Description>
+    <PackageTags>Arragro Arragro.EF6 Repository EntityFramework</PackageTags>
+    <Authors>Mike Jewell,Reece Beardsall</Authors>
+    <PackageIconUrl>http://cdn.arragro.com/public/images/favicon.ico</PackageIconUrl>
+    <PackageLicenseUrl>&gt;http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Arragro/Arragro</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Arragro/Arragro</PackageProjectUrl>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\Arragro.Common\Arragro.Common.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="BaseContext.cs" />
-    <Compile Include="DatabaseMigrator.cs" />
-    <Compile Include="DbContextRepositoryAllIncludingBase.cs" />
-    <Compile Include="DropCreateDatabaseAlwaysAndUpdateForced.cs" />
-    <Compile Include="Interfaces\IBaseContext.cs" />
-    <Compile Include="Interfaces\IDbContextAllIncludingRepositoryBase.cs" />
-    <Compile Include="Interfaces\IDbContextRepositoryBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DbContextRepositoryBase.cs" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Arragro.EF6.nuspec" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Arragro.Common\Arragro.Common.csproj">
-      <Project>{df7f6387-5d1a-4e62-b136-0c85e4175e1b}</Project>
-      <Name>Arragro.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

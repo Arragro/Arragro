@@ -1,86 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00CC675B-3F4A-44A6-A458-2E2773B8652F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Arragro.Google.Apis</RootNamespace>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Arragro.Google.Apis</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
+    <PackageId>Arragro.Google.Apis</PackageId>
+    <Title>Arragro Google Apis</Title>
+    <Copyright>Arragro 2017 (c) Arragro Ltd.</Copyright>
+    <Description>
+      Abstractions for Google Apis.
+    </Description>
+    <PackageTags>Arragro Arragro.Google.Apis</PackageTags>
+    <Authors>Mike Jewell,Reece Beardsall</Authors>
+    <PackageIconUrl>http://cdn.arragro.com/public/images/favicon.ico</PackageIconUrl>
+    <PackageLicenseUrl>&gt;http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Arragro/Arragro</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Arragro/Arragro</PackageProjectUrl>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Maps\Elevation\ElevationRequest.cs" />
-    <Compile Include="Maps\Elevation\ElevationResponse.cs" />
-    <Compile Include="Maps\Elevation\ElevationResult.cs" />
-    <Compile Include="Maps\Elevation\ElevationService.cs" />
-    <Compile Include="Maps\Extensions.cs" />
-    <Compile Include="Maps\Geocoding\AddressComponent.cs" />
-    <Compile Include="Maps\Geocoding\AddressType.cs" />
-    <Compile Include="Maps\Geocoding\GeocodingRequest.cs" />
-    <Compile Include="Maps\Geocoding\GeocodingResponse.cs" />
-    <Compile Include="Maps\Geocoding\GeocodingResult.cs" />
-    <Compile Include="Maps\Geocoding\GeocodingService.cs" />
-    <Compile Include="Maps\Geocoding\Geometry.cs" />
-    <Compile Include="Maps\Geocoding\LocationType.cs" />
-    <Compile Include="Maps\Geocoding\Viewport.cs" />
-    <Compile Include="Maps\GeographicPosition.cs" />
-    <Compile Include="Maps\Http.cs" />
-    <Compile Include="Maps\JsonEnumTypeConverter.cs" />
-    <Compile Include="Maps\ServiceResponseStatus.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Arragro.Google.Apis.nuspec" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

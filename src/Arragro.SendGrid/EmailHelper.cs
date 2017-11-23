@@ -15,18 +15,14 @@ namespace Arragro.SendGrid
         private readonly TextWriter _twLog = null;
         private readonly SG.ISendGridClient _transportWeb;
         private readonly string _applicationName;
-
-        private EmailHelper()
-        {
-            _transportWeb = new SG.SendGridClient(SendGridConfiguration.SendGridApiKey());
-        }
-
-        public EmailHelper(string applicationName) : this()
+        
+        public EmailHelper(string applicationName, string sendgridApiKey)
         {
             _applicationName = applicationName;
+            _transportWeb = new SG.SendGridClient(sendgridApiKey);
         }
 
-        public EmailHelper(string applicationName, TextWriter log) : this(applicationName)
+        public EmailHelper(string applicationName, string sendgridApiKey, TextWriter log) : this(applicationName, sendgridApiKey)
         {
             _twLog = log;
         }
