@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.Common", "Arragro.Common\Arragro.Common.csproj", "{DF7F6387-5D1A-4E62-B136-0C85E4175E1B}"
 EndProject
@@ -16,6 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arragro.EF6", "Arragro.EF6\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{673557DB-A079-469B-AD62-BE5741F71865}"
 	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
 		..\LICENSE = ..\LICENSE
 		..\Readme.md = ..\Readme.md
 	EndProjectSection
@@ -143,5 +144,8 @@ Global
 		{ABF94BBD-B164-47C5-80D2-1CECECC184C5} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{E2B0E486-599A-4996-92CA-6A8F258CBE79} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
 		{7F42945F-F3E9-40FF-84DE-BFD89C1A0878} = {89DA5227-7BAF-4778-9166-81D6D7FB7224}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65D2DDBF-AA6B-4572-A594-7A57D3E76798}
 	EndGlobalSection
 EndGlobal

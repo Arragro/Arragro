@@ -22,6 +22,7 @@
       <dependency id="Microsoft.AspNet.Razor" version="3.2.3" />
       <dependency id="Microsoft.AspNet.WebPages" version="3.2.3" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0" />
+      <dependency id="Unity" version="5.3.1" />
     </dependencies>
   </metadata>
 </package>

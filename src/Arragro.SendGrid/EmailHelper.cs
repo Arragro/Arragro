@@ -1,4 +1,5 @@
 ﻿using Arragro.Common.Logging;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -12,12 +13,12 @@ namespace Arragro.SendGrid
     {
         private readonly ILog _log = LogManager.GetLogger("SendGrid.EmailHelper");
         private readonly TextWriter _twLog = null;
-        private readonly SG.Web _transportWeb;
+        private readonly SG.ISendGridClient _transportWeb;
         private readonly string _applicationName;
 
         private EmailHelper()
         {
-            _transportWeb = new SG.Web(SendGridConfiguration.SendGridApiKey());
+            _transportWeb = new SG.SendGridClient(SendGridConfiguration.SendGridApiKey());
         }
 
         public EmailHelper(string applicationName) : this()
@@ -45,8 +46,8 @@ namespace Arragro.SendGrid
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            var message = new SG.SendGridMessage();
-            message.From = new MailAddress(fromEmail, displayName);
+            var message = new SendGridMessage();
+            message.From = new EmailAddress(fromEmail, displayName);
 #if DEBUG || DEV
             message.AddTo("support@arragro.com");
             message.Subject = string.Format("{0} - {1} - Originally To: {2}", _applicationName, subject, toEmail);
@@ -64,12 +65,12 @@ namespace Arragro.SendGrid
             }
 #endif
 
-            message.Text = text;
-            message.Html = html;
+            message.PlainTextContent = text;
+            message.HtmlContent = html;
 
             try
             {
-                await _transportWeb.DeliverAsync(message);
+                await _transportWeb.SendEmailAsync(message);
             }
             catch (Exception ex)
             {
@@ -82,8 +83,8 @@ namespace Arragro.SendGrid
 
         public async Task SendError(string errorText)
         {
-            var message = new SG.SendGridMessage();
-            message.From = new MailAddress("support@arragro.com", _applicationName);
+            var message = new SendGridMessage();
+            message.From = new EmailAddress("support@arragro.com", _applicationName);
             message.AddTo("support@arragro.com");
 
 #if RELEASE

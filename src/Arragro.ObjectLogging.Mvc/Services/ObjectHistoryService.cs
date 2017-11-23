@@ -1,5 +1,4 @@
 ﻿using Arragro.Common.ServiceBase;
-using Arragro.ObjectLogging;
 using Arragro.ObjectLogging.Interfaces;
 using System;
 using System.Collections.Generic;
