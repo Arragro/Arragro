@@ -15,14 +15,16 @@ namespace Arragro.SendGrid
         private readonly TextWriter _twLog = null;
         private readonly SG.ISendGridClient _transportWeb;
         private readonly string _applicationName;
+        private readonly bool _testMode;
         
-        public EmailHelper(string applicationName, string sendgridApiKey)
+        public EmailHelper(string applicationName, string sendgridApiKey, bool testMode = false)
         {
             _applicationName = applicationName;
+            _testMode = testMode;
             _transportWeb = new SG.SendGridClient(sendgridApiKey);
         }
 
-        public EmailHelper(string applicationName, string sendgridApiKey, TextWriter log) : this(applicationName, sendgridApiKey)
+        public EmailHelper(string applicationName, string sendgridApiKey, TextWriter log, bool testMode = false) : this(applicationName, sendgridApiKey, testMode)
         {
             _twLog = log;
         }
@@ -49,7 +51,7 @@ namespace Arragro.SendGrid
             message.Subject = string.Format("{0} - {1} - Originally To: {2}", _applicationName, subject, toEmail);
 #else
 
-            if (SendGridConfiguration.TestMode())
+            if (_testMode)
             {
                 message.AddTo("support@arragro.com");
                 message.Subject = string.Format("{0} - {1} - Originally To: {2}", _applicationName, subject, toEmail);
