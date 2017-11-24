@@ -26,7 +26,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             _cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
             _cloudBlobClient = _cloudStorageAccount.CreateCloudBlobClient();
 
-            var blobProperties = _cloudBlobClient.GetServiceProperties();
+            var blobProperties = _cloudBlobClient.GetServicePropertiesAsync().Result;
         }
 
         public CloudBlobContainer GetBlobContainer(string containerName)
@@ -37,14 +37,14 @@ namespace Arragro.Azure.ServiceManagement.Storage
         public CloudBlobContainer CreateBlobContainer(string containerName)
         {
             var container = GetBlobContainer(containerName);
-            container.CreateIfNotExists();
+            container.CreateIfNotExistsAsync().Wait();
             return container;
         }
 
         public bool DeleteBlobContainer(string containerName)
         {
             var container = GetBlobContainer(containerName);
-            return container.DeleteIfExists();
+            return container.DeleteIfExistsAsync().Result;
         }
 
         public static SasUriDetails CreateAndGetContainerSharedAccessSignatureUri(
@@ -66,7 +66,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             //Add the new policy to the container's permissions.
             permissions.SharedAccessPolicies.Clear();
             permissions.SharedAccessPolicies.Add(policyName, sharedPolicy);
-            container.SetPermissions(permissions);
+            container.SetPermissionsAsync(permissions).Wait();
 
             return GetContainerSharedAccessSignatureUri(accountName, container, policyName);
         }
@@ -89,11 +89,11 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
-                    blockBlob.UploadFromStream(stream);
+                if (!blockBlob.ExistsAsync().Result)
+                    blockBlob.UploadFromStreamAsync(stream).Wait();
             }
             else
-                blockBlob.UploadFromStream(stream);
+                blockBlob.UploadFromStreamAsync(stream).Wait();
 
             return blockBlob;
         }
@@ -104,7 +104,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
+                if (!blockBlob.ExistsAsync().Result)
                     await blockBlob.UploadFromStreamAsync(stream);
             }
             else
@@ -119,11 +119,11 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
-                    blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+                if (!blockBlob.ExistsAsync().Result)
+                    blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length).Wait();
             }
             else
-                blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+                blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length).Wait();
 
             return blockBlob;
         }
@@ -134,7 +134,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
+                if (!await blockBlob.ExistsAsync())
                     await blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
             }
             else
@@ -149,11 +149,11 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
-                    blockBlob.UploadFromStream(stream);
+                if (!blockBlob.ExistsAsync().Result)
+                    blockBlob.UploadFromStreamAsync(stream).Wait();
             }
             else
-                blockBlob.UploadFromStream(stream);
+                blockBlob.UploadFromStreamAsync(stream).Wait();
             return blockBlob;
         }
 
@@ -163,7 +163,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
+                if (!await blockBlob.ExistsAsync())
                     await blockBlob.UploadFromStreamAsync(stream);
             }
             else
@@ -177,11 +177,11 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
-                    blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+                if (!blockBlob.ExistsAsync().Result)
+                    blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length).Wait();
             }
             else
-                blockBlob.UploadFromByteArray(bytes, 0, bytes.Length);
+                blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length).Wait();
 
             return blockBlob;
         }
@@ -192,7 +192,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             var blockBlob = container.GetBlockBlobReference(blobName);
             if (!replaceIfExists)
             {
-                if (!blockBlob.Exists())
+                if (!await blockBlob.ExistsAsync())
                     await blockBlob.UploadFromByteArrayAsync(bytes, 0, bytes.Length);
             }
             else
@@ -205,7 +205,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
         {
             var container = GetBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(blobName);
-            blockBlob.Delete();
+            blockBlob.DeleteIfExistsAsync().Wait();
         }
 
         public void DownloadBlob(string containerName, string blobName, out Stream stream)
@@ -213,7 +213,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             Stream blobStream = new MemoryStream();
             var container = GetBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(blobName);
-            blockBlob.DownloadToStream(blobStream);
+            blockBlob.DownloadToStreamAsync(blobStream).Wait();
             stream = blobStream;
         }
 
@@ -221,7 +221,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
         {
             var container = GetBlobContainer(containerName);
             var blockBlob = container.GetBlockBlobReference(blobName);
-            return blockBlob.Exists();
+            return blockBlob.ExistsAsync().Result;
         }
     }
 }

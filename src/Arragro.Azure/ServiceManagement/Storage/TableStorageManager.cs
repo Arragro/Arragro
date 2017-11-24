@@ -22,7 +22,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             _cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
             _cloudTableClient = _cloudStorageAccount.CreateCloudTableClient();
 
-            var blobProperties = _cloudTableClient.GetServiceProperties();
+            var blobProperties = _cloudTableClient.GetServicePropertiesAsync().Result;
         }
 
         private CloudTable GetTable(string tableName)
@@ -33,9 +33,9 @@ namespace Arragro.Azure.ServiceManagement.Storage
         public CloudTable CreateTable(string tableName)
         {
             var table = GetTable(tableName);
-            if (!table.Exists())
+            if (!table.ExistsAsync().Result)
             {
-                table.Create();
+                table.CreateAsync().Wait();
             }
             return table;
         }
@@ -43,7 +43,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
         public bool DeleteTable(string tableName)
         {
             var table = GetTable(tableName);
-            return table.DeleteIfExists();
+            return table.DeleteIfExistsAsync().Result;
         }
 
         public static string GetTableSharedAccessSignatureUri(
@@ -64,7 +64,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             //Add the new policy to the container's permissions.
             permissions.SharedAccessPolicies.Clear();
             permissions.SharedAccessPolicies.Add(policyName, sharedPolicy);
-            table.SetPermissions(permissions);
+            table.SetPermissionsAsync(permissions).Wait();
 
             return GetTableSharedAccessSignatureUri(table, policyName);
         }

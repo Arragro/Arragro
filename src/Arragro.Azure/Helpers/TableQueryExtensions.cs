@@ -9,7 +9,7 @@ namespace Arragro.Azure.Helpers
 {
     public static class TableQueryExtensions
     {
-        public static TableQuery<TElement> AndWhere<TElement>(this TableQuery<TElement> @this, string filter)
+        public static TableQuery<TElement> AndWhere<TElement>(this TableQuery<TElement> @this, string filter) where TElement: class, ITableEntity, new()
         {
             if (string.IsNullOrEmpty(@this.FilterString))
                 @this.FilterString = filter;
@@ -18,7 +18,7 @@ namespace Arragro.Azure.Helpers
             return @this;
         }
 
-        public static TableQuery<TElement> OrWhere<TElement>(this TableQuery<TElement> @this, string filter)
+        public static TableQuery<TElement> OrWhere<TElement>(this TableQuery<TElement> @this, string filter) where TElement : class, ITableEntity, new()
         {
             if (string.IsNullOrEmpty(@this.FilterString))
                 @this.FilterString = filter;

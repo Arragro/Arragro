@@ -24,7 +24,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             _cloudStorageAccount = CloudStorageAccount.Parse(connectionString);
             _cloudQueueClient = _cloudStorageAccount.CreateCloudQueueClient();
 
-            var blobProperties = _cloudQueueClient.GetServiceProperties();
+            var blobProperties = _cloudQueueClient.GetServicePropertiesAsync().Result;
         }
 
         public CloudQueue GetQueue(string queueName)
@@ -35,14 +35,14 @@ namespace Arragro.Azure.ServiceManagement.Storage
         public CloudQueue CreateQueue(string queueName)
         {
             var queue = _cloudQueueClient.GetQueueReference(queueName);
-            queue.CreateIfNotExists();
+            queue.CreateIfNotExistsAsync().Wait();
             return queue;
         }
 
         public bool DeleteQueue(string queueName)
         {
             var queue = _cloudQueueClient.GetQueueReference(queueName);
-            return queue.DeleteIfExists();
+            return queue.DeleteIfExistsAsync().Result;
         }
 
         public static SasUriDetails CreateAndGetQueueSharedAccessSignatureUri(
@@ -64,7 +64,7 @@ namespace Arragro.Azure.ServiceManagement.Storage
             //Add the new policy to the container's permissions.
             permissions.SharedAccessPolicies.Clear();
             permissions.SharedAccessPolicies.Add(policyName, sharedPolicy);
-            queue.SetPermissions(permissions);       
+            queue.SetPermissionsAsync(permissions).Wait();
 
             //Return the URI string for the container, including the SAS token.
             return GetQueueSharedAccessSignatureUri(accountName, queue, policyName);
@@ -87,20 +87,20 @@ namespace Arragro.Azure.ServiceManagement.Storage
         {
             var queue = _cloudQueueClient.GetQueueReference(queueName);
             var queueMessage = new CloudQueueMessage(message);
-            queue.AddMessage(queueMessage);
+            queue.AddMessageAsync(queueMessage).Wait();
         }
 
         public static void AddMessageToQueue(Uri uri, string message)
         {
             var queue = new CloudQueue(uri);
             var queueMessage = new CloudQueueMessage(message);
-            queue.AddMessage(queueMessage);
+            queue.AddMessageAsync(queueMessage).Wait();
         }
 
         public CloudQueueMessage PeekAtNextMessage(string queueName)
         {
             var queue = _cloudQueueClient.GetQueueReference(queueName);
-            return queue.PeekMessage();
+            return queue.PeekMessageAsync().Result;
         }
 
         public void UpdateMessage(
@@ -113,25 +113,25 @@ namespace Arragro.Azure.ServiceManagement.Storage
 
             var queue = _cloudQueueClient.GetQueueReference(queueName);
 
-            var queueMessage = queue.GetMessage();
+            var queueMessage = queue.GetMessageAsync().Result;
 
             queueMessage.SetMessageContent(message);
-            queue.UpdateMessage(
+            queue.UpdateMessageAsync(
                 queueMessage,
                 visibilityTimeOut.Value,
-                messageUpdateFields);
+                messageUpdateFields).Wait();
         }
 
         public CloudQueueMessage DeQueue(string queueName)
         {
             var queue = _cloudQueueClient.GetQueueReference(queueName);
-            return queue.GetMessage();
+            return queue.GetMessageAsync().Result;
         }
 
         public void DeleteQueueMessage(string queueName, CloudQueueMessage queueMessage)
         {
             var queue = _cloudQueueClient.GetQueueReference(queueName);
-            queue.DeleteMessage(queueMessage);
+            queue.DeleteMessageAsync(queueMessage).Wait();
         }
 
     }
