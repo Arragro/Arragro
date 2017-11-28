@@ -72,7 +72,7 @@ namespace Arragro.SendGrid
             }
             catch (Exception ex)
             {
-                _log.Error(ex);
+                _log.Error(ex); 
             }
 
             stopwatch.Stop();

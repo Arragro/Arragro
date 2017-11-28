@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>1.0.0</Version>
     <PackageVersion>1.0.0</PackageVersion>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.0;net47</TargetFramework>
     <AssemblyName>Arragro.SendGrid</AssemblyName>
     <PackageId>Arragro.SendGrid</PackageId>
     <Title>Arragro SendGrid</Title>
