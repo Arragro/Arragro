@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>1.0.0</Version>
     <PackageVersion>1.0.0</PackageVersion>
-    <TargetFramework>netstandard2.0;net47</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net47</TargetFrameworks>
     <AssemblyName>Arragro.Azure</AssemblyName>
     <PackageId>Arragro.Azure</PackageId>
     <Title>Arragro Azure</Title>
