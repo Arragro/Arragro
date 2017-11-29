@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>1.0.0</Version>
     <PackageVersion>1.0.0</PackageVersion>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFrameworks>net452;net462;net471</TargetFrameworks>
     <AssemblyName>Arragro.WebApi</AssemblyName>
     <PackageId>Arragro.WebApi</PackageId>
     <Title>Arragro WebApi</Title>
