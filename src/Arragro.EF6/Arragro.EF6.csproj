@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>1.0.0</Version>
     <PackageVersion>1.0.0</PackageVersion>
-    <TargetFrameworks>netstandard2.0;net452;net462;net471</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462;net471</TargetFrameworks>
     <AssemblyName>Arragro.EF6</AssemblyName>
     <PackageId>Arragro.EF6</PackageId>
     <Title>Arragro EF6</Title>

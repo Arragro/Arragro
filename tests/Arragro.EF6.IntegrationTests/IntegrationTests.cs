@@ -36,7 +36,7 @@ namespace Arragro.EF6.IntegrationTests
 
                     var modelFoo = x.ModelFoos.Single();
                     Assert.Equal("Test", modelFoo.Name);
-                    Assert.NotSame(default(int), modelFoo.Id);
+                    Assert.NotEqual(default(int), modelFoo.Id);
                 });
         }
 
@@ -51,7 +51,7 @@ namespace Arragro.EF6.IntegrationTests
                 var modelFoo = modelFooService.InsertOrUpdate(new ModelFoo { Name = "Test" });
                 modelFooService.SaveChanges();
 
-                Assert.NotSame(default(int), modelFoo);
+                Assert.NotEqual(default(int), modelFoo.Id);
             }
         }
 
@@ -64,7 +64,7 @@ namespace Arragro.EF6.IntegrationTests
             var modelFoo = modelFooService.InsertOrUpdate(new ModelFoo { Name = "Test" });
             modelFooService.SaveChanges();
 
-            Assert.NotSame(default(int), modelFoo);
+            Assert.NotEqual(default(int), modelFoo.Id);
         }
     }
 }

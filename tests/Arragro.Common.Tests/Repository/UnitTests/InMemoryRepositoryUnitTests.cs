@@ -100,7 +100,7 @@ namespace Arragro.Common.Tests.Repository.UnitTests
         [Fact]
         public void FailOnBadModel()
         {
-            Assert.Throws(typeof(Exception), () => new InMemoryRepository<ModelBarFailOnKey, int>());
+            Assert.Throws<Exception>(() => new InMemoryRepository<ModelBarFailOnKey, int>());
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Arragro.Common.Tests.BusinessRules.UseCases
             // This will apply to the model as whole and should be used for 
             // scenarios where there are multiple issues against another object.
             rulesException.ErrorForModel("There is already a ModelFoo with this Id and Name");
-            Assert.Equal(1, rulesException.Errors.Count());
+            Assert.Single(rulesException.Errors);
 
             // Should be used for property issues.
             rulesException.ErrorFor(x => modelFoo.Name, "The Name is not Unique");
