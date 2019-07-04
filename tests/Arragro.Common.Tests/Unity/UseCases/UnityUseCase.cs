@@ -2,8 +2,6 @@
 using Arragro.Common.Repository;
 using Arragro.Common.ServiceBase;
 using Arragro.TestBase;
-using Microsoft.Practices.Unity;
-using System.Linq;
 using Unity;
 using Xunit;
 
@@ -80,7 +78,7 @@ namespace Arragro.Common.Tests.Unity.UseCases
             var findModelFoo = modelFooService.Find(modelFoo.Id);
             Assert.NotNull(findModelFoo);
 
-            Assert.Throws(typeof(RulesException<ModelFoo>), () =>
+            Assert.Throws<RulesException<ModelFoo>>(() =>
                 {
                     try
                     {
